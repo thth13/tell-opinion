@@ -1,6 +1,4 @@
 import api from '../utils/api';
-import setAuthToken from '../utils/setAuthToken';
-import jwt_decode from 'jwt-decode';
 import {
   REGISTER_SUCCESS,
   USER_LOADED,
@@ -25,10 +23,9 @@ export const loadUser = () => async dispatch => {
   }
 };
 
-export const register = formData => async dispatch => {
+export const registerUser = formData => async dispatch => {
   try {
     const res = await api.post('/users', formData);
-
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data
@@ -46,7 +43,7 @@ export const register = formData => async dispatch => {
 export const loginUser = formData => async dispatch => {
   try {
     const res = await api.post('/auth', formData);
-    
+    console.log(res)
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data
@@ -54,7 +51,6 @@ export const loginUser = formData => async dispatch => {
 
     dispatch(loadUser());
   } catch (err) {
-    // console.log(err.response.data);
     dispatch({
       type: GET_ERORRS,
       payload: err.response.data

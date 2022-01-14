@@ -27,7 +27,12 @@ router.post('/', async (req, res) => {
     if (user) {
       return res
         .status(400)
-        .json({ errors: [{ msg: 'User already exists' }] });
+        .json({
+          errors: {
+            email: {message: 'User already exists'},
+            login: {message: 'User already exists'}
+          }
+        });
     }
 
     // const avatar = normalize(
@@ -42,7 +47,7 @@ router.post('/', async (req, res) => {
     user = new User({
       login,
       email,
-      avatar,
+      // avatar,
       password,
     });
 

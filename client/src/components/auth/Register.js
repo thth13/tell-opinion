@@ -1,83 +1,74 @@
 import React, { useState, useEffect } from "react";
 import c from 'classnames';
+import * as yup from "yup";
+import { Link, Navigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
 import styles from "./styles.module.css";
 import google from "./../../img/googlel.svg";
 import instagram from "./../../img/instagram.svg";
-import { register } from '../../actions/auth';
+import { registerUser } from '../../actions/auth';
 import { connect } from 'react-redux';
 
-const Register = ({ register, auth, errors: err }) => {
-  const [formData, setFormData] = useState({
-    login: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    errors: {},
-  });
+const schema = yup.object({
+  login: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().required('Password is required').min(6),
+  confirmPassword: yup.string()
+     .oneOf([yup.ref('password'), null], 'Passwords must match')
+}).required();
 
-  const { login, email, password, confirmPassword, errors, history } = formData;
+const Register = ({ registerUser, isAuthenticated, serverErrors }) => {
+  const [errors, setErrors] = useState({})
 
-  const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const {register, handleSubmit, formState: { errors: clientErrors }} = useForm({
+    resolver: yupResolver(schema)
+  })
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    // setFormData({...formData, errors: {email: 'Error email ))'}})
-    register(formData);
-  };
+  const onSubmit = data => {
+    registerUser(data)
+  }
 
-  // useEffect(() => {
-  //   console.log(err)
-  //   setFormData({ errors: err.data.errors });
-  // }, [err]);
+  useEffect(() => (
+    setErrors({ ...serverErrors.errors, ...clientErrors})
+  ), [clientErrors, serverErrors])
 
-  useEffect(() => {
-    if (auth.isAuisAuthenticated) {
-      history.push('/')
-    }
-  }, [auth])
+  if (isAuthenticated) {
+    return <Navigate to="/" />
+  }
 
   return (
     <div className={styles.root}>
-      <form className={styles.form} onSubmit={onSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <h2 className={styles.headText}>Sign up</h2>
         <input
-          value={login}
-          onChange={onChange}
-          name="login"
-          className={styles.fields}
-          type="text"
+          className={c(styles.fields, {[styles.error]: errors.login })}
           placeholder="Login"
           size="40"
+          {...register("login")}
         />
-        {/* <span className={styles.error}>Login already existeds</span> */}
+        {errors.login && <span className={styles.errorText}>{errors.login.message}</span>}
         <input
-          value={email}
-          onChange={onChange}
-          className={c(styles.fields, { [styles.error]: errors.email })}
-          name="email"
-          type="text"
+          className={c(styles.fields, {[styles.error]: errors.email })}
           placeholder="Email address"
           size="40"
+          {...register("email")}
         />
-        {errors.email && <span className={styles.errorText}>лол {errors.email}</span>}
+        {errors.email && <span className={styles.errorText}>{errors.email.message}</span>}
         <input
-          value={password}
-          onChange={onChange}
-          className={styles.fields}
-          name="password"
+          className={c(styles.fields, {[styles.error]: errors.password })}
           placeholder="Password"
           type="password"
+          {...register("password")}
         />
+        {errors.password && <span className={styles.errorText}>{errors.password.message}</span>}
         <input
-          value={confirmPassword}
-          onChange={onChange}
-          className={styles.fields}
+          className={c(styles.fields, {[styles.error]: errors.confirmPassword })}
           name="confirmPassword"
           placeholder="Confirm password"
-          type="password"
+          {...register("confirmPassword")}
         />
+        {errors.confirmPassword && <span className={styles.errorText}>{errors.confirmPassword.message}</span>}
         <button className={styles.sendButton}>Register</button>
         <span className={styles.or}>or</span>
         <div className={styles.socialButtons}>
@@ -89,7 +80,7 @@ const Register = ({ register, auth, errors: err }) => {
           </button>
         </div>
         <span className={styles.haveAccount}>
-          Already have an account? <a href="#">Sign In</a>
+          Already have an account? <Link to="/login">Sign In</Link>
         </span>
       </form>
     </div>
@@ -97,8 +88,8 @@ const Register = ({ register, auth, errors: err }) => {
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
-  errors: state.errors
+  isAuthenticated: state.auth.isAuthenticated,
+  serverErrors: state.errors
 });
 
-export default connect(mapStateToProps, { register })(Register);
+export default connect(mapStateToProps, { registerUser })(Register);

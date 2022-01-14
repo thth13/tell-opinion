@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import c from 'classnames';
 import * as yup from "yup";
+import { Link, Navigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import styles from './styles.module.css'
@@ -14,19 +15,24 @@ const schema = yup.object({
   password: yup.string().required(),
 }).required();
 
-const Login = ({ loginUser, serverErrors }) => {
+const Login = ({ loginUser, serverErrors, isAuthenticated }) => {
+  const [errors, setErrors] = useState({})
+
   const {register, handleSubmit, formState: { errors: clientErrors }} = useForm({
     resolver: yupResolver(schema)
   });
-  const [errors, setErrors] = useState({});
 
-  const onSubmit = (data) => {
-    loginUser(data);
+  const onSubmit = data => {
+    loginUser(data)
   };
 
   useEffect(() => (
     setErrors({ ...serverErrors.errors, ...clientErrors})
-  ), [clientErrors, serverErrors]);
+  ), [clientErrors, serverErrors])
+
+  if (isAuthenticated) {
+    return <Navigate to="/" />
+  }
 
   return (
     <div className={styles.root}>
@@ -38,7 +44,7 @@ const Login = ({ loginUser, serverErrors }) => {
           size="40"
           {...register("email")}
         />
-        {errors.password && <span className={styles.errorText}>{errors.email.message}</span>}
+        {errors.email && <span className={styles.errorText}>{errors.email.message}</span>}
         <input
           className={c(styles.fields, { [styles.error]: errors.password })}
           placeholder="Password"
@@ -46,12 +52,8 @@ const Login = ({ loginUser, serverErrors }) => {
           {...register("password")}
         />
         {errors.password && <span className={styles.errorText}>{errors.password.message}</span>}
-        <div className={styles.rememberMe}>
-          <label className={styles.labelCheckbox}>
-            <input className={styles.checkbox} type="checkbox" name="remember" />
-            Remember me
-          </label>
-          <a href="/">Forgot password?</a>
+        <div className={styles.forgotPassword}>
+          <Link to="/restorepassword">Forgot password?</Link>
         </div>
         <button type={'submit'} className={styles.sendButton}>Login</button>
         <span className={styles.or}>or</span>
@@ -63,14 +65,14 @@ const Login = ({ loginUser, serverErrors }) => {
             <img src={instagram} alt="instagram" />
           </button>
         </div>
-        <span className={styles.haveAccount}>Dont have an account? <a href="/">Sign Up</a></span>
+        <span className={styles.haveAccount}>Dont have an account? <Link to="/register">Sign Up</Link></span>
       </form>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  isAuthenticated: state.auth.isAuthenticated,
   serverErrors: state.errors
 });
 

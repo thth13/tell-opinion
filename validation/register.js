@@ -39,8 +39,6 @@ const validateRegisterForm = (data) => {
   }
 
   if (!Validator.equals(data.password, data.confirmPassword)) {
-    console.log(data.password)
-    console.log(data.confirmPassword)
     errors.confirmPassword = 'Passwords must match';
   }
 

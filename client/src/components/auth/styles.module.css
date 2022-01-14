@@ -88,14 +88,11 @@
   cursor: pointer;
 }
 
-.rememberMe {
-  display: flex;
+.forgotPassword {
   font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 27px;
-  margin-top: 15px;
+  margin-bottom: 18px;
+  margin-top: 5px;
+  text-align: right;
 }
 
 .or { 
