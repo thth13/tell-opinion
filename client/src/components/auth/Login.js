@@ -27,6 +27,7 @@ const Login = ({ loginUser, serverErrors, isAuthenticated }) => {
   };
 
   useEffect(() => (
+    // TODO: Clear errors after resubmit
     setErrors({ ...serverErrors.errors, ...clientErrors})
   ), [clientErrors, serverErrors])
 

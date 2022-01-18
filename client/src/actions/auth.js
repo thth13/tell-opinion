@@ -43,7 +43,7 @@ export const registerUser = formData => async dispatch => {
 export const loginUser = formData => async dispatch => {
   try {
     const res = await api.post('/auth', formData);
-    console.log(res)
+
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data

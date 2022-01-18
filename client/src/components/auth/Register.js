@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 const schema = yup.object({
   login: yup.string().required(),
   email: yup.string().email().required(),
-  password: yup.string().required('Password is required').min(6),
+  password: yup.string().required('Password is required').min(1),
   confirmPassword: yup.string()
      .oneOf([yup.ref('password'), null], 'Passwords must match')
 }).required();
@@ -66,6 +66,7 @@ const Register = ({ registerUser, isAuthenticated, serverErrors }) => {
           className={c(styles.fields, {[styles.error]: errors.confirmPassword })}
           name="confirmPassword"
           placeholder="Confirm password"
+          type="password"
           {...register("confirmPassword")}
         />
         {errors.confirmPassword && <span className={styles.errorText}>{errors.confirmPassword.message}</span>}

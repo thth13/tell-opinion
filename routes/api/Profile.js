@@ -1,0 +1,55 @@
+const express = require('express')
+const router = express.Router()
+const auth = require('../../middleware/auth')
+const checkObjectId = require('../../middleware/checkObjectId')
+
+const Profile = require('../../models/Profile')
+const User = require('../../models/User')
+
+// @route   GET api/profile/me
+// @desc    Get current users profile
+// @access  Private
+router.get('/me', auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.user.id
+    }).populate('user', ['login', 'avatar'])
+
+    if (!profile) {
+      return res.status(400).json({msg: 'There is no profile for this user'})
+    }
+
+    res.json(profile)
+  } catch (err) {
+    console.log(err.message)
+    res.status(500).end('Server Error')
+  }
+})
+
+// @route   GET api/profile/user/:username
+// @desct   Get profile by user name
+// @access  Public
+router.get(
+  '/user/:username',
+  async ({params: {username}}, res) => {
+    try {
+      // TODO: Может можно как-то уменьшить количество запросов?
+      const user = await User.findOne({
+        login: username
+      })
+
+      const profile = await Profile.findOne({
+        user: user._id
+      }).populate('user', ['login', 'avatar'])
+
+      if (!profile) return res.status(400).json({msg: 'Profile not found'})
+   
+      return res.json(profile)
+    } catch (err) {
+      console.error(err.message)
+      return res.status(500).json({msg: 'Server error'})
+    }
+  }
+)
+
+module.exports = router

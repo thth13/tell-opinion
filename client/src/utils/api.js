@@ -16,13 +16,21 @@ const api = axios.create({
  logout the user if the token has expired
 **/
 
-api.interceptors.response.use(
-  res => res,
-  err => {
-    if (err.response.status === 401) {
+api.interceptors.request.use(
+  function(config) {
+    const token = localStorage.getItem("token"); 
+    if (token) {
+      config.headers["x-auth-token"] = token;
+    }
+
+    return config;
+  },
+  function(error) {
+    if (error.response.status === 401) {
       store.dispatch({ type: LOGOUT });
     }
-    return Promise.reject(err);
+
+    return Promise.reject(error);
   }
 );
 

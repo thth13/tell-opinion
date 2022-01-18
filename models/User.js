@@ -11,12 +11,6 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  // name: {
-  //   type: String
-  // },
-  // description: {
-  //   type: String
-  // },
   password: {
     type: String,
     required: true
@@ -24,14 +18,6 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     type: String
   },
-  // social: {
-  //   instagram: {
-  //     type: String
-  //   },
-  //   vk: {
-  //     type: String
-  //   }
-  // },
   date: {
     type: Date,
     default: Date.now

@@ -8,6 +8,7 @@ const normalize = require('normalize-url');
 
 const validateRegisterForm = require('../../validation/register');
 const User = require('../../models/User');
+const Profile = require('../../models/Profile');
 
 // @route   POST api/users
 // @desc    Register user
@@ -56,6 +57,12 @@ router.post('/', async (req, res) => {
     user.password = await bcrypt.hash(password, salt);
 
     await user.save();
+    // TODO: Как-то странно. проверить
+    profile = new Profile({
+      user: user.id
+    })
+
+    await profile.save();
 
     const payload = {
       user: {
