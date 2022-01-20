@@ -1,0 +1,164 @@
+/* * { */
+  /* margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+} */
+
+.body {
+  padding: 10px;
+  background-color: #f5f4f4;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  /* width: 90%; */
+  padding: 0 20px;
+  text-align: center;
+  background-color: white;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 150px;
+  margin: 20px 0;
+}
+
+.userName {
+  margin-bottom: 10px;
+}
+
+.opinionCounter {
+  margin-top: 10px;
+}
+
+.socialButtons {
+  /* margin: 0 auto; */
+  /* float: right; */
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.socialbtn {
+  margin-bottom: 5px;
+  background: #2D3748; 
+  /* width: 200px; */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+.ggl {
+  background-image: url('../../img/googlel.svg');
+  background-repeat: no-repeat;
+  background-size: 25px;
+  background-position: center;
+  margin-right: 10px;
+}
+
+.instg {
+  background-image: url('../../img/instagram.svg');
+  background-repeat: no-repeat;
+  background-size: 25px;
+  background-position: center;
+}
+
+textarea {
+  border: 1px solid #E8E8E8;
+  height: 50px;
+  padding: 0px 20px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  resize: none;
+  width: 100%;
+  height: 100px;
+  padding: 0;
+  /* margin-bottom: 55px; */
+  /* font-weight: 16px; */
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-end; */
+}
+
+button {
+  width: 106px;
+  height: 40px;
+  /* background: #04C45C; */
+  background: #8C30F5;
+  border-radius: 5px;
+  color: white;
+  border: 0;
+  cursor: pointer;
+  /* float: right; */
+  /* margin-bottom: 55px; */
+  /* font-weight: 700; */
+}
+
+.revblock {
+  background-color: white;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.revblock span {
+  font-weight: bold;
+}
+
+.views {
+  /* float: right; */
+  /* border: 1px solid red; */
+  /* text-align: left; */
+}
+
+.revblock p {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  /* float: right; */
+  /* margin-top: 30px; */
+}
+
+.opinionBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid red; */
+}
+
+.confirmed {
+  color: green
+  /* margin-top: 30px; */
+}
+
+.decl {
+  color: red;
+}
+
+.auth {
+  font-size: 13px;
+  font-weight: lighter;
+}
+
+.kek {
+  width: 25px;
+  margin-left: 75px;
+}
+
+.noReviews {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}

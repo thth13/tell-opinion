@@ -15,7 +15,7 @@ const schema = yup.object({
   password: yup.string().required(),
 }).required();
 
-const Login = ({ loginUser, serverErrors, isAuthenticated }) => {
+const Login = ({ loginUser, serverErrors, auth }) => {
   const [errors, setErrors] = useState({})
 
   const {register, handleSubmit, formState: { errors: clientErrors }} = useForm({
@@ -31,8 +31,8 @@ const Login = ({ loginUser, serverErrors, isAuthenticated }) => {
     setErrors({ ...serverErrors.errors, ...clientErrors})
   ), [clientErrors, serverErrors])
 
-  if (isAuthenticated) {
-    return <Navigate to="/" />
+  if (auth.isAuthenticated) {
+    return <Navigate to={`/@${auth.user.login}`} />
   }
 
   return (
@@ -73,7 +73,7 @@ const Login = ({ loginUser, serverErrors, isAuthenticated }) => {
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth,
   serverErrors: state.errors
 });
 

@@ -13,7 +13,7 @@ const schema = yup.object({
   password: yup.string().required(),
 }).required();
 
-const RestorePassword = ({ loginUser, serverErrors, isAuthenticated }) => {
+const RestorePassword = ({ loginUser, serverErrors, auth }) => {
   const {register, handleSubmit, formState: { errors: clientErrors }} = useForm({
     resolver: yupResolver(schema)
   });
@@ -27,8 +27,8 @@ const RestorePassword = ({ loginUser, serverErrors, isAuthenticated }) => {
     setErrors({ ...serverErrors.errors, ...clientErrors})
   ), [clientErrors, serverErrors])
 
-  if (isAuthenticated) {
-    return <Navigate to="/" />
+  if (auth.isAuthenticated) {
+    return <Navigate to={`/@${auth.user.login}`} />
   }
 
   return (
@@ -50,7 +50,7 @@ const RestorePassword = ({ loginUser, serverErrors, isAuthenticated }) => {
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth,
   serverErrors: state.errors
 });
 

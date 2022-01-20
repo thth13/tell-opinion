@@ -1,7 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link, Navigate } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-const Landing = () => {
+const Landing = ({ auth }) => {
+  if (auth.isAuthenticated) {
+    return <Navigate to={`/@${auth.user.login}`} />
+  }
+
   return (
     <div>
       <Link to={`/login`}>
@@ -11,7 +16,11 @@ const Landing = () => {
         Register
       </Link>
     </div>
-  );
-};
+  )
+}
 
-export default Landing;
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, {})(Landing)

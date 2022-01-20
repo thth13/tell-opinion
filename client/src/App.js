@@ -34,7 +34,7 @@ const App = () => {
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/restorepassword" element={<RestorePassword />} />
-          <Route exact path="/profile/:username" element={<Profile />} />
+          <Route exact path="/@:username" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </Provider>
