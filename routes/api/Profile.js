@@ -55,7 +55,7 @@ router.get('/user/:username', async ({params: {username}}, res) => {
 // @acess   Public
 router.post('/user/opinion/:id', checkObjectId('id'), async (req, res) => {
   // TODO: Validation
-
+  // TODO: Check 1 day after
   try {
     const profile = await Profile.findById(req.params.id)
 

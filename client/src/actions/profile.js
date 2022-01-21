@@ -50,7 +50,7 @@ export const newOpinion = (profileId, text) => async dispatch => {
     
     const localOpinionInfo = {
       user: profileId,
-      date: Date.now()
+      date: new Date()
     }
 
     localStorage.setItem(`opinion#${profileId}`, JSON.stringify(localOpinionInfo))

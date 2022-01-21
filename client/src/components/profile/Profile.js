@@ -18,7 +18,7 @@ const Profile = ({
   let params = useParams()
   const [opinionText, setOpinionText] = useState('')
   const [isMyProfile] = useState(user && user.login === params.username)
-  const [userOpinionInfo] = useState(JSON.parse(localStorage.getItem(`opinion#${profile && profile._id}`)))
+  const [userOpinionInfo, setUserOpinionInfo] = useState()
 
   const onChange = e => {
     setOpinionText(e.target.value)
@@ -38,11 +38,20 @@ const Profile = ({
     }
   }, [getCurrentProfile, getProfileByName, params, user])
 
-  console.log(userOpinionInfo)
+  useEffect(() => {
+    if (profile) {
+      setUserOpinionInfo(JSON.parse(localStorage.getItem(`opinion#${profile && profile._id}`)))
+    }
+  }, [profile, setUserOpinionInfo])
+
+  const isOneDayAfter = 
+    userOpinionInfo &&
+    moment().isAfter(moment(userOpinionInfo.date).add(1, 'day'))
+
   return (
     <div className={styles.body}>
       <header className={styles.header}>
-        {isMyProfile && <span className={styles.views}>{profile && profile.views}</span>}
+        {/* {isMyProfile && <span className={styles.views}>{profile && profile.views}</span>} */}
         <img src={noAvatar} alt="avatar" className={styles.avatar} />
         <h2 className={styles.userName}>{profile && profile.user.name && profile.user.name}</h2>
         <span>@{profile && profile.user.login}</span>
@@ -54,11 +63,17 @@ const Profile = ({
         </div>
       </header>
       <section>
-        {!isMyProfile && (
+        {!isMyProfile && isOneDayAfter && (
           <form onSubmit={onSubmit}>
             <textarea value={opinionText} onChange={onChange} placeholder="Tell your opinion"></textarea>
             <button type="submit">Send</button>
           </form>
+        )}
+        {!isOneDayAfter && userOpinionInfo  && (
+        <div>
+          <p>Thanks for your opinion</p>
+          <p>Opinions can be posted once a day</p>
+        </div>
         )}
         {profile && profile.opinions.length < 1 && <p className={styles.noOpinions}>
         {isMyProfile ? 'You dont have any opinions' : 'User has no opinions'}
