@@ -29,9 +29,7 @@ router.get('/me', auth, async (req, res) => {
 // @route   GET api/profile/user/:username
 // @desct   Get profile by user name
 // @access  Public
-router.get(
-  '/user/:username',
-  async ({params: {username}}, res) => {
+router.get('/user/:username', async ({params: {username}}, res) => {
     try {
       // TODO: Может можно как-то уменьшить количество запросов?
       const user = await User.findOne({
@@ -51,5 +49,25 @@ router.get(
     }
   }
 )
+
+// @route   POST api/profile/user/opinion/:id
+// @desc    New opinion about user
+// @acess   Public
+router.post('/user/opinion/:id', checkObjectId('id'), async (req, res) => {
+  // TODO: Validation
+
+  try {
+    const profile = await Profile.findById(req.params.id)
+
+    profile.opinions.unshift({text: req.body.text})
+
+    await profile.save()
+
+    res.json(profile.opinions)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server error')
+  }
+})
 
 module.exports = router

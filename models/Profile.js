@@ -12,6 +12,10 @@ const ProfileSchema = new Schema({
   description: {
     type: String
   },
+  views: {
+    type: Number,
+    default: 0
+  },
   social: {
     instagram: {
       type: String
@@ -26,7 +30,7 @@ const ProfileSchema = new Schema({
       type: String
     }
   },
-  reviews: [{
+  opinions: [{
     user: {
       type: Schema.Types.ObjectId
     },

@@ -1,19 +1,34 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import c from 'classnames'
 import styles from "./styles.module.css"
 import {useParams} from "react-router-dom"
 import {connect} from 'react-redux'
-import {getCurrentProfile, getProfileByName} from '../../actions/profile'
+import {getCurrentProfile, getProfileByName, newOpinion} from '../../actions/profile'
 import noAvatar from '../../img/noAvatar.png'
+import moment from 'moment'
+
 // TODO: Убрать стили по тегам, сделать по классам
 const Profile = ({
   getCurrentProfile,
   getProfileByName,
+  newOpinion,
   auth: {user},
   profile: {profile},
 }) => {
   let params = useParams()
-  const isMyProfile = user && user.login === params.username
+  const [opinionText, setOpinionText] = useState('')
+  const [isMyProfile] = useState(user && user.login === params.username)
+  const [userOpinionInfo] = useState(JSON.parse(localStorage.getItem(`opinion#${profile && profile._id}`)))
+
+  const onChange = e => {
+    setOpinionText(e.target.value)
+  }
+
+  const onSubmit = e => {
+    e.preventDefault()
+
+    newOpinion(profile._id, opinionText)
+  }
 
   useEffect(() => {
     if (user && user.login === params.username) {
@@ -23,15 +38,16 @@ const Profile = ({
     }
   }, [getCurrentProfile, getProfileByName, params, user])
 
+  console.log(userOpinionInfo)
   return (
     <div className={styles.body}>
       <header className={styles.header}>
-        {isMyProfile && <span className={styles.views}>32 views</span>}
+        {isMyProfile && <span className={styles.views}>{profile && profile.views}</span>}
         <img src={noAvatar} alt="avatar" className={styles.avatar} />
-        <h2 className={styles.userName}>Melanie Pasley</h2>
+        <h2 className={styles.userName}>{profile && profile.user.name && profile.user.name}</h2>
         <span>@{profile && profile.user.login}</span>
         <span>{profile && profile.description}</span>
-        <h3 className={styles.opinionCounter}>{profile && profile.reviews.length} opinions</h3>
+        <h3 className={styles.opinionCounter}>{profile && profile.opinions.length} opinions</h3>
         <div className={styles.socialButtons}>
           <button className={c(styles.socialbtn, styles.ggl)}></button>
           <button className={c(styles.socialbtn, styles.instg)}></button>
@@ -39,32 +55,28 @@ const Profile = ({
       </header>
       <section>
         {!isMyProfile && (
-          <>
-            <textarea placeholder="Tell your opinion"></textarea>
-            <button>Send</button>
-          </>
+          <form onSubmit={onSubmit}>
+            <textarea value={opinionText} onChange={onChange} placeholder="Tell your opinion"></textarea>
+            <button type="submit">Send</button>
+          </form>
         )}
-        {profile && profile.reviews.length < 1 && <p className={styles.noReviews}>You don't have any reviews</p>}
-        {profile && profile.reviews.map(item => (
+        {profile && profile.opinions.length < 1 && <p className={styles.noOpinions}>
+        {isMyProfile ? 'You dont have any opinions' : 'User has no opinions'}
+        </p>}
+        {profile && profile.opinions.map(item => (
           <div className={styles.revblock}>
-            <span>{item.date}2 days ago</span>
+            <span>{moment(item.date).fromNow()}</span>
             <p>{item.text}</p>
           </div>
         ))}
-        <div className={styles.revblock}>
-          {/* <span className={styles.auth}>Anonymous</span> */}
+        {/* <div className={styles.revblock}>
           <span>2 days ago</span>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
             exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
             dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
           </p>
-            {/* <div className={styles.opinionBlock}>
-              <span className={styles.confirmed}>Confirmed by Melanie</span>
-              <img src="plus.svg" alt="plusIcon" className={styles.kek} />
-              <a href="/">Report</a>
-            </div> */}
-        </div>
+        </div> */}
       </section>
     </div>
   )
@@ -75,4 +87,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 })
 
-export default connect(mapStateToProps, {getCurrentProfile, getProfileByName})(Profile)
+export default connect(mapStateToProps, {getCurrentProfile, getProfileByName, newOpinion})(Profile)

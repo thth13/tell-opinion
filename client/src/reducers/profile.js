@@ -1,6 +1,7 @@
 import {
   GET_PROFILE,
-  PROFILE_ERROR
+  PROFILE_ERROR,
+  NEW_OPINION
 } from '../actions/types'
 
 const initialState = {
@@ -26,6 +27,13 @@ function profileReducer(state = initialState, action) {
         loading: false,
         profile: null
       }
+    case NEW_OPINION: {
+      return {
+        ...state,
+        profile: { ...state.profile, opinions: payload },
+        loading: false
+      }
+    }
     default:
       return state
   }

@@ -2,7 +2,8 @@ import api from '../utils/api'
 
 import {
   GET_PROFILE,
-  PROFILE_ERROR
+  PROFILE_ERROR,
+  NEW_OPINION
 } from './types'
 
 export const getCurrentProfile = () => async dispatch => {
@@ -25,7 +26,6 @@ export const getCurrentProfile = () => async dispatch => {
 }
 
 export const getProfileByName = username => async dispatch => {
-  console.log('lol')
   try {
     const res = await api.get(`/profile/user/${username}`)
 
@@ -41,5 +41,26 @@ export const getProfileByName = username => async dispatch => {
         status: err.response.status
       }
     })
+  }
+}
+
+export const newOpinion = (profileId, text) => async dispatch => {
+  try {
+    const res = await api.post(`/profile/user/opinion/${profileId}`, {text})
+    
+    const localOpinionInfo = {
+      user: profileId,
+      date: Date.now()
+    }
+
+    localStorage.setItem(`opinion#${profileId}`, JSON.stringify(localOpinionInfo))
+
+    dispatch({
+      type: NEW_OPINION,
+      payload: res.data
+    })
+  } catch (err) {
+    // TODO: обработка ошибок
+    console.log(err);
   }
 }
