@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import c from 'classnames'
+import {Link} from 'react-router-dom'
 import styles from "./styles.module.css"
 import {useParams} from "react-router-dom"
 import {connect} from 'react-redux'
 import {getCurrentProfile, getProfileByName, newOpinion} from '../../actions/profile'
 import noAvatar from '../../img/noAvatar.png'
+import homeIcon from '../../img/home.png'
+import searchIcon from '../../img/search.png'
+import editProfileIcon from '../../img/edit.png'
 import moment from 'moment'
 
 // TODO: Убрать стили по тегам, сделать по классам
@@ -48,7 +52,13 @@ const Profile = ({
     userOpinionInfo &&
     moment().isAfter(moment(userOpinionInfo.date).add(1, 'day'))
 
-  return (
+  return (    
+  <>
+    <div className={styles.appBar}>
+      <Link to="/"><img className={styles.icon} src={homeIcon} alt="home" /></Link>
+      <Link to="/search"><img className={styles.icon} src={searchIcon} alt="search" /></Link>
+      <Link to="/editProfile"><img className={styles.icon} src={editProfileIcon} alt="edit profile" /></Link>
+    </div>
     <div className={styles.body}>
       <header className={styles.header}>
         {/* {isMyProfile && <span className={styles.views}>{profile && profile.views}</span>} */}
@@ -62,24 +72,26 @@ const Profile = ({
           <button className={c(styles.socialbtn, styles.instg)}></button>
         </div>
       </header>
-      <section>
+      <section className={styles.opinionsSection}>
         {!isMyProfile && isOneDayAfter && (
           <form onSubmit={onSubmit}>
-            <textarea value={opinionText} onChange={onChange} placeholder="Tell your opinion"></textarea>
-            <button type="submit">Send</button>
+            <textarea className={styles.opinionField} value={opinionText} onChange={onChange} placeholder="Tell your opinion"></textarea>
+            <button className={styles.submitButton} type="submit">Send</button>
           </form>
         )}
         {!isOneDayAfter && userOpinionInfo  && (
-        <div>
+        <div className={styles.thanksOpinionText}>
           <p>Thanks for your opinion</p>
           <p>Opinions can be posted once a day</p>
         </div>
         )}
-        {profile && profile.opinions.length < 1 && <p className={styles.noOpinions}>
-        {isMyProfile ? 'You dont have any opinions' : 'User has no opinions'}
-        </p>}
+        {profile && profile.opinions.length < 1 && 
+          <p className={styles.noOpinions}>
+            {isMyProfile ? 'You dont have any opinions' : 'User has no opinions'}
+          </p>
+        }
         {profile && profile.opinions.map(item => (
-          <div className={styles.revblock}>
+          <div key={item.date} className={styles.revblock}>
             <span>{moment(item.date).fromNow()}</span>
             <p>{item.text}</p>
           </div>
@@ -93,7 +105,7 @@ const Profile = ({
           </p>
         </div> */}
       </section>
-    </div>
+    </div></>
   )
 }
 

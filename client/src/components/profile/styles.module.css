@@ -1,21 +1,26 @@
-/* * { */
-  /* margin: 0;
-  padding: 0;
-  font-family: 'Montserrat', sans-serif;
-} */
-
 .body {
   padding: 10px;
   background-color: #f5f4f4;
-  height: 97vh;
+  padding-bottom: 25px;
+}
+
+.appBar {
+  height: 50px;
+  padding: 0 30px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon {
+  width: 25px;
 }
 
 .header {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
-  /* width: 90%; */
   padding: 0 20px;
   text-align: center;
   background-color: white;
@@ -36,8 +41,6 @@
 }
 
 .socialButtons {
-  /* margin: 0 auto; */
-  /* float: right; */
   margin-top: 10px;
   margin-bottom: 5px;
 }
@@ -45,7 +48,6 @@
 .socialbtn {
   margin-bottom: 5px;
   background: #2D3748; 
-  /* width: 200px; */
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -67,7 +69,7 @@
   background-position: center;
 }
 
-textarea {
+.opinionField {
   border: 1px solid #E8E8E8;
   height: 50px;
   padding: 0px 20px;
@@ -78,33 +80,26 @@ textarea {
   width: 100%;
   height: 100px;
   padding: 0;
-  /* margin-bottom: 55px; */
-  /* font-weight: 16px; */
 }
 
-section {
+.opinionsSection {
   display: flex;
   flex-direction: column;
-  /* align-items: flex-end; */
 }
 
-button {
+.submitButton {
   width: 106px;
   height: 40px;
-  /* background: #04C45C; */
   background: #8C30F5;
   border-radius: 5px;
   color: white;
   border: 0;
   cursor: pointer;
-  /* float: right; */
-  /* margin-bottom: 55px; */
-  /* font-weight: 700; */
 }
 
 .revblock {
   background-color: white;
-  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 20px;
 }
 
@@ -112,35 +107,25 @@ button {
   font-weight: bold;
 }
 
-.views {
-  /* float: right; */
-  /* border: 1px solid red; */
-  /* text-align: left; */
-}
-
 .revblock p {
   margin-top: 5px;
   margin-bottom: 10px;
 }
 
-a {
-  text-decoration: none;
-  color: black;
+.thanksOpinionText {
   font-weight: bold;
-  /* float: right; */
-  /* margin-top: 30px; */
+  margin: 15px auto;
+  font-size: 18px;
 }
 
 .opinionBlock {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border: 1px solid red; */
 }
 
 .confirmed {
   color: green
-  /* margin-top: 30px; */
 }
 
 .decl {
@@ -150,11 +135,6 @@ a {
 .auth {
   font-size: 13px;
   font-weight: lighter;
-}
-
-.kek {
-  width: 25px;
-  margin-left: 75px;
 }
 
 .noOpinions {
