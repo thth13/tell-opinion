@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import c from 'classnames'
-import {Link} from 'react-router-dom'
-import styles from "./styles.module.css"
+import moment from 'moment'
 import {useParams} from "react-router-dom"
 import {connect} from 'react-redux'
+import AppBar from '../appbar/AppBar'
 import {getCurrentProfile, getProfileByName, newOpinion} from '../../actions/profile'
+import styles from "./styles.module.css"
 import noAvatar from '../../img/noAvatar.png'
-import homeIcon from '../../img/home.png'
-import searchIcon from '../../img/search.png'
-import editProfileIcon from '../../img/edit.png'
-import moment from 'moment'
 
 // TODO: Убрать стили по тегам, сделать по классам
 const Profile = ({
@@ -54,11 +51,7 @@ const Profile = ({
 
   return (    
   <>
-    <div className={styles.appBar}>
-      <Link to="/"><img className={styles.icon} src={homeIcon} alt="home" /></Link>
-      <Link to="/search"><img className={styles.icon} src={searchIcon} alt="search" /></Link>
-      <Link to="/editProfile"><img className={styles.icon} src={editProfileIcon} alt="edit profile" /></Link>
-    </div>
+    <AppBar />
     <div className={styles.body}>
       <header className={styles.header}>
         {/* {isMyProfile && <span className={styles.views}>{profile && profile.views}</span>} */}
@@ -105,7 +98,8 @@ const Profile = ({
           </p>
         </div> */}
       </section>
-    </div></>
+    </div>
+  </>
   )
 }
 

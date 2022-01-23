@@ -1,0 +1,12 @@
+.appBar {
+  height: 50px;
+  padding: 0 30px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon {
+  width: 25px;
+}
