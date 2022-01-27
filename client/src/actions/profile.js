@@ -44,6 +44,14 @@ export const getProfileByName = username => async dispatch => {
   }
 }
 
+export const editProfile = data => async dispatch => {
+  try {
+    await api.post(`/profile`, data)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 export const newOpinion = (profileId, text) => async dispatch => {
   try {
     const res = await api.post(`/profile/user/opinion/${profileId}`, {text})

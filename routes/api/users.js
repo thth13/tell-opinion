@@ -4,7 +4,6 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const normalize = require('normalize-url');
 
 const validateRegisterForm = require('../../validation/register');
 const User = require('../../models/User');

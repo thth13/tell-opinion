@@ -70,4 +70,47 @@ router.post('/user/opinion/:id', checkObjectId('id'), async (req, res) => {
   }
 })
 
+// @route   POST api/profile
+// @desc    Create or update user profile
+// @access  Private
+router.post('/', auth, async (req, res) => {
+  const {
+    name,
+    description,
+    avatar,
+    instagram,
+    facebook,
+    twitter,
+    youtube
+  } = req.body
+
+  const profileFields = {
+    user: req.user.id,
+    name,
+    description,
+    avatar
+  }
+
+  const socialFields = { instagram, facebook, twitter, youtube }
+
+  // for (const [key, value] of Object.entries(socialFields)) {
+  //   if (value && value.length > 0)
+  //     socialFields[key] = normalize(value, { forceHttps: true })
+  // }
+  profileFields.social = socialFields
+
+  try {
+    let profile = await Profile.findOneAndUpdate(
+      { user: req.user.id },
+      { $set: profileFields },
+      { new: true, upsert: true, setDefaultOnInsert: true }
+    )
+    
+    return res.json(profile)
+  } catch (err) {
+    console.error(err.message)
+    return res.status(500).send('Server Error')
+  }
+})
+
 module.exports = router

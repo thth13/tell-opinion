@@ -4,9 +4,14 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+body {
+  background-color: #f5f4f4;
+}
+
 a {
   text-decoration: none;
 }
+
 button {
   border: 0;
   cursor: pointer;

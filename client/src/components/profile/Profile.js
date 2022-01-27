@@ -18,7 +18,7 @@ const Profile = ({
 }) => {
   let params = useParams()
   const [opinionText, setOpinionText] = useState('')
-  const [isMyProfile] = useState(user && user.login === params.username)
+  const [isMyProfile, setIsMyProfile] = useState(false)
   const [userOpinionInfo, setUserOpinionInfo] = useState()
 
   const onChange = e => {
@@ -45,14 +45,17 @@ const Profile = ({
     }
   }, [profile, setUserOpinionInfo])
 
-  const isOneDayAfter = 
-    userOpinionInfo &&
-    moment().isAfter(moment(userOpinionInfo.date).add(1, 'day'))
+  useEffect(() => {
+    setIsMyProfile(user && user.login === params.username)
+  }, [user, setIsMyProfile, params.username])
 
-  return (    
-  <>
-    <AppBar />
+  const isOneDayAfter = 
+    userOpinionInfo ?
+    moment().isAfter(moment(userOpinionInfo.date).add(1, 'day')) : true
+
+  return (
     <div className={styles.body}>
+      <AppBar />  
       <header className={styles.header}>
         {/* {isMyProfile && <span className={styles.views}>{profile && profile.views}</span>} */}
         <img src={noAvatar} alt="avatar" className={styles.avatar} />
@@ -99,7 +102,6 @@ const Profile = ({
         </div> */}
       </section>
     </div>
-  </>
   )
 }
 
