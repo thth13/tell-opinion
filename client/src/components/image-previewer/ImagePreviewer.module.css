@@ -1,4 +1,4 @@
-.page {
+/* .page {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,27 +6,26 @@
   height: 100vh;
 
   background-color: #f5f4f4;
-}
+} */
 
 .container {
-  width: 70vh;
-  height: 70vh;
-  border-radius: 10px;
-  background-color: #fff;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  margin: 20px 0;
 }
 
 .heading {
-  text-align: center;
-  margin-top: 1rem;
-  font-weight: bold;
-  font-size: 2rem;
+  margin: 0;
+  font-weight: normal;
+  font-size: 1rem;
 }
 
 .imgHolder {
-  width: 40vh;
-  height: 40vh;
+  width: 250px;
+  height: 250px;
   margin: auto;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .img {
@@ -41,7 +40,8 @@
 
 .label {
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
 }
@@ -53,5 +53,5 @@
 
   background-color: #f5f4f4;
 
-  font-size: 1.3rem;
+  font-size: 1rem;
 }

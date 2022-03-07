@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "./ImagePreviewer.module.css";
 import noAvatar from "../../img/noAvatar.png";
 
-const ImagePreviewer = (props) => {
+const ImagePreviewer = () => {
   const [profileImg, setProfileImg] = useState(noAvatar);
 
   const imageHandler = (e) => {
@@ -17,7 +17,6 @@ const ImagePreviewer = (props) => {
   }
 
   return (
-    <div className={styles.page}>
       <div className={styles.container}>
         <h1 className={styles.heading}>Add your Image</h1>
         <div className={styles.imgHolder}>
@@ -36,12 +35,7 @@ const ImagePreviewer = (props) => {
           </label>
         </div>
       </div>
-    </div>
   ) 
 }
 
-let mapStateToProps = state => {
-
-}
-
-export default connect(mapStateToProps, {})(ImagePreviewer);
+export default ImagePreviewer;
