@@ -5,7 +5,7 @@ import noAvatar from "../../img/noAvatar.png";
 const ImagePreviewer = () => {
   const [profileImg, setProfileImg] = useState(noAvatar)
 
-  const imageHandler = (e) => {
+  const imageHandler = e => {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
