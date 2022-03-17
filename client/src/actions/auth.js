@@ -61,5 +61,5 @@ export const loginUser = formData => async dispatch => {
 export const logoutsUser = () => dispatch => {
   dispatch({
     type: LOGOUT
-  });
+  })
 }
