@@ -15,6 +15,7 @@ import EditProfile from './components/edit-profile/EditProfile'
 import Search from './components/search/Search'
 
 import './App.css'
+import PrivateRoute from './components/PrivateRoute/PrivateRouter'
 
 const App = () => {
   useEffect(() => {
@@ -37,10 +38,12 @@ const App = () => {
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/restorepassword" element={<RestorePassword />} />
-          <Route exact path="/editprofile" element={<EditProfile />} />
-          <Route exact path="/search" element={<Search />} />
+          {/* <Route exact path="/editprofile" element={<EditProfile />} />
+          <Route exact path="/search" element={<Search />} /> */}
           <Route exact path="/@:username" element={<Profile />} />
         </Routes>
+        <PrivateRoute exact path="/editProfile" component={<EditProfile/>} />
+        <PrivateRoute exact path="/search" component={<Search/>} />
       </BrowserRouter>
     </Provider>
   )
