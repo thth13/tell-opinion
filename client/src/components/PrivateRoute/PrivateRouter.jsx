@@ -2,15 +2,15 @@ import { connect } from "react-redux";
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-let PrivateRoute = ({component, auth, user, rest}) => {
-  debugger
+let PrivateRoute = ({component, isAuthenticated, rest}) => {
   return (
     <Routes>
       <Route
       {...rest}
-      render={() => (auth !== null && user !== null)
-        ? component
-        : <Navigate to="/login"/>
+      element={
+        isAuthenticated
+          ? component
+          : <Navigate to="/login"/>
       }
     />
     </Routes>
@@ -19,9 +19,8 @@ let PrivateRoute = ({component, auth, user, rest}) => {
 
 let mapStateToProps = (state, ownProps) => ({
   isAuthenticated: state.auth.isAuthenticated,
-  user: state.auth.user,
   component: ownProps.component,
   rest: ownProps
 })
 
-export default connect(mapStateToProps, null)(PrivateRoute);
+export default connect(mapStateToProps, null)(PrivateRoute)
