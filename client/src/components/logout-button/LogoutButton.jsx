@@ -5,7 +5,7 @@ import styles from './styles.module.css'
 import logout from '../../img/logout.png'
 import { Link } from "react-router-dom"
 
-const LogoutBtn = (props) => {
+const LogoutButton = (props) => {
   return (
     <Link to="/" onClick={props.logoutsUser}>
       <img className={styles.icon} src={logout} alt="logouts" />
@@ -13,4 +13,4 @@ const LogoutBtn = (props) => {
   )
 }
 
-export default connect(null, {logoutsUser})(LogoutBtn)
+export default connect(null, {logoutsUser})(LogoutButton)
