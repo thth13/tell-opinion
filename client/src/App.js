@@ -41,8 +41,6 @@ const App = () => {
           <Route exact path="/editprofile" element={<EditProfile />} />
           <Route exact path="/search" element={<Search />} />
           <Route exact path="/@:username" element={<Profile />} />
-          {/* Image previewer */}
-          <Route exact path="/previewer" element={<ImagePreviewer />} />
         </Routes>
       </BrowserRouter>
     </Provider>
