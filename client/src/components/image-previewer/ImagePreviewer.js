@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import styles from "./ImagePreviewer.module.css";
-import noAvatar from "../../img/noAvatar.png";
+import React, { useState } from "react"
+import styles from "./ImagePreviewer.module.css"
 
-const ImagePreviewer = () => {
-  const [profileImg, setProfileImg] = useState(noAvatar)
+const ImagePreviewer = ({avatar, register}) => {
+  const [profileImg, setProfileImg] = useState(avatar)
 
   const imageHandler = e => {
-    const reader = new FileReader();
+    debugger
+    const reader = new FileReader()
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setProfileImg(reader.result);
+        setProfileImg(reader.result)
       }
     }
     reader.readAsDataURL(e.target.files[0])
@@ -26,7 +26,10 @@ const ImagePreviewer = () => {
           type="file" 
           name="image-upload" 
           id="input" accept="image/*" 
-          onChange={imageHandler}
+          {...register("avatar", {
+            onChange: imageHandler
+          })}
+          // onChange={imageHandler}
         />
         <div className={styles.label}>
           <label htmlFor="input" className={styles.imageUpload}>
@@ -37,4 +40,4 @@ const ImagePreviewer = () => {
   ) 
 }
 
-export default ImagePreviewer;
+export default ImagePreviewer

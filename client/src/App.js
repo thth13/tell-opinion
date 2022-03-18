@@ -15,7 +15,6 @@ import EditProfile from './components/edit-profile/EditProfile'
 import Search from './components/search/Search'
 
 import './App.css'
-import ImagePreviewer from './components/image-previewer/ImagePreviewer'
 
 const App = () => {
   useEffect(() => {
