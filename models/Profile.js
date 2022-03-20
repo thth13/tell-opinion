@@ -6,6 +6,9 @@ const ProfileSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'user'
   },
+  avatar: {
+    type: String
+  },
   name: {
     type: String
   },

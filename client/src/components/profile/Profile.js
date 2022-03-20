@@ -58,14 +58,18 @@ const Profile = ({
       <AppBar />  
       <header className={styles.header}>
         {/* {isMyProfile && <span className={styles.views}>{profile && profile.views}</span>} */}
-        <img src={noAvatar} alt="avatar" className={styles.avatar} />
-        <h2 className={styles.userName}>{profile && profile.user.name && profile.user.name}</h2>
+        <img src={profile && profile.avatar ? `avatars/${profile.avatar}` : noAvatar} alt="avatar" className={styles.avatar} />
+        <h2 className={styles.userName}>{profile && profile.name && profile.name}</h2>
         <span>@{profile && profile.user.login}</span>
         <span>{profile && profile.description}</span>
         <h3 className={styles.opinionCounter}>{profile && profile.opinions.length} opinions</h3>
         <div className={styles.socialButtons}>
           <button className={c(styles.socialbtn, styles.ggl)}></button>
-          <button className={c(styles.socialbtn, styles.instg)}></button>
+          {/* {profile && profile.social.instagram && (
+            <a target="_blank" rel="noreferrer" href={`https://www.instagram.com/${profile.social.instagram}`}>
+              <button className={c(styles.socialbtn, styles.instg)}></button>
+            </a>
+          )} */}
         </div>
       </header>
       <section className={styles.opinionsSection}>

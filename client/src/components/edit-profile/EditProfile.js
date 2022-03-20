@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { editProfile } from '../../actions/profile'
 import { yupResolver } from '@hookform/resolvers/yup'
+import noAvatar from '../../img/noAvatar.png'
 import styles from './styles.module.css'
 import AppBar from '../appbar/AppBar'
 import ImagePreviewer from "../image-previewer/ImagePreviewer"
@@ -30,8 +31,16 @@ const EditProfile = ({auth: {user}, profile: {profile}, editProfile}) => {
   });
 
   const onSubmit = data => {
-    editProfile(data)
-    
+    const formData = new FormData()
+    data.avatar && formData.append('avatar', data.avatar[0])
+    data.name && formData.append('name', data.name)
+    data.description && formData.append('description', data.description)
+    data.instagram && formData.append('instagram', data.instagram)
+    data.facebook && formData.append('facebook', data.facebook)
+    data.youtube && formData.append('youtube', data.youtube)
+    data.twitter && formData.append('twitter', data.twitter)
+
+    editProfile(formData)
     navigate('/')
   };
 
@@ -42,7 +51,7 @@ const EditProfile = ({auth: {user}, profile: {profile}, editProfile}) => {
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <span>Login: {user && user.login}</span>
         <span>Email: {user && user.email}</span>
-        <span>Avatar: {user && user.avatar}</span>
+        <span>Avatar:</span> <img src={user && user.avatar ? user.avatar : noAvatar} alt="avatar" className={styles.avatar} />
         <span>Change password link</span>
 
         {/* <input
@@ -92,3 +101,6 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, {editProfile})(EditProfile)
+
+
+
