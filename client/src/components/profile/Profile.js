@@ -52,13 +52,18 @@ const Profile = ({
   const isOneDayAfter = 
     userOpinionInfo ?
     moment().isAfter(moment(userOpinionInfo.date).add(1, 'day')) : true
-
+  
   return (
     <div className={styles.body}>
       <AppBar />  
       <header className={styles.header}>
         {/* {isMyProfile && <span className={styles.views}>{profile && profile.views}</span>} */}
-        <img src={profile && profile.avatar ? `avatars/${profile.avatar}` : noAvatar} alt="avatar" className={styles.avatar} />
+        <img 
+          // src={noAvatar} 
+          src={user.avatar ? user.avatar : noAvatar}
+          alt="avatar" 
+          className={styles.avatar}
+        />
         <h2 className={styles.userName}>{profile && profile.name && profile.name}</h2>
         <span>@{profile && profile.user.login}</span>
         <span>{profile && profile.description}</span>

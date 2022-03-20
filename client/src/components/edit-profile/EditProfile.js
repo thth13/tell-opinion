@@ -58,7 +58,7 @@ const EditProfile = ({auth: {user}, profile: {profile}, editProfile}) => {
           type="file"
           {...register("avatar")}
         /> */}
-        <ImagePreviewer/>
+        <ImagePreviewer avatar={user.avatar} register={register}/>
         <input
           className={c(styles.fields, { [styles.error]: errors.password })}
           placeholder="Name"

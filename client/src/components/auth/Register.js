@@ -33,7 +33,7 @@ const Register = ({ registerUser, auth, serverErrors }) => {
     setErrors({ ...serverErrors.errors, ...clientErrors})
   ), [clientErrors, serverErrors])
 
-  if (auth.isAuthenticated) {
+  if (auth.isAuthenticated && auth.user) {
     return <Navigate to={`/@${auth.user.login}`} />
   }
 

@@ -31,7 +31,7 @@ const Login = ({ loginUser, serverErrors, auth }) => {
     setErrors({ ...serverErrors.errors, ...clientErrors})
   ), [clientErrors, serverErrors])
 
-  if (auth.isAuthenticated) {
+  if (auth.isAuthenticated && auth.user) {
     return <Navigate to={`/@${auth.user.login}`} />
   }
 
