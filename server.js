@@ -14,6 +14,9 @@ app.use(express.json());
 app.use('/api/users/', require('./routes/api/users'));
 app.use('/api/profile/', require('./routes/api/profile'));
 app.use('/api/auth/', require('./routes/api/auth'));
+app.use(express.static('public'));
+
+// app.use('/avatars', express.static('avatars'));
 
 if (process.env.NODE_ENV === 'production')  {
   app.use(express.static('client/build'));
