@@ -34,3 +34,9 @@
   margin: 0 auto;
   border-radius: 5px;
 }
+
+.avatar {
+  border-radius: 50%;
+  width: 150px;
+  margin: 20px 0;
+}

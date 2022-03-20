@@ -1,7 +1,9 @@
 const express = require('express')
+const path = require("path");
 const router = express.Router()
 const auth = require('../../middleware/auth')
 const checkObjectId = require('../../middleware/checkObjectId')
+const multer = require("multer")
 
 const Profile = require('../../models/Profile')
 const User = require('../../models/User')
@@ -70,14 +72,26 @@ router.post('/user/opinion/:id', checkObjectId('id'), async (req, res) => {
   }
 })
 
+const storage = multer.diskStorage({
+  destination: "./public/avatars/",
+  filename: function(req, file, cb){
+     cb(null,"IMAGE-" + Date.now() + path.extname(file.originalname));
+  }
+});
+var upload = multer({ storage: storage })
+
+// const upload = multer({
+//   storage: storage,
+//   limits:{fileSize: 1000000},
+// }).single("myImage");
+
 // @route   POST api/profile
 // @desc    Create or update user profile
 // @access  Private
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, upload.single('avatar'), async (req, res) => {
   const {
     name,
     description,
-    avatar,
     instagram,
     facebook,
     twitter,
@@ -88,7 +102,10 @@ router.post('/', auth, async (req, res) => {
     user: req.user.id,
     name,
     description,
-    avatar
+  }
+
+  if (req.file) {
+    profileFields.avatar = req.file.filename
   }
 
   const socialFields = { instagram, facebook, twitter, youtube }

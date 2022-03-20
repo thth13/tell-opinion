@@ -20,9 +20,9 @@ const App = () => {
   useEffect(() => {
     if (localStorage.token) {
       setAuthToken(localStorage.token)
-      // TODO: тут всё ок? Может это должно быть вне условия
-      store.dispatch(loadUser())
     }
+
+    store.dispatch(loadUser())
 
     window.addEventListener('storage', () => {
       if (!localStorage.token) store.dispatch({type: LOGOUT})
