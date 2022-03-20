@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import noAvatar from '../../img/noAvatar.png'
 import styles from './styles.module.css'
 import AppBar from '../appbar/AppBar'
+import ImagePreviewer from "../image-previewer/ImagePreviewer"
 
 const schema = yup.object({
   // email: yup.string().email().required(),
@@ -48,14 +49,16 @@ const EditProfile = ({auth: {user}, profile: {profile}, editProfile}) => {
       <AppBar />
       <h2>Edit profile</h2>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <span>Avatar:</span> <img src={user && user.avatar ? user.avatar : noAvatar} alt="avatar" className={styles.avatar} />
-        <input
-          type="file"
-          {...register("avatar")}
-        />
         <span>Login: {user && user.login}</span>
         <span>Email: {user && user.email}</span>
+        <span>Avatar:</span> <img src={user && user.avatar ? user.avatar : noAvatar} alt="avatar" className={styles.avatar} />
         <span>Change password link</span>
+
+        {/* <input
+          type="file"
+          {...register("avatar")}
+        /> */}
+        <ImagePreviewer/>
         <input
           className={c(styles.fields, { [styles.error]: errors.password })}
           placeholder="Name"

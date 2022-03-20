@@ -15,14 +15,15 @@ import EditProfile from './components/edit-profile/EditProfile'
 import Search from './components/search/Search'
 
 import './App.css'
+import ImagePreviewer from './components/image-previewer/ImagePreviewer'
 
 const App = () => {
   useEffect(() => {
     if (localStorage.token) {
       setAuthToken(localStorage.token)
-      // TODO: тут всё ок? Может это должно быть вне условия
-      store.dispatch(loadUser())
     }
+
+    store.dispatch(loadUser())
 
     window.addEventListener('storage', () => {
       if (!localStorage.token) store.dispatch({type: LOGOUT})
@@ -40,6 +41,8 @@ const App = () => {
           <Route exact path="/editprofile" element={<EditProfile />} />
           <Route exact path="/search" element={<Search />} />
           <Route exact path="/@:username" element={<Profile />} />
+          {/* Image previewer */}
+          <Route exact path="/previewer" element={<ImagePreviewer />} />
         </Routes>
       </BrowserRouter>
     </Provider>
