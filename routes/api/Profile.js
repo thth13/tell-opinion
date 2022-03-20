@@ -78,12 +78,7 @@ const storage = multer.diskStorage({
      cb(null,"IMAGE-" + Date.now() + path.extname(file.originalname));
   }
 });
-var upload = multer({ storage: storage })
-
-// const upload = multer({
-//   storage: storage,
-//   limits:{fileSize: 1000000},
-// }).single("myImage");
+const upload = multer({ storage: storage })
 
 // @route   POST api/profile
 // @desc    Create or update user profile

@@ -5,15 +5,15 @@ import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { editProfile } from '../../actions/profile'
 import { yupResolver } from '@hookform/resolvers/yup'
-import noAvatar from '../../img/noAvatar.png'
 import styles from './styles.module.css'
 import AppBar from '../appbar/AppBar'
 import ImagePreviewer from "../image-previewer/ImagePreviewer"
 
+// TODO: валидация
 const schema = yup.object({
   // email: yup.string().email().required(),
   // password: yup.string().required(),
-}).required();
+}).required()
 
 const EditProfile = ({auth: {user}, profile: {profile}, editProfile}) => {
   const navigate = useNavigate()
@@ -23,15 +23,17 @@ const EditProfile = ({auth: {user}, profile: {profile}, editProfile}) => {
     defaultValues: {
       name: profile && profile.name,
       description: profile && profile.description,
+      avatar: profile && profile.avatar,
       instagram: profile && profile.social && profile.social.instagram,
       facebook: profile && profile.social && profile.social.facebook,
       youtube: profile && profile.social && profile.social.youtube,
       twitter: profile && profile.social && profile.social.twitter
     }
-  });
+  })
 
-  const onSubmit = data => {
+  const onSubmit = async (data) => {
     const formData = new FormData()
+
     data.avatar && formData.append('avatar', data.avatar[0])
     data.name && formData.append('name', data.name)
     data.description && formData.append('description', data.description)
@@ -40,9 +42,9 @@ const EditProfile = ({auth: {user}, profile: {profile}, editProfile}) => {
     data.youtube && formData.append('youtube', data.youtube)
     data.twitter && formData.append('twitter', data.twitter)
 
-    editProfile(formData)
+    await editProfile(formData)
     navigate('/')
-  };
+  }
 
   return (
     <div className={styles.body}>
@@ -51,14 +53,10 @@ const EditProfile = ({auth: {user}, profile: {profile}, editProfile}) => {
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <span>Login: {user && user.login}</span>
         <span>Email: {user && user.email}</span>
-        <span>Avatar:</span> <img src={user && user.avatar ? user.avatar : noAvatar} alt="avatar" className={styles.avatar} />
-        <span>Change password link</span>
-
-        {/* <input
-          type="file"
-          {...register("avatar")}
-        /> */}
-        <ImagePreviewer avatar={user.avatar} register={register}/>
+        <ImagePreviewer
+          avatar={profile && profile.avatar && `avatars/${profile.avatar}`}
+          register={register}
+        />
         <input
           className={c(styles.fields, { [styles.error]: errors.password })}
           placeholder="Name"
@@ -101,6 +99,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, {editProfile})(EditProfile)
-
-
-

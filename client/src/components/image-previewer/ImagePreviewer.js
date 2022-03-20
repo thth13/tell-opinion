@@ -1,11 +1,11 @@
 import React, { useState } from "react"
+import noAvatar from '../../img/noAvatar.png'
 import styles from "./ImagePreviewer.module.css"
 
 const ImagePreviewer = ({avatar, register}) => {
-  const [profileImg, setProfileImg] = useState(avatar)
+  const [profileImg, setProfileImg] = useState(avatar ? avatar : noAvatar)
 
   const imageHandler = e => {
-    debugger
     const reader = new FileReader()
     reader.onload = () => {
       if (reader.readyState === 2) {
@@ -17,7 +17,6 @@ const ImagePreviewer = ({avatar, register}) => {
 
   return (
       <div className={styles.container}>
-        <h1 className={styles.heading}>Add your Image</h1>
         <div className={styles.imgHolder}>
           <img src={profileImg} alt="" id="img" className={styles.img}/>
         </div>
@@ -29,7 +28,6 @@ const ImagePreviewer = ({avatar, register}) => {
           {...register("avatar", {
             onChange: imageHandler
           })}
-          // onChange={imageHandler}
         />
         <div className={styles.label}>
           <label htmlFor="input" className={styles.imageUpload}>
