@@ -42,21 +42,35 @@
   height: 40px;
   border-radius: 50%;
   margin-top: 5px;
-}
 
-.ggl {
-  background-image: url('../../img/googlel.svg');
   background-repeat: no-repeat;
   background-size: 25px;
   background-position: center;
   margin-right: 10px;
 }
 
+.socialbtn:last-child {
+  margin-right: 0px;
+}
+
+.ggl {
+  background-image: url('../../img/googlel.svg');
+}
+
 .instg {
-  background-image: url('../../img/instagram.svg');
-  background-repeat: no-repeat;
-  background-size: 25px;
-  background-position: center;
+  background-image: url('../../img/instagraml.svg');
+}
+
+.fb {
+  background-image: url('../../img/facebook.svg');  
+}
+
+.yt {
+  background-image: url('../../img/youtube.svg');
+}
+
+.tw {
+  background-image: url('../../img/twitter.svg');
 }
 
 .opinionField {
