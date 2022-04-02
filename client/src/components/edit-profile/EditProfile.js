@@ -11,6 +11,15 @@ import ImagePreviewer from "../image-previewer/ImagePreviewer"
 
 // TODO: валидация
 const schema = yup.object({
+  avatar: yup.mixed().test("fileSize", "The file size is too large", value => {
+      if (!value.length) return true
+      return value[0].size <= 2000000
+    }).test("fileType", "File must be image type of JPEG or PNG", value => {
+      return value && (
+        value[0].type === "image/jpeg" ||
+        value[0].type === "image/png"
+      )
+    })
   // email: yup.string().email().required(),
   // password: yup.string().required(),
 }).required()
