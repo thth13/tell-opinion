@@ -3,11 +3,12 @@ import c from 'classnames'
 import { connect } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { editProfile } from '../../actions/profile'
+import { editProfile, getCurrentProfile } from '../../actions/profile'
 import { yupResolver } from '@hookform/resolvers/yup'
 import styles from './styles.module.css'
 import AppBar from '../appbar/AppBar'
 import ImagePreviewer from "../image-previewer/ImagePreviewer"
+import { useEffect } from "react"
 
 // TODO: валидация
 const schema = yup.object({
@@ -15,7 +16,16 @@ const schema = yup.object({
   // password: yup.string().required(),
 }).required()
 
-const EditProfile = ({auth: {user}, profile: {profile}, editProfile}) => {
+const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
+  useEffect(() => {
+    if (profile === null) {
+      getCurrentProfile()
+    } 
+  })
+  
+  console.log(profile)
+  console.log(user)
+
   const navigate = useNavigate()
 
   const {register, handleSubmit, formState: { errors }} = useForm({
@@ -60,6 +70,7 @@ const EditProfile = ({auth: {user}, profile: {profile}, editProfile}) => {
         <input
           className={c(styles.fields, { [styles.error]: errors.password })}
           placeholder="Name"
+          value={profile && profile.name}
           {...register("name")}
         />
         <input
@@ -94,8 +105,8 @@ const EditProfile = ({auth: {user}, profile: {profile}, editProfile}) => {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  profile: state.profile
+  user: state.auth.user,
+  profile: state.profile.profile
 })
 
-export default connect(mapStateToProps, {editProfile})(EditProfile)
+export default connect(mapStateToProps, {editProfile, getCurrentProfile})(EditProfile)
