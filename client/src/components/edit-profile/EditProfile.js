@@ -28,18 +28,24 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
 
   const navigate = useNavigate()
 
-  const {register, handleSubmit, formState: { errors }} = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      name: profile && profile.name,
-      description: profile && profile.description,
-      avatar: profile && profile.avatar,
-      instagram: profile && profile.social && profile.social.instagram,
-      facebook: profile && profile.social && profile.social.facebook,
-      youtube: profile && profile.social && profile.social.youtube,
-      twitter: profile && profile.social && profile.social.twitter
-    }
+  const {register, handleSubmit, reset, formState: { errors }} = useForm({
+      resolver: yupResolver(schema),
+        defaultValues: {
+          name: profile && profile.name,
+          description: profile && profile.description,
+          avatar: profile && profile.avatar,
+          instagram: profile && profile.social && profile.social.instagram,
+          facebook: profile && profile.social && profile.social.facebook,
+          youtube: profile && profile.social && profile.social.youtube,
+          twitter: profile && profile.social && profile.social.twitter
+        }
   })
+
+  useEffect(() => {
+    if (profile) {
+      reset(profile)
+    }
+  }, [profile])
 
   const onSubmit = async (data) => {
     const formData = new FormData()
@@ -70,7 +76,6 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
         <input
           className={c(styles.fields, { [styles.error]: errors.password })}
           placeholder="Name"
-          value={profile && profile.name}
           {...register("name")}
         />
         <input
