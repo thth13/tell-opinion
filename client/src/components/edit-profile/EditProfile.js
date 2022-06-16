@@ -3,11 +3,12 @@ import c from 'classnames'
 import { connect } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { editProfile } from '../../actions/profile'
+import { editProfile, getCurrentProfile } from '../../actions/profile'
 import { yupResolver } from '@hookform/resolvers/yup'
 import styles from './styles.module.css'
 import AppBar from '../appbar/AppBar'
 import ImagePreviewer from "../image-previewer/ImagePreviewer"
+import { useEffect } from "react"
 
 // TODO: валидация
 const schema = yup.object({
@@ -15,21 +16,36 @@ const schema = yup.object({
   // password: yup.string().required(),
 }).required()
 
-const EditProfile = ({auth: {user}, profile: {profile}, editProfile}) => {
+const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
+  useEffect(() => {
+    if (profile === null) {
+      getCurrentProfile()
+    } 
+  })
+  
+  console.log(profile)
+  console.log(user)
+
   const navigate = useNavigate()
 
-  const {register, handleSubmit, formState: { errors }} = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      name: profile && profile.name,
-      description: profile && profile.description,
-      avatar: profile && profile.avatar,
-      instagram: profile && profile.social && profile.social.instagram,
-      facebook: profile && profile.social && profile.social.facebook,
-      youtube: profile && profile.social && profile.social.youtube,
-      twitter: profile && profile.social && profile.social.twitter
-    }
+  const {register, handleSubmit, reset, formState: { errors }} = useForm({
+      resolver: yupResolver(schema),
+        defaultValues: {
+          name: profile && profile.name,
+          description: profile && profile.description,
+          avatar: profile && profile.avatar,
+          instagram: profile && profile.social && profile.social.instagram,
+          facebook: profile && profile.social && profile.social.facebook,
+          youtube: profile && profile.social && profile.social.youtube,
+          twitter: profile && profile.social && profile.social.twitter
+        }
   })
+
+  useEffect(() => {
+    if (profile) {
+      reset(profile)
+    }
+  }, [profile])
 
   const onSubmit = async (data) => {
     const formData = new FormData()
@@ -94,8 +110,8 @@ const EditProfile = ({auth: {user}, profile: {profile}, editProfile}) => {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  profile: state.profile
+  user: state.auth.user,
+  profile: state.profile.profile
 })
 
-export default connect(mapStateToProps, {editProfile})(EditProfile)
+export default connect(mapStateToProps, {editProfile, getCurrentProfile})(EditProfile)
