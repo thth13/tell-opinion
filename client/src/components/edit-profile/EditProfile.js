@@ -8,10 +8,18 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import styles from './styles.module.css'
 import AppBar from '../appbar/AppBar'
 import ImagePreviewer from "../image-previewer/ImagePreviewer"
-import { useEffect } from "react"
 
 // TODO: валидация
 const schema = yup.object({
+  avatar: yup.mixed().test("fileSize", "The file size is too large", value => {
+      if (!value.length) return true
+      return value[0].size <= 2000000
+    }).test("fileType", "File must be image type of JPEG or PNG", value => {
+      return value && (
+        value[0].type === "image/jpeg" ||
+        value[0].type === "image/png"
+      )
+    })
   // email: yup.string().email().required(),
   // password: yup.string().required(),
 }).required()
@@ -72,6 +80,7 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
         <ImagePreviewer
           avatar={profile && profile.avatar && `avatars/${profile.avatar}`}
           register={register}
+          errors={errors}
         />
         <input
           className={c(styles.fields, { [styles.error]: errors.password })}

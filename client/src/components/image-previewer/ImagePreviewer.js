@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
 import noAvatar from '../../img/noAvatar.png'
 import styles from "./ImagePreviewer.module.css"
+import c from "classnames"
 
-const ImagePreviewer = ({avatar, register}) => {
-  const [profileImg, setProfileImg] = useState(noAvatar)
+const ImagePreviewer = ({avatar, register, errors}) => {
+  const [profileImg, setProfileImg] = useState(avatar ? avatar : noAvatar)
 
   useEffect(() => {
     if (avatar) setProfileImg(avatar)
@@ -22,7 +23,9 @@ const ImagePreviewer = ({avatar, register}) => {
   return (
       <div className={styles.container}>
         <div className={styles.imgHolder}>
-          <img src={profileImg} alt="" id="img" className={styles.img}/>
+          <img src={profileImg} alt="" id="img" 
+            className={c(styles.img, {[styles.error]: errors.avatar})}
+            />
         </div>
         <input
           className={styles.inputFile} 
@@ -34,10 +37,13 @@ const ImagePreviewer = ({avatar, register}) => {
           })}
         />
         <div className={styles.label}>
-          <label htmlFor="input" className={styles.imageUpload}>
+          <label htmlFor="input" 
+            className={c(styles.imageUpload, {[styles.error]: errors.avatar})}
+          >
             Choose your photo
           </label>
         </div>
+        {errors.avatar && <p className={styles.errorText}>{errors.avatar.message}</p>}
       </div>
   ) 
 }
