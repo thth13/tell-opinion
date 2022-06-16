@@ -10,7 +10,7 @@ const AppBar = () => (
     <Link to="/"><img className={styles.icon} src={homeIcon} alt="home" /></Link>
     <Link to="/search"><img className={styles.icon} src={searchIcon} alt="search" /></Link>
     <Link to="/editProfile"><img className={styles.icon} src={editProfileIcon} alt="edit profile" /></Link>
-    <LogoutButton/>
+    <LogoutButton />
   </div>
 )
 
