@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import noAvatar from '../../img/noAvatar.png'
 import styles from "./ImagePreviewer.module.css"
 import c from "classnames"
@@ -6,6 +6,10 @@ import c from "classnames"
 const ImagePreviewer = ({avatar, register, errors}) => {
   const [profileImg, setProfileImg] = useState(avatar ? avatar : noAvatar)
 
+  useEffect(() => {
+    if (avatar) setProfileImg(avatar)
+  }, [avatar])
+  
   const imageHandler = e => {
     const reader = new FileReader()
     reader.onload = () => {
