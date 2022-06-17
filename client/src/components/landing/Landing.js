@@ -11,7 +11,7 @@ const Landing = ({ auth }) => {
   }
 
   return (
-    <div>
+    <div className={styles.body}>
       <header>
         <div className={styles.container}>
           <div className={styles.headerAuth}>
