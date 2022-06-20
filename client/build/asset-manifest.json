@@ -1,16 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.fde7f922.css",
-    "main.js": "/static/js/main.1dc0151a.js",
+    "main.css": "/static/css/main.80263189.css",
+    "main.js": "/static/js/main.f07924b0.js",
+    "static/media/background.png": "/static/media/background.c236fcb418b4d58e8a1c.png",
     "static/media/edit.png": "/static/media/edit.0f46e2728eb984e21ce8.png",
     "static/media/instagram.svg": "/static/media/instagram.c715600054cad0f030f4fd6af9d5a4e9.svg",
+    "static/media/instagraml.svg": "/static/media/instagraml.a58d47cd74f0f117c12a.svg",
     "static/media/googlel.svg": "/static/media/googlel.81b5a837bf02f0cd7f130624aad4e30d.svg",
+    "static/media/twitter.svg": "/static/media/twitter.fe06d572bd13680e66f4.svg",
     "index.html": "/index.html",
-    "main.fde7f922.css.map": "/static/css/main.fde7f922.css.map",
-    "main.1dc0151a.js.map": "/static/js/main.1dc0151a.js.map"
+    "static/media/logo.svg": "/static/media/logo.db4f96daea63466aa5c79f6bece61135.svg",
+    "static/media/youtube.svg": "/static/media/youtube.6806408aa1bf55b7f1aa.svg",
+    "static/media/facebook.svg": "/static/media/facebook.447953c2943858178413.svg",
+    "main.80263189.css.map": "/static/css/main.80263189.css.map",
+    "main.f07924b0.js.map": "/static/js/main.f07924b0.js.map"
   },
   "entrypoints": [
-    "static/css/main.fde7f922.css",
-    "static/js/main.1dc0151a.js"
+    "static/css/main.80263189.css",
+    "static/js/main.f07924b0.js"
   ]
 }
