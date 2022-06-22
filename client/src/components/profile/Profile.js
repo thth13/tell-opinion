@@ -53,7 +53,9 @@ const Profile = ({
     userOpinionInfo ?
     moment().isAfter(moment(userOpinionInfo.date).add(1, 'day')) : true
   
-    return (
+  if (!profile) return null;
+
+  return (
     <div className={styles.body}>
       <AppBar />  
       <header className={styles.header}>
