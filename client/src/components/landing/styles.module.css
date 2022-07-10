@@ -1,5 +1,6 @@
 .body {
   overflow: hidden;
+  min-height: 100vh;
 }
 
 .container {
@@ -176,7 +177,7 @@
     font-size: 17px;
   }
 
-  body, html {  
+  .body {  
     overflow: hidden;
     height: 100%;
   }
