@@ -71,25 +71,29 @@ const Profile = ({
         <h3 className={styles.opinionCounter}>{profile && profile.opinions.length} opinions</h3>
         <div className={styles.socialButtons}>
           <button className={c(styles.socialbtn, styles.ggl)}></button>
-          {profile && profile.social.instagram && (
-            <a target="_blank" rel="noreferrer" href={`https://www.instagram.com/${profile.social.instagram}`}>
-              <button className={c(styles.socialbtn, styles.instg)}></button>
-            </a>
-          )}
-          {profile && profile.social.facebook && (
-            <a target="_blank" rel="noreferrer" href={`https://www.facebook.com/${profile.social.facebook}`}>
-              <button className={c(styles.socialbtn, styles.fb)}></button>
-            </a>
-          )}
-          {profile && profile.social.youtube && (
-            <a target="_blank" rel="noreferrer" href={`https://www.youtube.com/${profile.social.youtube}`}>
-              <button className={c(styles.socialbtn, styles.yt)}></button>
-            </a>
-          )}
-          {profile && profile.social.twitter && (
-            <a target="_blank" rel="noreferrer" href={`https://twitter.com.com/${profile.social.twitter}`}>
-              <button className={c(styles.socialbtn, styles.tw)}></button>
-            </a>
+          {profile && profile.social && (
+            <>
+              {profile.social.instagram && (
+                <a target="_blank" rel="noreferrer" href={`https://www.instagram.com/${profile.social.instagram}`}>
+                  <button className={c(styles.socialbtn, styles.instg)}></button>
+                </a>
+              )}
+              {profile.social.facebook && (
+                <a target="_blank" rel="noreferrer" href={`https://www.facebook.com/${profile.social.facebook}`}>
+                  <button className={c(styles.socialbtn, styles.fb)}></button>
+                </a>
+              )}
+              {profile.social.youtube && (
+                <a target="_blank" rel="noreferrer" href={`https://www.youtube.com/${profile.social.youtube}`}>
+                  <button className={c(styles.socialbtn, styles.yt)}></button>
+                </a>
+              )}
+              {profile.social.twitter && (
+                <a target="_blank" rel="noreferrer" href={`https://twitter.com.com/${profile.social.twitter}`}>
+                  <button className={c(styles.socialbtn, styles.tw)}></button>
+                </a>
+              )}
+            </>
           )}
           {/* {profile && profile.social.instagram && (
             <a target="_blank" rel="noreferrer" href={`https://www.instagram.com/${profile.social.instagram}`}>

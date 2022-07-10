@@ -8,12 +8,10 @@ import styles from './styles.module.css'
 const Landing = ({ auth }) => {
   if (auth.isAuthenticated) {
     return <Navigate to={`/@${auth.user.login}`} />
-  } else if (!auth.loadig) {
-    return null
   }
 
   return (
-    <div>
+    <div className={styles.body}>
       <header>
         <div className={styles.container}>
           <div className={styles.headerAuth}>
