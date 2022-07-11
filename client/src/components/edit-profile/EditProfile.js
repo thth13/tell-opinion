@@ -13,9 +13,11 @@ import ImagePreviewer from "../image-previewer/ImagePreviewer"
 // TODO: валидация
 const schema = yup.object({
   avatar: yup.mixed().test("fileSize", "The file size is too large", value => {
+      if (typeof value === "string" ) return true
       if (!value.length) return true
       return value[0].size <= 2000000
     }).test("fileType", "File must be image type of JPEG or PNG", value => {
+      if (typeof value === "string" ) return true
       return value && (
         value[0].type === "image/jpeg" ||
         value[0].type === "image/png"
@@ -70,7 +72,7 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
     await editProfile(formData)
     navigate('/')
   }
-
+  
   return (
     <div className={styles.body}>
       <AppBar />
