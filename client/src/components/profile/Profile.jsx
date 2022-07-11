@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import c from "classnames"
 import moment from "moment"
-import {useParams} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 import {connect} from "react-redux"
 import AppBar from "../appbar/AppBar"
 import {getCurrentProfile, getProfileByName, newOpinion} from "../../actions/profile"
@@ -76,7 +76,9 @@ let Profile = ({
             <h1 className={styles.name}>{profile && profile.name && profile.name}</h1>
             <h3 className={styles.nickName}>@{profile && profile.user.login}</h3>
             <p className={styles.description}>{profile && profile.description}</p>
-            {isMyProfile && <button className={c(styles.editProfileBtton, styles.editProfileBttonNarrow)}>Редактировать профиль</button>}
+            {isMyProfile && <Link to="/editProfile">
+              <button className={c(styles.editProfileBtton, styles.editProfileBttonNarrow)}>Редактировать профиль</button>
+            </Link>}
             <div className={styles.contacts}>
               <div className="infoSocial">
                 {profile && profile.social.google && (
@@ -108,7 +110,9 @@ let Profile = ({
               <span className={styles.dividingLine}></span>
               <div className={styles.opinionCount}>{profile && profile.opinions.length} opinions</div>
             </div>
-            {isMyProfile && <button className={c(styles.editProfileBtton, styles.editProfileBttonWide)}>Редактировать профиль</button>}
+            {isMyProfile && <Link to="/editProfile">
+              <button className={c(styles.editProfileBtton, styles.editProfileBttonWide)}>Редактировать профиль</button>
+            </Link>}
           </section>
           <section className={c(styles.opinions, styles.section)}>
             <h2 className={styles.opinionsTitle}>Мнения</h2>

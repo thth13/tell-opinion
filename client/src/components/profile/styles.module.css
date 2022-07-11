@@ -174,6 +174,7 @@
 .editProfileBtton {
   padding: 5px  23px;
   border: 1px solid var(--accent-color);
+  cursor: pointer;
   font-weight: 700;
   font-size: 18px;
   line-height: 222%;
@@ -341,6 +342,7 @@
 
 .opinionSubmitButton {
   padding: 5px 28px;
+  cursor: pointer;
   background-image: linear-gradient(86.13deg, #0075FF 17.96%, #95C6FF 90.14%);
   font-weight: 700;
   font-size: 18px;
