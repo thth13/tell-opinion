@@ -15,7 +15,6 @@ import EditProfile from './components/edit-profile/EditProfile'
 import Search from './components/search/Search'
 
 import './App.css'
-import AppBar from './components/appbar/AppBar'
 
 const App = () => {
   useEffect(() => {
@@ -41,7 +40,6 @@ const App = () => {
           <Route exact path="/editprofile" element={<EditProfile />} />
           <Route exact path="/search" element={<Search />} />
           <Route exact path="/@:username" element={<Profile />} />
-          <Route exact path="/appbar" element={<AppBar />} />
         </Routes>
       </BrowserRouter>
     </Provider>
