@@ -3,7 +3,7 @@ import c from 'classnames'
 import moment from 'moment'
 import {useParams} from "react-router-dom"
 import {connect} from 'react-redux'
-import AppBar from '../appbar/AppBar'
+// import AppBar from '../appbar/AppBar'
 import {getCurrentProfile, getProfileByName, newOpinion} from '../../actions/profile'
 import styles from "./styles.module.css"
 import noAvatar from '../../img/noAvatar.png'
@@ -20,7 +20,7 @@ const Profile = ({
   const [opinionText, setOpinionText] = useState('')
   const [isMyProfile, setIsMyProfile] = useState(false)
   const [userOpinionInfo, setUserOpinionInfo] = useState()
-
+  
   const onChange = e => {
     setOpinionText(e.target.value)
   }
@@ -55,7 +55,7 @@ const Profile = ({
   
   return (
     <div className={styles.body}>
-      <AppBar />  
+      {/* <AppBar />   */}
       <header className={styles.header}>
         {/* {isMyProfile && <span className={styles.views}>{profile && profile.views}</span>} */}
         <img 
