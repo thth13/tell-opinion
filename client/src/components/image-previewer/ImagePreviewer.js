@@ -22,11 +22,14 @@ const ImagePreviewer = ({avatar, register, errors}) => {
 
   return (
     <div className={styles.avatarContainer}>
-      <div className={styles.avatarHolder}>
-        <img src={profileImg} alt="" id="img" 
-          className={c(styles.avatar, {[styles.error]: errors.avatar})}
+      <div className={styles.avatarWrapper}>
+        <div className={styles.avatarHolder}>
+          <img src={profileImg} alt="" id="img" 
+            className={c(styles.avatar, {[styles.error]: errors.avatar})}
           />
+        </div>
       </div>
+      
       <input
         className={styles.inputFile} 
         type="file" 

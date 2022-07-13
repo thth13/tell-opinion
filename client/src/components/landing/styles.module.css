@@ -176,9 +176,8 @@
     font-size: 17px;
   }
 
-  body, html {  
-    overflow: hidden;
-    height: 100%;
+  body, html {
+    min-height: 100vh;
   }
 
   .container {

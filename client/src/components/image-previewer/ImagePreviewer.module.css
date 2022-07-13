@@ -40,3 +40,39 @@
   margin-top: 15px;
   text-align: center;
 }
+
+@media screen and (max-width: 767px) {
+  .avatarContainer {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .avatarWrapper {
+    width: 47.761%;
+    margin-right: 4.8%;
+  }
+
+  .avatarHolder {
+    position: relative;
+    width: 100%;
+    height: 0;
+    margin-bottom: 14px;
+    padding: 50% 0;
+  }
+  .avatar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .label {
+    width: 46.865%;
+    padding: 10px 5px;
+    font-size: 18px;
+  }
+}

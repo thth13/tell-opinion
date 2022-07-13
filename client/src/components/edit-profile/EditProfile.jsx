@@ -13,14 +13,15 @@ import ImagePreviewer from "../image-previewer/ImagePreviewer"
 // TODO: валидация
 const schema = yup.object({
   avatar: yup.mixed().test("fileSize", "The file size is too large", value => {
+      if (typeof value === "string") return true
       if (!value.length) return true
       return value[0].size <= 2000000
     }).test("fileType", "File must be image type of JPEG or PNG", value => {
+      if (typeof value === "string") return true
       return value && (
         value[0].type === "image/jpeg" ||
         value[0].type === "image/png"
-      )
-    })
+    )})
   // email: yup.string().email().required(),
   // password: yup.string().required(),
 }).required()
@@ -68,12 +69,18 @@ let EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
     navigate('/')
   }
 
+  let comeBack = () => {
+    window.history.back()
+  }
+
   return (
     <div>
       <AppBar/>
       <main className={styles.container}>
         <header className={styles.header}>
-          <button><span className={styles.backArrow}></span></button>
+          <button className={styles.backArrowButton} onClick={comeBack}>
+            <span className={styles.backArrow}></span>
+          </button>
           <h1 className={styles.mainTitle}>Редактирование профиля</h1>
         </header>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -85,7 +92,7 @@ let EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
             />
             <div className={styles.fieldsContainer}>
               <div className={styles.descriptionContainer}>
-                <h2 className={styles.descriptionTitle}>Данные</h2>
+                <h2 className={c(styles.descriptionTitle, styles.descriptionTitleSmallHidden)}>Данные</h2>
                 <input
                   className={c(styles.fields, { [styles.error]: errors.password })}
                   placeholder="Name"
@@ -122,7 +129,7 @@ let EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
               </div>
               <div className={styles.buttonsContainer}>
                 <input className={styles.submitButton} type="submit" value="Сохранить изменения"/>
-                <button  className={styles.cancelButton}>Выйти без изменений</button>
+                <button className={styles.cancelButton} onClick={comeBack}>Выйти без изменений</button>
               </div>
             </div>
           </div>
