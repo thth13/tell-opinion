@@ -52,14 +52,6 @@ let Profile = ({
 
   return (
     <div>
-      {/* <header>
-        <div className={"Styles.container"}>
-          <div className={"styles.logo"}></div>
-          <div className={"styles.social"}></div>
-          <button className={"styles.logoutButtton"}>Выход</button>
-          <button className={"styles.accountButton"}>Выход</button>
-        </div>
-      </header> */}
       <AppBar /> 
       <main>
         <div className={styles.container}>
