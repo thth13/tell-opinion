@@ -21,30 +21,26 @@ const ImagePreviewer = ({avatar, register, errors}) => {
   }
 
   return (
-      <div className={styles.container}>
-        <div className={styles.imgHolder}>
-          <img src={profileImg} alt="" id="img" 
-            className={c(styles.img, {[styles.error]: errors.avatar})}
-            />
-        </div>
-        <input
-          className={styles.inputFile} 
-          type="file" 
-          name="image-upload" 
-          id="input" accept="image/*" 
-          {...register("avatar", {
-            onChange: imageHandler
-          })}
-        />
-        <div className={styles.label}>
-          <label htmlFor="input" 
-            className={c(styles.imageUpload, {[styles.error]: errors.avatar})}
-          >
-            Choose your photo
-          </label>
-        </div>
-        {errors.avatar && <p className={styles.errorText}>{errors.avatar.message}</p>}
+    <div className={styles.avatarContainer}>
+      <div className={styles.avatarHolder}>
+        <img src={profileImg} alt="" id="img" 
+          className={c(styles.avatar, {[styles.error]: errors.avatar})}
+          />
       </div>
+      <input
+        className={styles.inputFile} 
+        type="file" 
+        name="image-upload" 
+        id="input" accept="image/*" 
+        {...register("avatar", {
+          onChange: imageHandler
+        })}
+      />
+      <label htmlFor="input"
+        className={c(styles.label, {[styles.error]: errors.avatar})}
+      >Выбрать фото</label>
+      {errors.avatar && <p className={styles.errorText}>{errors.avatar.message}</p>}
+    </div>
   ) 
 }
 
