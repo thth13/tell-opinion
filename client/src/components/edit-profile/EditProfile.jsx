@@ -70,7 +70,7 @@ let EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
   }
 
   let comeBack = () => {
-    window.history.back()
+    navigate(`/@${user.login}`)
   }
 
   return (
@@ -134,6 +134,7 @@ let EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
             </div>
           </div>
         </form>
+        <div className={styles.backgroundBox}></div>
       </main>
     </div>
   )

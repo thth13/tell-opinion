@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import c from "classnames"
+import { useNavigate } from 'react-router-dom'
 import styles from "./styles.module.css"
 import logo from "../../img/logo.svg"
 import { connect } from "react-redux"
@@ -8,7 +9,9 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { logoutsUser } from "../../actions/auth"
 
-let AppBar = ({user, profile, getCurrentProfile, logoutsUser}) => {
+let AppBar = ({user, profile, 
+  getCurrentProfile, logoutsUser, 
+  isAuthenticated}) => {
   let [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -22,11 +25,18 @@ let AppBar = ({user, profile, getCurrentProfile, logoutsUser}) => {
     else setIsMenuOpen(false)
   }
 
+  const navigate = useNavigate()
+
+  let logout = () => {
+    logoutsUser()
+    navigate('/')
+  }
+
   return (
     <div>
       <div className={styles.container}>
         <img className={styles.logo} src={logo} alt="Logo of Tell Opinion" />
-        <div className={styles.navContainer}>
+        {isAuthenticated && <div className={styles.navContainer}>
           <button className={styles.searchButton}></button>
           <button className={c(styles.menuButton, {[styles.menuButtonActive]: isMenuOpen})} onClick={toggleMenu}>
             <div className={styles.name}>
@@ -43,17 +53,26 @@ let AppBar = ({user, profile, getCurrentProfile, logoutsUser}) => {
                 <Link to="/search">Settings</Link>
               </li>
               <li className={styles.menuItem} >
-                <button className={styles.logout} onClick={logoutsUser}>Logout</button> 
+                <button className={styles.logout} onClick={logout}>Logout</button> 
               </li>
             </ul>
           </nav>          
-        </div>
+        </div>}
+        {!isAuthenticated && <div className={styles.authorizationBox}>
+        <Link to={`/register`}>
+          <button className={styles.signUp}>Sign up</button>
+        </Link>
+        <Link to={`/login`}>  
+          <button className={styles.signIn}>Sign in</button>
+        </Link>
+        </div>}
       </div>
     </div>
   )
 }
 
 let mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
   user: state.auth.user,
   profile: state.profile.profile
 })

@@ -160,6 +160,7 @@
 
 .cancelButton {
   box-sizing: border-box;
+  margin-bottom: 158px;
   padding: 15px 23px;
   border: 1px solid #0075FF;
   border-radius: 2px;
@@ -167,6 +168,16 @@
   font-size: 18px;
   line-height: 26px;
   color: #0075FF;
+}
+
+.backgroundBox {
+  width: 100%;
+  padding: 3.261% 0;
+  margin-bottom: 152px;
+  background-image: url(../../img/editProfileBackground.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 @media screen and (max-width: 1023px) {
@@ -186,6 +197,10 @@
 
   .textArea {
     margin-bottom: 0;
+  }
+
+  .backgroundBox {
+    display: none;
   }
 }
 
