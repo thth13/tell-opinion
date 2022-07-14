@@ -1,0 +1,229 @@
+.body {
+  overflow: hidden;
+}
+
+.container {
+  padding: 20px 50px;
+  max-width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerAuth {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.headerLogo {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.headerLogo img {
+  width: 28px;
+  margin-right: 10px;
+}
+
+.headerSocial {
+  list-style: none;
+  display: flex;;
+}
+
+.headerSocial li {
+  width: 32px;
+  height: 32px;
+  background-color: rgb(255,255,255, 0.1);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 17px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.headerSocial li:last-child {
+  margin: 0
+}
+
+.socialTwitter {
+  background-image: url('../../img/twitter.svg');
+  background-position: center;
+}
+
+.socialInstagram {
+  background-image: url('../../img/instagraml.svg');
+  background-position: center;
+}
+
+.backgroundCircles {
+  width: 560px;
+  height: 460px;
+  background-image: url('../../img/background.png');  
+  background-position: center;
+  background-size: cover;
+  margin-right: -30px;
+  margin-top: 30px;
+}
+
+.backgroundCircles div {
+  position: relative;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.circle1 {
+  width: 740px;
+  height: 740px;
+  right: -150px;
+  top: -350px;
+  background-color: #c698fa;
+}
+
+.circle2 {
+  width: 72px;
+  height: 72px;
+  top: -300px;
+  left: 350px;
+  background-color: #75E3EA;
+}
+
+.circle3 {
+  width: 72px;
+  height: 72px;
+  top: -640px;
+  background: #FFC278;
+}
+
+.mainSection {
+  margin-top: 75px;
+  position: relative;
+  overflow: visible;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.titleBlock h2 {
+  font-size: 72px;
+  max-width: 500px;
+  margin-bottom: 16px;
+  font-weight: 800;
+}
+
+.titleBlock span {
+  font-size: 18px;
+  margin-bottom: 32px;
+}
+
+.titleBlock button {
+  width: 196px;
+  height: 62px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 8px;
+  font-size: 20px;
+}
+
+.registerButton:active {
+  background: #7C30F1;
+}
+
+.registerButton {
+  background: #8C30F5;
+  border: none;
+  color: white;
+}
+
+.loginButton {
+  border: 1px solid #8C30F5;
+  background: white;
+  color: black;
+  margin-top: 20px;
+
+}
+
+@media (max-width: 1100px) {
+  .titleBlock h2 {
+    font-size: 32px;
+  }
+
+  .backgroundCircles {
+    margin-top: 0px;
+    background-size: 500px;
+    background-repeat: no-repeat;
+  }
+}
+
+.mobileButtons {
+  display: none;
+}
+
+
+@media (max-width: 750px) {
+  .titleBlock h2 {
+    font-size: 37px;
+  }
+
+  .mobileButtons {
+    display: block;
+  }
+  
+  .mobileButtons button{
+    font-size: 17px;
+  }
+
+  body, html {
+    min-height: 100vh;
+  }
+
+  .container {
+    padding: 20px 10px;
+  }
+
+  .mainSection {
+    margin-top: 35%;
+  }
+
+  .desktopButton {
+    display: none;
+  }
+
+  .headerAuth {
+    display: none;
+  }
+
+  .headerLogo {
+    margin: 0 auto;
+  }
+
+  .headerSocial {
+    display: none;
+  }
+
+  .titleBlock {
+    text-align: center;
+  }
+
+  .titleBlock button {
+    width: 275px;
+    height: 52px;
+  }
+
+  .backgroundCircles {
+    position: absolute;
+    background-image: none;
+  }
+
+  .circle2 {
+    left: 270px;
+    background: #FFC278;
+  }
+
+  .circle3 {
+    display: none;
+  }
+} 

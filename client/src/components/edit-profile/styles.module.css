@@ -7,7 +7,7 @@
   background-size: cover;
 }
 
-@media screen and (max-width: 1365px) {
+@media screen and (max-width: 1536px) {
   .container {
     max-width: 92%;
   }
@@ -105,7 +105,7 @@
   margin-bottom: 40px;
 }
 
-@media screen and (max-width: 1365px) {
+@media screen and (max-width: 1536px) {
   .fieldsContainer {
     width: 60%;
   }

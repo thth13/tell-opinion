@@ -13,19 +13,6 @@
   background-color: inherit;
 }
 
-@media screen and (max-width: 1365px) {
-  .container {
-    max-width: 92%;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .container {
-    max-width: 100%;
-    padding: 15px 5.333% 0;
-  }
-}
-
 .logo {
   width: 236px;
   height: auto;
@@ -115,36 +102,6 @@
   color: #2E3238;
 }
 
-@media screen and (max-width: 767px) {
-  .logo {
-    width: 149px;
-  }
-
-  .searchButton {
-    background-size: 20px;
-  }
-
-  .name {
-    display: none;
-  }
-
-  .arrowButton{
-    margin-right: 10px;
-  }
-
-  .menu {
-    padding: 8px 15px;
-    text-align: right;
-  }
-}
-
-@media screen and (max-width: 320px) { 
-  .searchButton {
-    background-size: 18px;
-    margin-right: 14px;
-  }
-}
-
 .signUp,
 .signIn {
   font-weight: 700;
@@ -166,9 +123,48 @@
   color: #FFFFFF;  
 }
 
+@media screen and (max-width: 1536px) {
+  .container {
+    max-width: 92%;
+  }
+}
+
 @media screen and (max-width: 767px) {
+  .container {
+    max-width: 100%;
+    padding: 15px 5.333% 0;
+  }
+
+  .logo {
+    width: 149px;
+  }
+
+  .searchButton {
+    background-size: 20px;
+  }
+
+  .name {
+    display: none;
+  }
+
+  .arrowButton{
+    margin-right: 10px;
+  }
+
+  .menu {
+    padding: 8px 15px;
+    text-align: right;
+  }
+
   .signUp,
   .signIn {
     display: none;
+  }
+}
+
+@media screen and (max-width: 320px) { 
+  .searchButton {
+    background-size: 18px;
+    margin-right: 14px;
   }
 }
