@@ -142,17 +142,11 @@ color: #2E3238;
     background-size: 160%;
   }
 
-<<<<<<< HEAD
   .container {
     flex-direction: column-reverse;
     max-width: 100%;
     padding: 0 5.333%;
     padding-top: 165px;
-=======
-  .body {  
-    overflow: hidden;
-    height: 100%;
->>>>>>> master
   }
 
   .authBox,
