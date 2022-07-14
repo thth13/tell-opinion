@@ -50,6 +50,13 @@ let Profile = ({
     userOpinionInfo ?
     moment().isAfter(moment(userOpinionInfo.date).add(1, 'day')) : true
 
+  let isShowLine = (profile && profile.social && ((
+    profile.social.facebook 
+    && profile.social.instagram 
+    && profile.social.twitter 
+    && profile.social.youtube) === null)) ? true : false
+  
+  
   return (
     <div>
       <AppBar /> 
@@ -99,7 +106,7 @@ let Profile = ({
                   </a>
                 )}                
               </div>
-              <span className={styles.dividingLine}></span>
+              {!isShowLine && <span className={styles.dividingLine}></span>}
               <div className={styles.opinionCount}>{profile && profile.opinions.length} opinions</div>
             </div>
             {isMyProfile && <Link to="/editProfile">

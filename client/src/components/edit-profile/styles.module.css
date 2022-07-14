@@ -1,6 +1,10 @@
 .container {
   max-width: 83.333%;
   margin: 0 auto;
+  background-image: url(../../img/editProfileDots.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 @media screen and (max-width: 1365px) {

@@ -35,7 +35,9 @@ let AppBar = ({user, profile,
   return (
     <div>
       <div className={styles.container}>
-        <img className={styles.logo} src={logo} alt="Logo of Tell Opinion" />
+        <a href="https://tell-opinion.com/">
+          <img className={styles.logo} src={logo} alt="Logo of Tell Opinion" />
+        </a>
         {isAuthenticated && <div className={styles.navContainer}>
           <button className={styles.searchButton}></button>
           <button className={c(styles.menuButton, {[styles.menuButtonActive]: isMenuOpen})} onClick={toggleMenu}>
@@ -49,9 +51,9 @@ let AppBar = ({user, profile,
           </button>
           <nav className={styles.menu}>
             <ul>
-              <li className={styles.menuItem}>
-                <Link to="/search">Settings</Link>
-              </li>
+              {/* <li className={styles.menuItem}>
+                <Link to="/settings">Settings</Link>
+              </li> */}
               <li className={styles.menuItem} >
                 <button className={styles.logout} onClick={logout}>Logout</button> 
               </li>
