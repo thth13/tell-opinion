@@ -1,231 +1,220 @@
 .body {
-  overflow: hidden;
-  min-height: 100vh;
+  background-image: url(../../img/landingBackground.svg), url(../../img/landingDots.svg);
+  background-repeat: no-repeat;
+  background-position: top 7% right, center;
+  background-size: 70.9375vw, cover;
 }
 
 .container {
-  padding: 20px 50px;
-  max-width: 1170px;
-  margin: 0 auto;
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+  max-width: 83.333%;
+  margin: 0 auto;
+  padding-top: 238px;
 }
 
-.headerAuth {
-  font-size: 14px;
+.authBox {
+  box-sizing: border-box;
+  width: 50%;
+}
+
+.mainTitle {
+  margin-bottom: 50px;
   font-weight: 700;
+  font-size: 5vw;
+  line-height: 95.83333333333333%;
+  color: #232630;
 }
 
-.headerLogo {
-  font-weight: bold;
-  display: flex;
-  align-items: center;
+.mainTitleAccent {
+  color: #0075FF;
 }
 
-.headerLogo img {
-  width: 28px;
-  margin-right: 10px;
-}
-
-.headerSocial {
-  list-style: none;
-  display: flex;;
-}
-
-.headerSocial li {
-  width: 32px;
-  height: 32px;
-  background-color: rgb(255,255,255, 0.1);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 17px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.headerSocial li:last-child {
-  margin: 0
-}
-
-.socialTwitter {
-  background-image: url('../../img/twitter.svg');
-  background-position: center;
-}
-
-.socialInstagram {
-  background-image: url('../../img/instagraml.svg');
-  background-position: center;
-}
-
-.backgroundCircles {
-  width: 560px;
-  height: 460px;
-  background-image: url('../../img/background.png');  
-  background-position: center;
-  background-size: cover;
-  margin-right: -30px;
-  margin-top: 30px;
-}
-
-.backgroundCircles div {
-  position: relative;
-  border-radius: 50%;
-  z-index: -1;
-}
-
-.circle1 {
-  width: 740px;
-  height: 740px;
-  right: -150px;
-  top: -350px;
-  background-color: #c698fa;
-}
-
-.circle2 {
-  width: 72px;
-  height: 72px;
-  top: -300px;
-  left: 350px;
-  background-color: #75E3EA;
-}
-
-.circle3 {
-  width: 72px;
-  height: 72px;
-  top: -640px;
-  background: #FFC278;
-}
-
-.mainSection {
-  margin-top: 75px;
-  position: relative;
-  overflow: visible;
-}
-
-.titleBlock {
-  display: flex;
-  flex-direction: column;
-}
-
-.titleBlock h2 {
-  font-size: 72px;
-  max-width: 500px;
-  margin-bottom: 16px;
-  font-weight: 800;
-}
-
-.titleBlock span {
+.descriptionNarrow {
+  display: none;
+  font-weight: 400;
   font-size: 18px;
-  margin-bottom: 32px;
+  line-height: 144%;
+  margin-bottom: 18px;  
+
+
+color: #2E3238;
 }
 
-.titleBlock button {
-  width: 196px;
-  height: 62px;
-  cursor: pointer;
-  outline: none;
-  border-radius: 8px;
-  font-size: 20px;
+.startButton {
+  margin-bottom: 138px;
+  padding: 10px 48px;
+  background-image: 
+    linear-gradient(86.13deg, #0075FF 17.96%, #95C6FF 90.14%);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 40px;
+  color: #FFFFFF;
 }
 
-.registerButton:active {
-  background: #7C30F1;
+.social {
+  margin-bottom: 170px;
 }
 
-.registerButton {
-  background: #8C30F5;
-  border: none;
-  color: white;
+.socialBtn {
+  box-sizing: border-box;
+  width: 50px;
+  height: 50px;
+  margin-right: 9px;
+  border: 1px solid #0075FF;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.loginButton {
-  border: 1px solid #8C30F5;
-  background: white;
-  color: black;
-  margin-top: 20px;
-
+.twitter {
+  background-image: url(../../img/twGradient.svg);
+  background-size: 44% auto;
 }
 
-@media (max-width: 1100px) {
-  .titleBlock h2 {
-    font-size: 32px;
-  }
-
-  .backgroundCircles {
-    margin-top: 0px;
-    background-size: 500px;
-    background-repeat: no-repeat;
-  }
+.instagram {
+  background-image: url(../../img/instGradient.svg);
+  background-size: 47% auto;
 }
 
-.mobileButtons {
+.authorizationBox {
   display: none;
 }
 
+.descriptionBox {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 50%;
+}
 
-@media (max-width: 750px) {
-  .titleBlock h2 {
-    font-size: 37px;
+.description{
+  margin-right: 8.5%;
+  margin-bottom: 170px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 150%;
+  text-align: right;
+  color: #232630;
+}
+
+.image {
+  width: 49.25%;
+  height: auto;
+  margin-bottom: 170px;
+}
+
+@media screen and (max-width: 1536px) {
+  .container {
+    max-width: 92%;
+    padding-top: 100px;
   }
 
-  .mobileButtons {
-    display: block;
-  }
-  
-  .mobileButtons button{
-    font-size: 17px;
+  .mainTitle {
+    font-size: 5.434782608695652vw;
   }
 
+  .startButton {
+    margin-bottom: 100px;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .body {
+    background-position: top 15vh right, center;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .description{
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .body {
+    background-position: top -5% right 25%, center;
+    background-size: 160%;
+  }
+
+<<<<<<< HEAD
+  .container {
+    flex-direction: column-reverse;
+    max-width: 100%;
+    padding: 0 5.333%;
+    padding-top: 165px;
+=======
   .body {  
     overflow: hidden;
     height: 100%;
+>>>>>>> master
   }
 
-  .container {
-    padding: 20px 10px;
+  .authBox,
+  .descriptionBox {
+    width: 100%;
   }
 
-  .mainSection {
-    margin-top: 35%;
+  .mainTitle {
+    font-size: 10.66666666666667vw;
+    line-height: 100%;
+    margin-bottom: 25px;
   }
 
-  .desktopButton {
+  .descriptionNarrow {
+    display: block;
+  }
+
+  .description{
+    display: none;
+  }
+  
+  .image {
+    width: 49.85074626865672%;
+    height: auto;
+    margin-bottom: 13px;
+  }
+
+  .startButton {
     display: none;
   }
 
-  .headerAuth {
+  .social {
     display: none;
   }
 
-  .headerLogo {
-    margin: 0 auto;
+  .authorizationBox {
+    display: block;
   }
 
-  .headerSocial {
-    display: none;
+  .signUp,
+  .signIn {
+    box-sizing: border-box;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 40px;
   }
 
-  .titleBlock {
-    text-align: center;
+  .signUp {
+    width: 100%;
+    margin-bottom: 67px;
+    margin-right: 11px;
+    padding: 5px 36px;
+    border: 1px solid #0075FF;
+    color: #0075FF;
   }
-
-  .titleBlock button {
-    width: 275px;
-    height: 52px;
+  
+  .signIn {
+    width: 100%;
+    margin-bottom: 14px;
+    padding: 6px 37px;
+    background-image: 
+      linear-gradient(86.13deg, #0075FF 17.96%, #95C6FF 90.14%);
+    color: #FFFFFF;  
   }
-
-  .backgroundCircles {
-    position: absolute;
-    background-image: none;
-  }
-
-  .circle2 {
-    left: 270px;
-    background: #FFC278;
-  }
-
-  .circle3 {
-    display: none;
-  }
-} 
+}
