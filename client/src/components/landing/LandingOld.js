@@ -10,7 +10,7 @@ const Landing = ({ auth }) => {
     return <Navigate to={`/@${auth.user.login}`} />
   }
 
-  return (
+  return !auth.loading && (
     <div className={styles.body}>
       <header>
         <div className={styles.container}>
@@ -32,13 +32,13 @@ const Landing = ({ auth }) => {
       <section className={styles.mainSection}>
         <div className={styles.container}>
           <div className={styles.titleBlock}>
-            <h2>Узнай что о тебе думают другие</h2>
-            <span>Регестрируйся и получай анонимные мнения о себе</span>
+            <h2>Find out what others think of you</h2>
+            <span>Register and get anonymous opinions about yourself</span>
             <div className={styles.mobileButtons}>
-              <button className={styles.registerButton}>Регистрация</button>
-              <button className={styles.loginButton}>Вход</button>
+              <button className={styles.registerButton}>Sign up</button>
+              <button className={styles.loginButton}>Sign in</button>
             </div>
-            <button className={c(styles.registerButton, styles.desktopButton)}>Начать</button>
+            <button className={c(styles.registerButton, styles.desktopButton)}>Get started</button>
           </div>
           <div className={styles.backgroundCircles}>
             <div className={styles.circle1}></div>
