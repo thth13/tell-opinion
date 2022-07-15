@@ -35,9 +35,9 @@ let AppBar = ({user, profile,
   return (
     <div>
       <div className={styles.container}>
-        <a href="https://tell-opinion.com/">
+        <Link to={`/`}>
           <img className={styles.logo} src={logo} alt="Logo of Tell Opinion" />
-        </a>
+        </Link>
         {isAuthenticated && <div className={styles.navContainer}>
           <button className={styles.searchButton}></button>
           <button className={c(styles.menuButton, {[styles.menuButtonActive]: isMenuOpen})} onClick={toggleMenu}>

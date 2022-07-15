@@ -6,7 +6,11 @@ import styles from "./styles.module.css"
 import AppBar from "./../appbar/AppBar"
 import image from "../../img/landingImg.svg"
 
-let Landing = () => {
+let Landing = ({ auth }) => {
+  if (auth.isAuthenticated) {
+    return <Navigate to={`/@${auth.user.login}`} />
+  }
+
   return (
     <div className={styles.body}>
       <AppBar/>
@@ -21,7 +25,9 @@ let Landing = () => {
             Регистрируйся и получай<br/> 
             анонимные мнения о себе
           </p>
-          <button className={styles.startButton}>Start</button>
+          <Link to={`/register`}>
+            <button className={styles.startButton}>Start</button>
+          </Link>
           <div className={styles.social}>
             <button className={c(styles.socialBtn, styles.twitter)}></button>
             <button className={c(styles.socialBtn, styles.instagram)}></button>
@@ -48,4 +54,8 @@ let Landing = () => {
   )
 }
 
-export default Landing
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, {})(Landing)
