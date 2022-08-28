@@ -1,9 +1,14 @@
 const express = require('express')
 const path = require("path");
 const router = express.Router()
+const fs = require('fs')
 const auth = require('../../middleware/auth')
 const checkObjectId = require('../../middleware/checkObjectId')
 const multer = require("multer")
+const util = require('util')
+
+const unlinkFile = util.promisify(fs.unlink)
+const { PutObjectCommand, S3Client } = require('@aws-sdk/client-s3');
 
 const Profile = require('../../models/Profile')
 const User = require('../../models/User')
@@ -72,13 +77,27 @@ router.post('/user/opinion/:id', checkObjectId('id'), async (req, res) => {
   }
 })
 
-const storage = multer.diskStorage({
-  destination: "./public/avatars/",
-  filename: function(req, file, cb){
-     cb(null,"IMAGE-" + Date.now() + path.extname(file.originalname));
-  }
+// const storage = multer.diskStorage({
+//   destination: "./public/avatars/",
+//   filename: function(req, file, cb){
+//      cb(null,"IMAGE-" + Date.now() + path.extname(file.originalname));
+//   }
+// });
+
+const upload = multer({ dest: 'uploads/' })
+
+// const upload = multer({ storage: storage })
+
+
+const s3 = new S3Client({
+    endpoint: "https://fra1.digitaloceanspaces.com",
+    region: "fra1",
+    credentials: {
+      accessKeyId: 'DO00HEQGABT9UU6MBUP7',
+      secretAccessKey: 'DO00H93VMVY3CKX8M9QK'
+    }
 });
-const upload = multer({ storage: storage })
+
 
 // @route   POST api/profile
 // @desc    Create or update user profile
@@ -100,7 +119,28 @@ router.post('/', auth, upload.single('avatar'), async (req, res) => {
   }
 
   if (req.file) {
-    profileFields.avatar = req.file.filename
+    const params = {
+      Bucket: "tell-opinion-img",
+      Key: req.file.filename,
+      Body: req.file,
+      ACL: "private",
+    };
+    
+    try {console.log(3)
+      const data = await s3.send(new PutObjectCommand(params));
+      console.log(
+        "Successfully uploaded object: " +
+          params.Bucket +
+          "/" +
+          params.Key
+      );
+      console.log(data);
+      await unlinkFile(req.file.path)
+    } catch (err) {
+      await unlinkFile(req.file.path)
+      console.log("Error", err);
+    }
+    // profileFields.avatar = req.file.filename
   }
 
   const socialFields = { instagram, facebook, twitter, youtube }
