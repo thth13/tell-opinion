@@ -93,8 +93,8 @@ const s3 = new S3Client({
     endpoint: "https://fra1.digitaloceanspaces.com",
     region: "fra1",
     credentials: {
-      accessKeyId: 'DO00HEQGABT9UU6MBUP7',
-      secretAccessKey: 'DO00H93VMVY3CKX8M9QK'
+      accessKeyId: 'DO007C9W2XJFVVNVRYDV',
+      secretAccessKey: 'DO00JD2LJXA3J9MJLDM8'
     }
 });
 
