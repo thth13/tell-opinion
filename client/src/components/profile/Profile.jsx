@@ -61,8 +61,6 @@ const Profile = ({
   
   return (
     <div>
-      <WaitPopup/>
-      {/* <ThanksPopup/> */}
       <AppBar /> 
       <main>
         <div className={styles.container}>
@@ -120,9 +118,9 @@ const Profile = ({
           <section className={c(styles.opinions, styles.section)}>
             <h2 className={styles.opinionsTitle}>Мнения</h2>
             <div className="opinionBox">
-            {!isOneDayAfter && userOpinionInfo  && (
+            {/* {!isOneDayAfter && userOpinionInfo  && (
               <WaitPopup/>
-            )}
+            )} */}
             </div>
             <div className={styles.opinionItemsContainer}>
               {profile && profile.opinions.length < 1 && 
