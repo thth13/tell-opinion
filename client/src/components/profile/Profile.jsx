@@ -7,6 +7,8 @@ import AppBar from "../appbar/AppBar"
 import {getCurrentProfile, getProfileByName, newOpinion} from "../../actions/profile"
 import styles from "./styles.module.css"
 import noAvatar from "../../img/noAvatar.png"
+import ThanksPopup from "../thanks-popup/ThanksPopup"
+import WaitPopup from "../wait-popup/WaitPopup"
 
 const Profile = ({
   getCurrentProfile, getProfileByName, newOpinion,
@@ -59,6 +61,8 @@ const Profile = ({
   
   return (
     <div>
+      <WaitPopup/>
+      {/* <ThanksPopup/> */}
       <AppBar /> 
       <main>
         <div className={styles.container}>
@@ -116,14 +120,9 @@ const Profile = ({
           <section className={c(styles.opinions, styles.section)}>
             <h2 className={styles.opinionsTitle}>Мнения</h2>
             <div className="opinionBox">
-              
-              {/* {!isOneDayAfter && userOpinionInfo  && (
-              <div className={styles.thanksOpinionText}>
-                <p>Thanks for your opinion</p>
-                <p>Opinions can be posted once a day</p>
-              </div>
-              )} */}
-              
+            {!isOneDayAfter && userOpinionInfo  && (
+              <WaitPopup/>
+            )}
             </div>
             <div className={styles.opinionItemsContainer}>
               {profile && profile.opinions.length < 1 && 
