@@ -1,17 +1,19 @@
 const express = require('express')
-const path = require("path");
-const router = express.Router()
-const fs = require('fs')
-const auth = require('../../middleware/auth')
-const checkObjectId = require('../../middleware/checkObjectId')
 const multer = require("multer")
 const util = require('util')
-
+const fs = require('fs')
 const unlinkFile = util.promisify(fs.unlink)
-const { PutObjectCommand, S3Client } = require('@aws-sdk/client-s3');
+const router = express.Router()
+
+const auth = require('../../middleware/auth')
+const checkObjectId = require('../../middleware/checkObjectId')
+const { PutObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3')
+const s3 = require('../../middleware/s3Client')
 
 const Profile = require('../../models/Profile')
 const User = require('../../models/User')
+
+const upload = multer({ dest: 'uploads/' })
 
 // @route   GET api/profile/me
 // @desc    Get current users profile
@@ -77,28 +79,6 @@ router.post('/user/opinion/:id', checkObjectId('id'), async (req, res) => {
   }
 })
 
-// const storage = multer.diskStorage({
-//   destination: "./public/avatars/",
-//   filename: function(req, file, cb){
-//      cb(null,"IMAGE-" + Date.now() + path.extname(file.originalname));
-//   }
-// });
-
-const upload = multer({ dest: 'uploads/' })
-
-// const upload = multer({ storage: storage })
-
-
-const s3 = new S3Client({
-    endpoint: "https://fra1.digitaloceanspaces.com",
-    region: "fra1",
-    credentials: {
-      accessKeyId: 'DO007C9W2XJFVVNVRYDV',
-      secretAccessKey: 'DO00JD2LJXA3J9MJLDM8'
-    }
-});
-
-
 // @route   POST api/profile
 // @desc    Create or update user profile
 // @access  Private
@@ -119,28 +99,34 @@ router.post('/', auth, upload.single('avatar'), async (req, res) => {
   }
 
   if (req.file) {
+    const file = fs.readFileSync(req.file.path)
+    // TODO: fix bucket to env
     const params = {
-      Bucket: "tell-opinion-img",
+      Bucket: "tell-opinion-image",
       Key: req.file.filename,
-      Body: req.file,
-      ACL: "private",
-    };
-    
-    try {console.log(3)
-      const data = await s3.send(new PutObjectCommand(params));
-      console.log(
-        "Successfully uploaded object: " +
-          params.Bucket +
-          "/" +
-          params.Key
-      );
-      console.log(data);
+      Body: file,
+      ACL: "public-read"
+    }
+
+    try {
+      await s3.send(new PutObjectCommand(params))
+      const profile = await Profile.findOne({
+        user: req.user.id
+      }).select('avatar');
+
+      if (profile.avatar) {
+        await s3.send(new DeleteObjectCommand({
+          Bucket: "tell-opinion-image",
+          Key: profile.avatar
+        }));
+      }
+
+      profileFields.avatar = params.Key
       await unlinkFile(req.file.path)
     } catch (err) {
       await unlinkFile(req.file.path)
-      console.log("Error", err);
+      console.log("Error", err)
     }
-    // profileFields.avatar = req.file.filename
   }
 
   const socialFields = { instagram, facebook, twitter, youtube }

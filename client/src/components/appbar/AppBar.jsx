@@ -46,7 +46,7 @@ let AppBar = ({user, profile,
             </div>
             <button className={styles.arrowButton}></button>
             <div className={styles.avatarWrapper}>
-              <img src={`avatars/${profile && profile.avatar}`} alt="" className={styles.avatar} />
+              <img src={`https://spaces.tell-opinion.com//${profile && profile.avatar}`} alt="" className={styles.avatar} />
             </div>
           </button>
           <nav className={styles.menu}>

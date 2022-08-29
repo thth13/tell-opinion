@@ -26,7 +26,7 @@ const schema = yup.object({
   // password: yup.string().required(),
 }).required()
 
-let EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
+const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
   useEffect(() => {
     if (profile === null) {
       getCurrentProfile()
@@ -69,7 +69,7 @@ let EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
     navigate('/')
   }
 
-  let comeBack = () => {
+  const comeBack = () => {
     navigate(`/@${user.login}`)
   }
 
@@ -86,7 +86,7 @@ let EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.editWrapper}>
             <ImagePreviewer 
-              avatar={profile && profile.avatar && `avatars/${profile.avatar}`}
+              avatar={profile && profile.avatar && `https://spaces.tell-opinion.com/${profile.avatar}`}
               register={register}
               errors={errors}
             />

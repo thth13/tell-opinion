@@ -66,7 +66,7 @@ let Profile = ({
             <div className={styles.avatarContainer}>
               <div className={styles.avatarWrapper}>
                 <img 
-                  src={profile && profile.avatar ? `avatars/${profile.avatar}` : noAvatar}
+                  src={profile && profile.avatar ? `https://spaces.tell-opinion.com/${profile.avatar}` : noAvatar}
                   alt="avatar" 
                   className={styles.avatar}
                 />
