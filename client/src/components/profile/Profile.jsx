@@ -8,12 +8,12 @@ import {getCurrentProfile, getProfileByName, newOpinion} from "../../actions/pro
 import styles from "./styles.module.css"
 import noAvatar from "../../img/noAvatar.png"
 
-let Profile = ({
+const Profile = ({
   getCurrentProfile, getProfileByName, newOpinion,
   auth: {user},
   profile: {profile},
 }) => {
-  let params = useParams()
+  const params = useParams()
   const [opinionText, setOpinionText] = useState('')
   const [isMyProfile, setIsMyProfile] = useState(false)
   const [userOpinionInfo, setUserOpinionInfo] = useState()
@@ -50,7 +50,7 @@ let Profile = ({
     userOpinionInfo ?
     moment().isAfter(moment(userOpinionInfo.date).add(1, 'day')) : true
 
-  let isShowLine = (profile && profile.social && ((
+  const isShowLine = (profile && profile.social && ((
     profile.social.facebook 
     && profile.social.instagram 
     && profile.social.twitter 

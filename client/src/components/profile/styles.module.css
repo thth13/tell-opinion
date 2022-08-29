@@ -18,7 +18,7 @@
   width: 50%;
 }
 
-@media screen and (max-width: 1536px) {
+@media screen and (max-width: 1225px) {
   .section {
     width: 100%;
     margin-bottom: 80px;
@@ -30,16 +30,13 @@
     max-width: 100%;
     padding-top: 25px;
   }
-}
 
-@media screen and (max-width: 767px) {
   .section {
     margin-bottom: 0px;
   }
 }
 
 /*  INFO SECTION */
-
 .info {
   display: flex;
   flex-direction: column;
