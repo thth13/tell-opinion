@@ -11,7 +11,7 @@ let Landing = ({ auth }) => {
     return <Navigate to={`/@${auth.user.login}`} />
   }
 
-  return (
+  return !auth.loading && (
     <div className={styles.body}>
       <AppBar/>
       <main className={styles.container}>
