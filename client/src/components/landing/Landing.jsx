@@ -25,7 +25,7 @@ let Landing = ({ auth }) => {
             Регистрируйся и получай<br/> 
             анонимные мнения о себе
           </p>
-          <Link to={`/register`}>
+          <Link to={`/login`}>
             <button className={styles.startButton}>Start</button>
           </Link>
           <div className={styles.social}>
