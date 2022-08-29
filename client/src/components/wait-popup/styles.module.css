@@ -1,0 +1,67 @@
+.popupWrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: rgba(163, 166, 171, 0.47);
+  backdrop-filter: blur(40px);
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 330px 113px 40px;
+  background-color: #FFFFFF;
+  background-image: url("./../../img/landingImg.svg"), url("./../../img/waitPopupBankground.svg");
+  background-repeat: no-repeat;
+  background-position: top 40px right 162px, center;
+  background-size: 157px auto, 100%;
+}
+
+.title {
+  width: 400px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 30px;
+  text-align: center;
+  color: #2E3238;  
+}
+
+.prompt {
+  width: 259px;
+  margin: 0 auto;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 20px;
+  text-align: center;
+  color: #FF7474;
+}
+
+@media screen and (max-width: 767px) {
+  .popupWrapper {
+    background: rgba(76, 87, 100, 0.7);
+    backdrop-filter: blur(10px);    
+  }
+
+  .popup {
+    padding: 285px 7.5vw 40px;
+    background-position: top 40px right 17vw, top 45% center;
+    background-size: 118px auto, 140%;
+  }
+
+  .title {
+    width: 269px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 26px; 
+  }
+
+  .prompt {
+    font-size: 16px;
+    line-height: 18px;
+  }
+}
