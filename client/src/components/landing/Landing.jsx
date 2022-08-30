@@ -4,9 +4,9 @@ import { Link, Navigate } from "react-router-dom"
 import { connect } from "react-redux"
 import styles from "./styles.module.css"
 import AppBar from "./../appbar/AppBar"
-import image from "../../img/landingImg.svg"
+import image from "../../img/People.gif"
 
-let Landing = ({ auth }) => {
+const Landing = ({ auth }) => {
   if (auth.isAuthenticated) {
     return <Navigate to={`/@${auth.user.login}`} />
   }
