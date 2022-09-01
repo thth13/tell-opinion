@@ -12,6 +12,7 @@ const s3 = require('../../middleware/s3Client')
 
 const Profile = require('../../models/Profile')
 const User = require('../../models/User')
+const Opinion = require('../../models/Opinion')
 
 const upload = multer({ dest: 'uploads/' })
 
@@ -24,11 +25,16 @@ router.get('/me', auth, async (req, res) => {
       user: req.user.id
     }).populate('user', ['login', 'avatar'])
 
+    const opinions = await Opinion.find({
+      profile: profile._id
+    }).populate('profile', ['text']).sort({date: -1})
+
     if (!profile) {
       return res.status(400).json({msg: 'There is no profile for this user'})
     }
 
-    res.json(profile)
+    res.json({profile, opinions})
+
   } catch (err) {
     console.log(err.message)
     res.status(500).end('Server Error')
@@ -40,7 +46,6 @@ router.get('/me', auth, async (req, res) => {
 // @access  Public
 router.get('/user/:username', async ({params: {username}}, res) => {
     try {
-      // TODO: Может можно как-то уменьшить количество запросов?
       const user = await User.findOne({
         login: username
       })
@@ -49,9 +54,13 @@ router.get('/user/:username', async ({params: {username}}, res) => {
         user: user._id
       }).populate('user', ['login', 'avatar'])
 
+      const opinions = await Opinion.find({
+        profile: profile._id
+      }).populate('profile', ['text']).sort({date: -1})
+
       if (!profile) return res.status(400).json({msg: 'Profile not found'})
    
-      return res.json(profile)
+      return res.json({profile, opinions})
     } catch (err) {
       console.error(err.message)
       return res.status(500).json({msg: 'Server error'})
@@ -66,13 +75,12 @@ router.post('/user/opinion/:id', checkObjectId('id'), async (req, res) => {
   // TODO: Validation
   // TODO: Check 1 day after
   try {
-    const profile = await Profile.findById(req.params.id)
+    const opinion = await new Opinion({
+      text: req.body.text,
+      profile: req.params.id
+    }).save();
 
-    profile.opinions.unshift({text: req.body.text})
-
-    await profile.save()
-
-    res.json(profile.opinions)
+    res.json(opinion)
   } catch (err) {
     console.error(err.message)
     res.status(500).send('Server error')

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const ProfileSchema = new Schema({
   user: {
@@ -33,23 +33,10 @@ const ProfileSchema = new Schema({
       type: String
     }
   },
-  opinions: [{
-    user: {
-      type: Schema.Types.ObjectId
-    },
-    text: {
-      type: String,
-      required: true
-    },
-    date: {
-      type: Date,
-      default: Date.now
-    }
-  }],
   date: {
     type: Date,
     default: Date.now
   }
-});
+})
 
-module.exports = mongoose.model('profile', ProfileSchema);
+module.exports = mongoose.model('profile', ProfileSchema)

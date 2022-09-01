@@ -16,12 +16,13 @@ const schema = yup.object({
       if (typeof value === "string") return true
       if (!value.length) return true
       return value[0].size <= 2000000
-    }).test("fileType", "File must be image type of JPEG or PNG", value => {
-      if (typeof value === "string") return true
-      return value && (
-        value[0].type === "image/jpeg" ||
-        value[0].type === "image/png"
-    )})
+    })
+    // .test("fileType", "File must be image type of JPEG or PNG", value => {
+    //   if (typeof value === "string") return true
+    //   return value && (
+    //     value[0].type === "image/jpeg" ||
+    //     value[0].type === "image/png"
+    // )})
   // email: yup.string().email().required(),
   // password: yup.string().required(),
 }).required()
@@ -32,19 +33,18 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
       getCurrentProfile()
     } 
   })
-
   const navigate = useNavigate()
 
   const {register, handleSubmit, reset, formState: { errors }} = useForm({
       resolver: yupResolver(schema),
         defaultValues: {
-          name: profile && profile.name,
-          description: profile && profile.description,
-          avatar: profile && profile.avatar,
-          instagram: profile && profile.social && profile.social.instagram,
-          facebook: profile && profile.social && profile.social.facebook,
-          youtube: profile && profile.social && profile.social.youtube,
-          twitter: profile && profile.social && profile.social.twitter
+          name: profile && profile?.name,
+          description: profile && profile?.description,
+          avatar: profile && profile?.avatar,
+          instagram: profile && profile?.social && profile.social?.instagram,
+          facebook: profile && profile?.social && profile.social?.facebook,
+          youtube: profile && profile?.social && profile.social?.youtube,
+          twitter: profile && profile?.social && profile.social?.twitter
         }
   })
 

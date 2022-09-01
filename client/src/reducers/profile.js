@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   profile: null,
+  opinions: [],
   loadig: true,
   error: {}
 }
@@ -17,7 +18,8 @@ function profileReducer(state = initialState, action) {
     case GET_PROFILE:
       return {
         ...state,
-        profile: payload,
+        profile: payload.profile,
+        opinions: payload.opinions,
         loading: false
       }
     case PROFILE_ERROR:
@@ -30,7 +32,7 @@ function profileReducer(state = initialState, action) {
     case NEW_OPINION: {
       return {
         ...state,
-        profile: { ...state.profile, opinions: payload },
+        opinions: state.opinions.concat(payload),
         loading: false
       }
     }

@@ -13,7 +13,8 @@ import WaitPopup from "../wait-popup/WaitPopup"
 const Profile = ({
   getCurrentProfile, getProfileByName, newOpinion,
   auth: {user},
-  profile: {profile},
+  profile,
+  opinions
 }) => {
   const params = useParams()
   const [opinionText, setOpinionText] = useState('')
@@ -39,10 +40,10 @@ const Profile = ({
   }, [getCurrentProfile, getProfileByName, params, user])
 
   useEffect(() => {
-    if (profile) {
+    if (opinions) {
       setUserOpinionInfo(JSON.parse(localStorage.getItem(`opinion#${profile && profile._id}`)))
     }
-  }, [profile, setUserOpinionInfo])
+  }, [opinions, setUserOpinionInfo])
 
   useEffect(() => {
     setIsMyProfile(user && user.login === params.username)
@@ -57,7 +58,6 @@ const Profile = ({
     && profile.social.instagram 
     && profile.social.twitter 
     && profile.social.youtube) === null)) ? true : false
-  
   
   return (
     <div>
@@ -82,34 +82,38 @@ const Profile = ({
             </Link>}
             <div className={styles.contacts}>
               <div className="infoSocial">
-                {profile && profile.social.google && (
-                  <a target="_blank" rel="noreferrer" href={`https://www.google.com/${profile.social.google}`}>
-                    <button className={c(styles.socialbtn, styles.google)}></button>
-                  </a>
-                )}
-                {profile && profile.social.twitter && (
-                  <a target="_blank" rel="noreferrer" href={`https://twitter.com.com/${profile.social.twitter}`}>
-                    <button className={c(styles.socialbtn, styles.tw)}></button>
-                  </a>
-                )}
-                {profile && profile.social.instagram && (
-                  <a target="_blank" rel="noreferrer" href={`https://www.instagram.com/${profile.social.instagram}`}>
-                    <button className={c(styles.socialbtn, styles.instg)}></button>
-                  </a>
-                )}
-                {profile && profile.social.facebook && (
-                  <a target="_blank" rel="noreferrer" href={`https://www.facebook.com/${profile.social.facebook}`}>
-                    <button className={c(styles.socialbtn, styles.fb)}></button>
-                  </a>
-                )}
-                {profile && profile.social.youtube && (
-                  <a target="_blank" rel="noreferrer" href={`https://www.youtube.com/${profile.social.youtube}`}>
-                    <button className={c(styles.socialbtn, styles.yt)}></button>
-                  </a>
-                )}                
+              {profile && profile.social && (
+                <>
+                  {profile.social.google && (
+                    <a target="_blank" rel="noreferrer" href={`https://www.google.com/${profile.social.google}`}>
+                      <button className={c(styles.socialbtn, styles.google)}></button>
+                    </a>
+                  )}
+                  {profile.social.twitter && (
+                    <a target="_blank" rel="noreferrer" href={`https://twitter.com.com/${profile.social.twitter}`}>
+                      <button className={c(styles.socialbtn, styles.tw)}></button>
+                    </a>
+                  )}
+                  {profile.social.instagram && (
+                    <a target="_blank" rel="noreferrer" href={`https://www.instagram.com/${profile.social.instagram}`}>
+                      <button className={c(styles.socialbtn, styles.instg)}></button>
+                    </a>
+                  )}
+                  {profile.social.facebook && (
+                    <a target="_blank" rel="noreferrer" href={`https://www.facebook.com/${profile.social.facebook}`}>
+                      <button className={c(styles.socialbtn, styles.fb)}></button>
+                    </a>
+                  )}
+                  {profile.social.youtube && (
+                    <a target="_blank" rel="noreferrer" href={`https://www.youtube.com/${profile.social.youtube}`}>
+                      <button className={c(styles.socialbtn, styles.yt)}></button>
+                    </a>
+                  )}
+                </>
+              )}
               </div>
               {!isShowLine && <span className={styles.dividingLine}></span>}
-              <div className={styles.opinionCount}>{profile && profile.opinions.length} opinions</div>
+              <div className={styles.opinionCount}>{opinions && opinions.length} opinions</div>
             </div>
             {isMyProfile && <Link to="/editProfile">
               <button className={c(styles.editProfileBtton, styles.editProfileBttonWide)}>Редактировать профиль</button>
@@ -123,12 +127,12 @@ const Profile = ({
             )} */}
             </div>
             <div className={styles.opinionItemsContainer}>
-              {profile && profile.opinions.length < 1 && 
+              {opinions && opinions.length < 1 && 
                 <p className={styles.noOpinions}>
                   {isMyProfile ? 'You dont have any opinions' : 'User has no opinions'}
                 </p>
               }
-              {profile && profile.opinions.map(item => (
+              {opinions && opinions.map(item => (
                 <div key={item.date} className={styles.opinionItem}>
                   <span className={styles.opinionDate}>{moment(item.date).fromNow()}</span>
                   <p className={styles.opinionBody}>{item.text}</p>
@@ -143,7 +147,9 @@ const Profile = ({
             )}
             {isMyProfile && (
               <p className={styles.advice}>
-                <span className={styles.adviceName}>{profile && profile.name && profile.name}</span>, 
+                {profile && profile.name && (
+                  <span className={styles.adviceName}>{profile.name}, </span>
+                )}
                 чтобы получать больше мнений, 
                 делитесь сайтом в соц.сетях.
               </p>
@@ -157,7 +163,8 @@ const Profile = ({
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile
+  profile: state.profile.profile,
+  opinions: state.profile.opinions
 })
 
 export default connect(mapStateToProps, {

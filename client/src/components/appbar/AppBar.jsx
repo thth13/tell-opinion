@@ -8,6 +8,7 @@ import { getCurrentProfile } from "../../actions/profile"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { logoutsUser } from "../../actions/auth"
+import noAvatar from "../../img/noAvatar.png"
 
 let AppBar = ({user, profile, 
   getCurrentProfile, logoutsUser, 
@@ -46,7 +47,11 @@ let AppBar = ({user, profile,
             </div>
             <button className={styles.arrowButton}></button>
             <div className={styles.avatarWrapper}>
-              <img src={`https://spaces.tell-opinion.com//${profile && profile.avatar}`} alt="" className={styles.avatar} />
+              <img 
+                src={profile && profile.avatar ? `https://spaces.tell-opinion.com/${profile.avatar}` : noAvatar}
+                alt=""
+                className={styles.avatar} 
+              />
             </div>
           </button>
           <nav className={styles.menu}>
