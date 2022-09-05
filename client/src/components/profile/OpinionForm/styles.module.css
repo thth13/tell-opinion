@@ -1,0 +1,37 @@
+.opinionField {
+  box-sizing: border-box;
+  width: 100%;
+  height: 182px;
+  margin-top: 46px;
+  margin-bottom: 24px;
+  padding: 30px;
+  border: none;
+  resize: none;
+  background-color: #EEF6FF;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.opinionField::placeholder {
+  font-weight: 700;
+  font-size: 16px;
+  color: #585D65;
+}
+
+.opinionSubmitButton {
+  padding: 5px 28px;
+  cursor: pointer;
+  background-image: linear-gradient(86.13deg, #0075FF 17.96%, #95C6FF 90.14%);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 222%;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+@media screen and (max-width: 767px) {
+  .opinionForm {
+    max-width: 94%;
+    margin: 0 auto;
+  }
+}

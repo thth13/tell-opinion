@@ -1,0 +1,32 @@
+.socialbtn {
+  width: 23px;
+  height: 23px;
+  margin: 0 7px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.google {
+  background-image: url(../../../img/googlel.svg);
+  background-size: 23px;
+}
+
+.twitter {
+  background-image: url(../../../img/twitter.svg);
+  background-size: 23px;
+}
+
+.instagram {
+  background-image: url(../../../img/instagram.svg);
+  background-size: 19px;
+}
+
+.facebook {
+  background-image: url(../../../img/facebook.svg);
+  background-size: 19px;
+}
+
+.youtube {
+  background-image: url(../../../img/youtube.svg);
+  background-size: 26px;
+}
