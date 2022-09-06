@@ -17,12 +17,13 @@ const schema = yup.object({
       if (!value.length) return true
       return value[0].size <= 2000000
     })
-    // .test("fileType", "File must be image type of JPEG or PNG", value => {
-    //   if (typeof value === "string") return true
-    //   return value && (
-    //     value[0].type === "image/jpeg" ||
-    //     value[0].type === "image/png"
-    // )})
+    .test("fileType", "File must be image type of JPEG or PNG", value => {
+      if (value[0] === undefined) return true
+      if (typeof value === "string") return true
+      return value && (
+        value[0].type === "image/jpeg" ||
+        value[0].type === "image/png"
+    )})
   // email: yup.string().email().required(),
   // password: yup.string().required(),
 }).required()
@@ -55,6 +56,7 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
   }, [profile])
 
   const onSubmit = async (data) => {
+    debugger
     const formData = new FormData()
 
     data.avatar && formData.append('avatar', data.avatar[0])
