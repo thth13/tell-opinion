@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Provider } from 'react-redux'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import store from './store'
 // import RoutesPage from './components/routing/Routes'
 import setAuthToken from './utils/setAuthToken'
@@ -17,6 +17,8 @@ import Search from './components/search/Search'
 import './App.css'
 
 const App = () => {
+  let location = useLocation();
+
   useEffect(() => {
     if (localStorage.token) {
       setAuthToken(localStorage.token)
@@ -29,19 +31,21 @@ const App = () => {
     })
   }, [])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location])
+
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<Landing />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/restorepassword" element={<RestorePassword />} />
-          <Route exact path="/editprofile" element={<EditProfile />} />
-          <Route exact path="/search" element={<Search />} />
-          <Route exact path="/@:username" element={<Profile />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Landing />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/restorepassword" element={<RestorePassword />} />
+        <Route exact path="/editprofile" element={<EditProfile />} />
+        <Route exact path="/search" element={<Search />} />
+        <Route exact path="/@:username" element={<Profile />} />
+      </Routes>
     </Provider>
   )
 }

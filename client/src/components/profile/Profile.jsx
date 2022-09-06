@@ -20,7 +20,7 @@ const Profile = ({
   const [opinionText, setOpinionText] = useState('')
   const [isMyProfile, setIsMyProfile] = useState(false)
   const [userOpinionInfo, setUserOpinionInfo] = useState()
-
+  
   const onChange = e => {
     setOpinionText(e.target.value)
   }
