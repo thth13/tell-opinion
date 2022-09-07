@@ -74,7 +74,7 @@ const Register = ({ registerUser, auth, serverErrors }) => {
           {...register("confirmPassword")}
         />
         {errors.confirmPassword && <span className={styles.errorText}>{errors.confirmPassword.message}</span>}
-        <button className={c(styles.button, styles.sendButton, styles.registerButton)}>Register</button>
+        <button className={c(styles.button, styles.sendButton, styles.buttonMarginBottom)}>Register</button>
         <span className={styles.haveAccount}>
           Already have an account?<br/>
           <Link to="/login">Sign In</Link>

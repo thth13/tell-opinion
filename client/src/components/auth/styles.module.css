@@ -124,8 +124,33 @@
   background-color: #95C6FF;
 }
 
-.registerButton {
+.buttonMarginBottom {
   margin-bottom: 26px;
+}
+
+.forgotPassword {
+  display: block;
+  max-width: 388px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  margin-top: -5px;
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+.forgotPassword a,
+.forgotPassword a:visited {
+  color: inherit;
+}
+
+.forgotPassword a:hover {
+  color: #0075FF;
+}
+
+.forgotPassword a:active {
+  color: #95C6FF;
 }
 
 .haveAccount { 
