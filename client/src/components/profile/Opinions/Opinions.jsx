@@ -6,7 +6,7 @@ import OpinionForm from "../OpinionForm/OpinionForm"
 
 const Opinions = ({
   profile, opinions, isMyProfile, 
-  isOneDayAfter, newOpinion
+  isOneDayAfter, newOpinion, setIsShowThanksPopup
 }) => {
   return (
     <section className={c(styles.opinions, styles.section)}>
@@ -23,7 +23,9 @@ const Opinions = ({
           <OpinionItem key={item.date} item={item} />
         ))}
       </div>
-      {!isMyProfile && isOneDayAfter && <OpinionForm newOpinion={newOpinion} profile={profile} />}
+      {!isMyProfile && isOneDayAfter && <OpinionForm newOpinion={newOpinion} 
+        profile={profile} setIsShowThanksPopup={setIsShowThanksPopup} 
+      />}
       {isMyProfile && (
         <p className={styles.advice}>
           {profile && profile.name && (

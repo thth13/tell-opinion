@@ -20,6 +20,7 @@ const Profile = ({
   const params = useParams()
   const [isMyProfile, setIsMyProfile] = useState(false)
   const [userOpinionInfo, setUserOpinionInfo] = useState()
+  const [isShowThanksPopup, setIsShowThanksPopup] = useState(false)
 
   useEffect(() => {
     if (user && user.login === params.username) {
@@ -55,10 +56,14 @@ const Profile = ({
               <WaitPopup/>
             )} */}
           <Opinions profile={profile} opinions={opinions} 
-            newOpinion={newOpinion} isMyProfile={isMyProfile} isOneDayAfter={isOneDayAfter} 
+            newOpinion={newOpinion} isMyProfile={isMyProfile} isOneDayAfter={isOneDayAfter}
+            setIsShowThanksPopup={setIsShowThanksPopup} 
           />
         </div>
       </main>
+      {isShowThanksPopup && <ThanksPopup 
+        isShowThanksPopup={isShowThanksPopup} setIsShowThanksPopup={setIsShowThanksPopup} 
+      />}
     </div>
   )
 }

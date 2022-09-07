@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import styles from "./styles.module.css"
 
-const OpinionForm = ({newOpinion, profile}) => {
+const OpinionForm = ({newOpinion, profile, setIsShowThanksPopup}) => {
   const [opinionText, setOpinionText] = useState('')
 
   const onChange = e => {
@@ -12,6 +12,7 @@ const OpinionForm = ({newOpinion, profile}) => {
     e.preventDefault()
 
     newOpinion(profile._id, opinionText)
+    setIsShowThanksPopup(true)
   }
 
   return (
