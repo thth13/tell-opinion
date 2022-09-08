@@ -1,6 +1,7 @@
 .opinionItem {
   padding: 40px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
 }
 
 .opinionItem:last-child {
@@ -15,6 +16,7 @@
 .opinionBody {
   font-weight: 700;
   font-size: 20px;
+  word-break: break-word;
 }
 
 @media screen and (max-width: 767px) {
