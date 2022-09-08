@@ -1,0 +1,65 @@
+.adviceInMyProfile {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  margin-top: 46px;
+  margin-bottom: 10px;
+  padding: 55px 17.534%;
+  background: #FFE794;
+  font-size: 24px;
+  line-height: 36px;
+  text-align: center;
+  color: #232630;
+}
+
+.closeAdviceButton {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 19px;
+  height: 19px;
+}
+
+.closeAdviceButton::before,
+.closeAdviceButton::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 24px;
+  background-color: #0075FF;
+}
+
+.closeAdviceButton::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.closeAdviceButton::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.closeAdviceButton:hover::before,
+.closeAdviceButton:hover::after {
+  background: #232630;
+}
+
+.adviceName {
+  font-weight: 700;
+}
+
+@media screen and (max-width: 767px) {
+  .adviceInMyProfile {
+    width: 89.333%;
+    margin: 12px auto 0;
+    padding: 30px 14.666%;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .closeAdviceButton {
+    top: 20px;
+    right: 20px;
+  }
+}

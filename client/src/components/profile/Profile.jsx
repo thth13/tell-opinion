@@ -52,9 +52,6 @@ const Profile = ({
           <ProfileInfo profile={profile} isMyProfile={isMyProfile} 
             opinions={opinions} 
           />
-          {/* {!isOneDayAfter && userOpinionInfo  && (
-              <WaitPopup/>
-            )} */}
           <Opinions profile={profile} opinions={opinions} 
             newOpinion={newOpinion} isMyProfile={isMyProfile} isOneDayAfter={isOneDayAfter}
             setIsShowThanksPopup={setIsShowThanksPopup} 
@@ -64,6 +61,9 @@ const Profile = ({
       {isShowThanksPopup && <ThanksPopup 
         isShowThanksPopup={isShowThanksPopup} setIsShowThanksPopup={setIsShowThanksPopup} 
       />}
+      {/* {!isOneDayAfter && userOpinionInfo  && (
+        <WaitPopup/>
+      )} */}
     </div>
   )
 }

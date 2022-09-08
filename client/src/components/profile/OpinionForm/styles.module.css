@@ -31,7 +31,16 @@
 
 @media screen and (max-width: 767px) {
   .opinionForm {
-    max-width: 94%;
+    width: 89.333%;
     margin: 0 auto;
+  }
+
+  .opinionField {
+    margin-top: 12px;
+    margin-bottom: 20px;
+  }
+
+  .opinionSubmitButton {
+    margin-bottom: 0px;
   }
 }
