@@ -1,0 +1,54 @@
+.socialbtn {
+  width: 50px;
+  height: 50px;
+  margin: 0 7px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.google {
+  background-image: url(../../../img/googlel.svg);
+  background-size: 23px;
+}
+
+.twitter {
+  background-image: url(../../../img/social/twitter.svg);
+}
+
+.twitter:hover {
+  background-image: url(../../../img/social/twitterHover.svg);
+}
+
+.twitter:active {
+  background-image: url(../../../img/social/twitterActive.svg);
+}
+
+.instagram {
+  background-image: url(../../../img/social/instagram.svg);
+}
+
+.instagram:hover {
+  background-image: url(../../../img/social/instagramHover.svg);
+}
+
+.instagram:active {
+  background-image: url(../../../img/social/instagramActive.svg);
+}
+
+.facebook {
+  background-image: url(../../../img/facebook.svg);
+  background-size: 19px;
+}
+
+.youtube {
+  background-image: url(../../../img/youtube.svg);
+  background-size: 26px;
+}
+
+@media screen and (max-width: 767px) {
+  .socialbtn {
+    width: 40px;
+    height: 40px;
+  }
+}
