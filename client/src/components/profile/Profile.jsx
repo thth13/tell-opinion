@@ -6,10 +6,6 @@ import {connect} from "react-redux"
 import AppBar from "../appbar/AppBar"
 import {getCurrentProfile, getProfileByName, newOpinion, loadMoreOpinions} from "../../actions/profile"
 import styles from "./styles.module.css"
-
-// import noAvatar from "../../img/noAvatar.png"
-// import {BottomScrollListener} from 'react-bottom-scroll-listener';
-
 import ThanksPopup from "../thanks-popup/ThanksPopup"
 import WaitPopup from "../wait-popup/WaitPopup"
 import ProfileInfo from "./ProfileInfo/ProfileInfo"
