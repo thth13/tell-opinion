@@ -14,7 +14,7 @@ const Opinions = ({
 }) => {
   const [isShowAdviceInMyProfile, setIsShowAdviceInMyProfile] = useState(true);
 
-  return (
+  return profile && (
     <section className={c(styles.opinions, styles.section)}>
       <h2 className={styles.opinionsTitle}>Мнения</h2>
       {!isMyProfile && isOneDayAfter && <OpinionForm newOpinion={newOpinion} 
