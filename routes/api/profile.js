@@ -16,6 +16,8 @@ const Opinion = require('../../models/Opinion')
 
 const upload = multer({ dest: 'uploads/' })
 
+const opinionsLimit = 10;
+
 // @route   GET api/profile/me
 // @desc    Get current users profile
 // @access  Private
@@ -27,13 +29,19 @@ router.get('/me', auth, async (req, res) => {
 
     const opinions = await Opinion.find({
       profile: profile._id
-    }).populate('profile', ['text']).sort({date: -1})
+    }).populate('profile', ['text'])
+      .sort({date: -1})
+      .limit(opinionsLimit)
+
+    const opinionsLength = await Opinion.countDocuments({
+      profile: profile._id
+    })
 
     if (!profile) {
       return res.status(400).json({msg: 'There is no profile for this user'})
     }
 
-    res.json({profile, opinions})
+    res.json({profile, opinions, opinionsLength})
 
   } catch (err) {
     console.log(err.message)
@@ -56,17 +64,41 @@ router.get('/user/:username', async ({params: {username}}, res) => {
 
       const opinions = await Opinion.find({
         profile: profile._id
-      }).populate('profile', ['text']).sort({date: -1})
+      }).populate('profile', ['text'])
+        .sort({date: -1})
+        .limit(opinionsLimit)
+
+      const opinionsLength = await Opinion.countDocuments({
+        profile: profile._id
+      })
 
       if (!profile) return res.status(400).json({msg: 'Profile not found'})
    
-      return res.json({profile, opinions})
+      return res.json({profile, opinions, opinionsLength})
     } catch (err) {
       console.error(err.message)
       return res.status(500).json({msg: 'Server error'})
     }
   }
 )
+
+// @route   GET api/profile/moreopinions/:username
+// @desct   Get more opinions
+// @access  Public
+router.get('/user/moreopinions/:profileId/:opinionsLength', async (req, res) => {
+	const length = Number.parseInt(req.params.opinionsLength)
+
+  try {
+    const opinions = await Opinion.find({
+      profile: req.params.profileId
+    }).sort({date: -1}).skip(length).limit(opinionsLimit)
+
+    res.json(opinions)
+  } catch (err) {
+    console.log(err.message)
+    res.status(500).end('Server error')
+  }
+})
 
 // @route   POST api/profile/user/opinion/:id
 // @desc    New opinion about user

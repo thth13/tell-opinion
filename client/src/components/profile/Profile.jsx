@@ -4,17 +4,19 @@ import moment from "moment"
 import {Link, useParams} from "react-router-dom"
 import {connect} from "react-redux"
 import AppBar from "../appbar/AppBar"
-import {getCurrentProfile, getProfileByName, newOpinion} from "../../actions/profile"
+import {getCurrentProfile, getProfileByName, newOpinion, loadMoreOpinions} from "../../actions/profile"
 import styles from "./styles.module.css"
 import noAvatar from "../../img/noAvatar.png"
+import {BottomScrollListener} from 'react-bottom-scroll-listener';
 import ThanksPopup from "../thanks-popup/ThanksPopup"
 import WaitPopup from "../wait-popup/WaitPopup"
 
 const Profile = ({
-  getCurrentProfile, getProfileByName, newOpinion,
+  getCurrentProfile, getProfileByName, newOpinion, loadMoreOpinions,
   auth: {user},
   profile,
-  opinions
+  opinions,
+  opinionsLength
 }) => {
   const params = useParams()
   const [opinionText, setOpinionText] = useState('')
@@ -29,6 +31,10 @@ const Profile = ({
     e.preventDefault()
 
     newOpinion(profile._id, opinionText)
+  }
+
+  const loadMore = () => {
+    loadMoreOpinions(profile._id, opinions.length);
   }
 
   useEffect(() => {
@@ -58,7 +64,7 @@ const Profile = ({
     && profile.social.instagram 
     && profile.social.twitter 
     && profile.social.youtube) === null)) ? true : false
-  
+
   return (
     <div>
       <AppBar /> 
@@ -113,7 +119,7 @@ const Profile = ({
               )}
               </div>
               {!isShowLine && <span className={styles.dividingLine}></span>}
-              <div className={styles.opinionCount}>{opinions && opinions.length} opinions</div>
+              <div className={styles.opinionCount}>{opinionsLength} opinions</div>
             </div>
             {isMyProfile && <Link to="/editProfile">
               <button className={c(styles.editProfileBtton, styles.editProfileBttonWide)}>Редактировать профиль</button>
@@ -133,11 +139,14 @@ const Profile = ({
                 </p>
               }
               {opinions && opinions.map(item => (
-                <div key={item.date} className={styles.opinionItem}>
+                <div key={item._id} className={styles.opinionItem}>
                   <span className={styles.opinionDate}>{moment(item.date).fromNow()}</span>
                   <p className={styles.opinionBody}>{item.text}</p>
                 </div>
               ))}
+              {opinionsLength !== opinions.length &&
+                <BottomScrollListener onBottom={loadMore} />
+              }
             </div>
             {!isMyProfile && isOneDayAfter && (
               <form className={styles.opinionForm} onSubmit={onSubmit}>
@@ -164,10 +173,13 @@ const Profile = ({
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile.profile,
-  opinions: state.profile.opinions
+  opinions: state.profile.opinions,
+  opinionsLength: state.profile.opinionsLength
 })
 
 export default connect(mapStateToProps, {
   getCurrentProfile, 
   getProfileByName, 
-  newOpinion})(Profile)
+  newOpinion,
+  loadMoreOpinions
+})(Profile)

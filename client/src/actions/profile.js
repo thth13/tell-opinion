@@ -3,7 +3,8 @@ import api from '../utils/api'
 import {
   GET_PROFILE,
   PROFILE_ERROR,
-  NEW_OPINION
+  NEW_OPINION,
+  MORE_OPINIONS
 } from './types'
 
 export const getCurrentProfile = () => async dispatch => {
@@ -69,6 +70,19 @@ export const newOpinion = (profileId, text) => async dispatch => {
     })
   } catch (err) {
     // TODO: обработка ошибок
-    console.log(err);
+    console.log(err)
+  }
+}
+
+export const loadMoreOpinions = (profileId, opinionsLength) => async dispatch => {
+  try {
+    const res = await api.get(`/profile/user/moreopinions/${profileId}/${opinionsLength}`)
+
+    dispatch({
+      type: MORE_OPINIONS,
+      payload: res.data
+    })
+  } catch (err) {
+    console.log(err)
   }
 }

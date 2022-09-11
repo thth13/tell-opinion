@@ -1,12 +1,14 @@
 import {
   GET_PROFILE,
   PROFILE_ERROR,
-  NEW_OPINION
+  NEW_OPINION,
+  MORE_OPINIONS
 } from '../actions/types'
 
 const initialState = {
   profile: null,
   opinions: [],
+  opinionsLength: 0,
   loadig: true,
   error: {}
 }
@@ -20,6 +22,7 @@ function profileReducer(state = initialState, action) {
         ...state,
         profile: payload.profile,
         opinions: payload.opinions,
+        opinionsLength: payload.opinionsLength,
         loading: false
       }
     case PROFILE_ERROR:
@@ -32,8 +35,14 @@ function profileReducer(state = initialState, action) {
     case NEW_OPINION: {
       return {
         ...state,
-        opinions: state.opinions.concat(payload),
+        opinions: [payload, ...state.opinions],
         loading: false
+      }
+    }
+    case MORE_OPINIONS: {
+      return {
+        ...state,
+        opinions: state.opinions.concat(payload)
       }
     }
     default:
