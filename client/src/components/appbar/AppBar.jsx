@@ -60,6 +60,9 @@ let AppBar = ({user, profile,
                 <Link to="/settings">Settings</Link>
               </li> */}
               <li className={styles.menuItem} >
+                <Link to={`/editProfile`} >Edit profile</Link> 
+              </li>
+              <li className={styles.menuItem} >
                 <button className={styles.logout} onClick={logout}>Logout</button> 
               </li>
             </ul>
