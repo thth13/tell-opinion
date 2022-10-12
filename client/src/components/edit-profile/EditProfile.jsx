@@ -56,7 +56,6 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
   }, [profile])
 
   const onSubmit = async (data) => {
-    debugger
     const formData = new FormData()
 
     data.avatar && formData.append('avatar', data.avatar[0])
