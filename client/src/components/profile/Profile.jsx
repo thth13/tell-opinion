@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react"
-import c from "classnames"
 import moment from "moment"
 import {useParams} from "react-router-dom"
 import {connect} from "react-redux"
@@ -7,7 +6,6 @@ import AppBar from "../appbar/AppBar"
 import {getCurrentProfile, getProfileByName, newOpinion, loadMoreOpinions} from "../../actions/profile"
 import styles from "./styles.module.css"
 import ThanksPopup from "../thanks-popup/ThanksPopup"
-import WaitPopup from "../wait-popup/WaitPopup"
 import ProfileInfo from "./ProfileInfo/ProfileInfo"
 import Opinions from "./Opinions/Opinions"
 
@@ -54,19 +52,30 @@ const Profile = ({
       <AppBar /> 
       <main>
         <div className={styles.container}>
-          <ProfileInfo profile={profile} isMyProfile={isMyProfile} 
-            opinions={opinions} opinionsLength={opinionsLength}
+          <ProfileInfo
+            profile={profile}
+            isMyProfile={isMyProfile} 
+            opinions={opinions}
+            opinionsLength={opinionsLength}
           />
-          <Opinions profile={profile} opinions={opinions} 
-            newOpinion={newOpinion} isMyProfile={isMyProfile} isOneDayAfter={isOneDayAfter}
-            setIsShowThanksPopup={setIsShowThanksPopup} opinionsLength={opinionsLength}
+          <Opinions
+            profile={profile}
+            opinions={opinions} 
+            newOpinion={newOpinion}
+            isMyProfile={isMyProfile}
+            isOneDayAfter={isOneDayAfter}
+            setIsShowThanksPopup={setIsShowThanksPopup}
+            opinionsLength={opinionsLength}
             loadMore={loadMore}
           />
         </div>
       </main>
-      {isShowThanksPopup && <ThanksPopup 
-        isShowThanksPopup={isShowThanksPopup} setIsShowThanksPopup={setIsShowThanksPopup} 
-      />}
+      {isShowThanksPopup && 
+        <ThanksPopup 
+          isShowThanksPopup={isShowThanksPopup}
+          setIsShowThanksPopup={setIsShowThanksPopup} 
+        />
+      }
       {/* {!isOneDayAfter && userOpinionInfo  && (
         <WaitPopup/>
       )} */}

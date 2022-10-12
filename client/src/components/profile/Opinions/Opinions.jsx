@@ -17,12 +17,19 @@ const Opinions = ({
   return profile && (
     <section className={c(styles.opinions, styles.section)}>
       <h2 className={styles.opinionsTitle}>Мнения</h2>
-      {!isMyProfile && isOneDayAfter && <OpinionForm newOpinion={newOpinion} 
-        profile={profile} setIsShowThanksPopup={setIsShowThanksPopup} 
-      />}
-      {isMyProfile && isShowAdviceInMyProfile && <AdviceInMyProfile 
-        name={profile.name} setIsShowAdviceInMyProfile={setIsShowAdviceInMyProfile} 
-      />}
+      {!isMyProfile && isOneDayAfter && 
+        <OpinionForm
+          newOpinion={newOpinion} 
+          profile={profile}
+          setIsShowThanksPopup={setIsShowThanksPopup} 
+        />
+      }
+      {isMyProfile && isShowAdviceInMyProfile &&
+        <AdviceInMyProfile 
+          name={profile.name}
+          setIsShowAdviceInMyProfile={setIsShowAdviceInMyProfile} 
+        />
+      }
       <div className={styles.opinionItemsContainer}>
         {opinions && opinions.length < 1 && 
           <p className={styles.noOpinions}>
