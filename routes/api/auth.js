@@ -21,6 +21,36 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+router.put('/changepassword', auth, async (req, res) => {
+  const {oldPassword, newPassword} = req.body
+  try {
+    const user = await User.findById(req.user.id)
+
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+
+    if (!isMatch) {
+      return res
+        .status(400)
+        .json({
+          errors: {
+            oldPassword: {message: 'Wrong old password'},
+          }
+        });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+
+    user.password = await bcrypt.hash(newPassword, salt);
+
+    await user.save();
+
+    res.json('Password changed successfully')
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
 // @route   POST api/auth
 // @desc    Authenticate user & get token
 // @access  Public

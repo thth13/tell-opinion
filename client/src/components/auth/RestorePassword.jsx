@@ -35,7 +35,9 @@ const RestorePassword = ({ loginUser, serverErrors, auth }) => {
   return (
     <div className={styles.container}>
       <div className={styles.root}>
-        <img className={styles.logo}  src={logo} alt="" />
+        <Link to={`/`}>
+          <img className={styles.logo} src={logo} alt="Logo of Tell Opinion" />
+        </Link>        
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <h2 className={styles.headText}>
             Restore password

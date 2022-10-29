@@ -15,6 +15,7 @@ import EditProfile from './components/edit-profile/EditProfile'
 import Search from './components/search/Search'
 
 import './App.css'
+import ChangePassword from './components/auth/ChangePassword'
 
 const App = () => {
   let location = useLocation();
@@ -41,6 +42,7 @@ const App = () => {
         <Route exact path="/" element={<Landing />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/changepassword" element={<ChangePassword />} />
         <Route exact path="/restorepassword" element={<RestorePassword />} />
         <Route exact path="/editprofile" element={<EditProfile />} />
         <Route exact path="/search" element={<Search />} />

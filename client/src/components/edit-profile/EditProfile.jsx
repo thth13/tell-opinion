@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import * as yup from "yup"
 import c from "classnames"
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { editProfile, getCurrentProfile } from '../../actions/profile'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -131,6 +131,7 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
               <div className={styles.buttonsContainer}>
                 <input className={styles.submitButton} type="submit" value="Сохранить изменения"/>
                 <button className={styles.cancelButton} onClick={comeBack}>Выйти без изменений</button>
+                <Link to="/changepassword"><button className={styles.changePasswordButton}>Change password</button></Link>
               </div>
             </div>
           </div>

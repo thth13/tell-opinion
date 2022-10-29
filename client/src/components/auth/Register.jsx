@@ -39,7 +39,9 @@ const Register = ({ registerUser, auth, serverErrors }) => {
   return (
     <div className={c(styles.container, styles.registerContainer)}>
       <div className={styles.root}>
-        <img className={styles.logo}  src={logo} alt="" />
+        <Link to={`/`}>
+          <img className={styles.logo} src={logo} alt="Logo of Tell Opinion" />
+        </Link>        
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <h2 className={styles.headText}>
             Регистрируйся<br/>

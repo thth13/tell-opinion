@@ -5,7 +5,7 @@ import OpinionItem from "../OpinionItem/OpinionItem"
 import OpinionForm from "../OpinionForm/OpinionForm"
 import AdviceInMyProfile from "./AdviceInMyProfile/AdviceInMyProfile"
 import {BottomScrollListener} from 'react-bottom-scroll-listener';
-import { useState } from "react"
+import {useState} from "react"
 
 const Opinions = ({
   profile, opinions, isMyProfile, 
