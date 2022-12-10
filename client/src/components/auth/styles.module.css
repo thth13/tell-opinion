@@ -164,6 +164,10 @@
   color: #0075FF;
 }
 
+.emailSended {
+  margin: 0 auto;
+}
+
 @media screen and (max-width: 1366px) {
   .container {
     background-position: center bottom 2vh;

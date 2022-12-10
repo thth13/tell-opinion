@@ -16,6 +16,7 @@ import Search from './components/search/Search'
 
 import './App.css'
 import ChangePassword from './components/auth/ChangePassword'
+import NewPassword from './components/auth/NewPassword'
 
 const App = () => {
   let location = useLocation();
@@ -47,6 +48,7 @@ const App = () => {
         <Route exact path="/editprofile" element={<EditProfile />} />
         <Route exact path="/search" element={<Search />} />
         <Route exact path="/@:username" element={<Profile />} />
+        <Route exact path="/resetpassword/:token" element={<NewPassword />} />
       </Routes>
     </Provider>
   )

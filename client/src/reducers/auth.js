@@ -3,14 +3,16 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
-  LOGOUT
+  LOGOUT,
+  RESTORE_PASSWORD
 } from '../actions/types';
 
 const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
   loading: true,
-  user: null
+  user: null,
+  isRestorePassword: false
 };
 
 function authReducer(state = initialState, action) {
@@ -41,6 +43,11 @@ function authReducer(state = initialState, action) {
         loading: false,
         user: null
       };
+    case RESTORE_PASSWORD:
+      return {
+        ...state,
+        isRestorePassword: true
+      }
     default:
       return state;
   }

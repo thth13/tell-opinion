@@ -11,7 +11,7 @@ const transport = nodemailer.createTransport({
   }
 })
 
-export const sendEmail = (subject, html, to) => {
+const sendEmail = (subject, html, to) => {
   transport.sendMail({
     from: '"Tell Opinion" <noreply@tell-opinion.com>',
     to,
@@ -19,6 +19,8 @@ export const sendEmail = (subject, html, to) => {
     html
   }).catch(err => console.log(err));
 }
+
+module.exports = sendEmail;
 
 // `<div><h1>Email Confirmation</h1>
 // <h2>Hello ${user.name}</h2>

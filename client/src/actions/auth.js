@@ -5,7 +5,8 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGOUT,
-  GET_ERORRS
+  GET_ERORRS,
+  RESTORE_PASSWORD
 } from './types'
 
 export const loadUser = () => async dispatch => {
@@ -32,6 +33,32 @@ export const registerUser = formData => async dispatch => {
     })
 
     dispatch(loadUser())
+  } catch (err) {
+    dispatch({
+      type: GET_ERORRS,
+      payload: err.response.data
+    })
+  }
+}
+
+export const resetPassword = (formData, token, navigate) => async dispatch => {
+  try {
+    await api.post(`/auth/reset/${token}`, formData)
+
+    navigate('/login')
+  } catch (err) {
+    dispatch({
+      type: GET_ERORRS,
+      payload: err.response.data
+    })
+  }
+}
+
+export const restorePassword = data => async dispatch => {
+  try {
+    await api.post('/auth/recover', data)
+
+    dispatch({type: RESTORE_PASSWORD})
   } catch (err) {
     dispatch({
       type: GET_ERORRS,
