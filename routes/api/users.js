@@ -34,20 +34,10 @@ router.post('/', async (req, res) => {
         });
     }
 
-    // const avatar = normalize(
-    //   gravatar.url(email, {
-    //     s: '200',
-    //     r: 'pg',
-    //     d: 'mm'
-    //   }),
-    //   { foceHttps: true }
-    // );
-
     user = new User({
       login,
       email,
-      // avatar,
-      password,
+      password
     });
 
     const salt = await bcrypt.genSalt(10);

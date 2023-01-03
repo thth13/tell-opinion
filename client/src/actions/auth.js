@@ -97,4 +97,22 @@ export const loginUser = formData => async dispatch => {
   }
 }
 
+export const googleLoginUser = token => async dispatch => {
+  try {
+    const res = await api.post('/auth/google', {token})
+
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data
+    })
+
+    dispatch(loadUser())
+  } catch (err) {
+    dispatch({
+      type: GET_ERORRS,
+      payload: err.response.data
+    })
+  }
+}
+
 export const logoutsUser = () => ({type: LOGOUT})

@@ -6,9 +6,12 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const crypto = require('crypto');
 const sendEmail = require('../../config/emailSender');
+const generator = require('string-generator-js');
+const { OAuth2Client } = require('google-auth-library')
 
 const validateLoginForm = require('../../validation/login');
 const User = require('../../models/User');
+const Profile = require('../../models/Profile');
 
 // @route POST api/auth/recover
 // @desct Recover password - Generates token and Sends password reset email
@@ -132,6 +135,76 @@ router.put('/changepassword', auth, async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
+router.post('/google', async (req, res) => {
+  const { token } = req.body;
+  const clientId = '853830546263-7jh0en2tn5i292pfg7l0a3v8hodjmr1s.apps.googleusercontent.com'
+  const client = new OAuth2Client(clientId)
+
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      autience: clientId
+    });
+
+    const ticketPayload = ticket.getPayload();
+
+    let { given_name, email } = ticketPayload
+
+    let user = await User.findOne({ email });
+
+    function containsOnlyLatinLetters(str) {
+      return /^[a-zA-Z]+$/.test(str);
+    }
+
+    if (!user) {
+      if (!containsOnlyLatinLetters(given_name)) {
+        given_name = generator.generate({length: 7})
+      }
+
+      // TODO: переделать это. Если при гугл логине такое имя уже занято
+      // либо генерить как-то нормально, либо предлагать юзеру самому выбрать логин
+      const ifUserName = await User.findOne({ login: given_name });
+      if (ifUserName) {
+        given_name = `${given_name}_${generator.generate({length: 5})}`
+      }
+
+      user = new User({
+        login: given_name,
+        email
+      })
+
+      await user.save()
+
+      const profile = new Profile({
+        user: user.id
+      })
+
+      await profile.save()
+    }
+
+    const payload = {
+      user: {
+        id: user.id
+      }
+    }
+    console.log(user.id)
+
+    jwt.sign(
+      payload,
+      config.get('jwtSecret'),
+      { expiresIn: '5 days' },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    )
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
 
 // @route   POST api/auth
 // @desc    Authenticate user & get token

@@ -19,6 +19,7 @@
     "config": "^3.3.3",
     "express": "^4.17.1",
     "express-validator": "^6.9.2",
+    "google-auth-library": "^8.7.0",
     "gravatar": "^1.8.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
@@ -26,6 +27,7 @@
     "multer": "^1.4.4",
     "nodemailer": "^6.7.5",
     "react-bottom-scroll-listener": "^5.1.0",
+    "string-generator-js": "^2.0.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {
