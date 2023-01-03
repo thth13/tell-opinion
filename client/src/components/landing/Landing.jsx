@@ -33,10 +33,10 @@ let Landing = ({ auth }) => {
             <button className={c(styles.socialBtn, styles.instagram)}></button>
           </div>
           <div className={styles.authorizationBox}>
-            <Link to={`/register`}>
+            <Link to={`/login`}>
               <button className={styles.signIn}>Sign in</button>
             </Link>
-            <Link to={`/login`}>  
+            <Link to={`/register`}>  
               <button className={styles.signUp}>Sign up</button>
             </Link>
           </div>
