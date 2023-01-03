@@ -9,8 +9,8 @@ const AdviceInMyProfile = ({name, setIsShowAdviceInMyProfile}) => {
   return (
     <div className={styles.adviceInMyProfile}>
       <button className={styles.closeAdviceButton} onClick={closeAdvice}></button>
-      <span className={styles.adviceName}>{name}, </span>
-      чтобы получать больше мнений, делитесь сайтом в соц.сетях. 
+      {name && <span className={styles.adviceName}>{name}, </span>}
+      {name ? 'ч' : 'Ч'}тобы получать больше мнений, делитесь сайтом в соц.сетях. 
     </div>
   )
 }
