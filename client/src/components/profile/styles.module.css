@@ -13,9 +13,17 @@
   background-size: cover;
 }
 
+.errorMessage {
+  margin: 0 auto;
+}
+
 @media screen and (max-width: 767px) {
   .container {
     max-width: 100%;
     padding-top: 25px;
+  }
+
+  .errorMessage {
+    margin-top: 50px;
   }
 }

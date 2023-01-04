@@ -38,7 +38,7 @@ export const getProfileByName = username => async dispatch => {
     dispatch({
       type: PROFILE_ERROR,
       payload: {
-        msg: err.response.statusText,
+        msg: err.response.data.msg,
         status: err.response.status
       }
     })

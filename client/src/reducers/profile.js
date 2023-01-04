@@ -10,7 +10,7 @@ const initialState = {
   opinions: [],
   opinionsLength: 0,
   loadig: true,
-  error: {}
+  error: null
 }
 
 function profileReducer(state = initialState, action) {
@@ -23,6 +23,7 @@ function profileReducer(state = initialState, action) {
         profile: payload.profile,
         opinions: payload.opinions,
         opinionsLength: payload.opinionsLength,
+        error: null,
         loading: false
       }
     case PROFILE_ERROR:

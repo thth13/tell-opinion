@@ -13,6 +13,7 @@ const Profile = ({
   getCurrentProfile, getProfileByName, newOpinion, loadMoreOpinions,
   auth: {user},
   profile,
+  error,
   opinions,
   opinionsLength
 }) => {
@@ -46,10 +47,10 @@ const Profile = ({
   const isOneDayAfter = 
     userOpinionInfo ?
     moment().isAfter(moment(userOpinionInfo.date).add(1, 'day')) : true
-  
+
   return (
     <div>
-      <AppBar /> 
+      <AppBar />
       <main>
         <div className={styles.container}>
           <ProfileInfo
@@ -68,6 +69,9 @@ const Profile = ({
             opinionsLength={opinionsLength}
             loadMore={loadMore}
           />
+          {(error && error.msg) && 
+            <h1 className={styles.errorMessage}>{error.msg}</h1>
+          }
         </div>
       </main>
       {isShowThanksPopup && 
@@ -86,6 +90,7 @@ const Profile = ({
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile.profile,
+  error: state.profile.error,
   opinions: state.profile.opinions,
   opinionsLength: state.profile.opinionsLength
 })
