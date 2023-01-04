@@ -2,7 +2,8 @@ import {
   GET_PROFILE,
   PROFILE_ERROR,
   NEW_OPINION,
-  MORE_OPINIONS
+  MORE_OPINIONS,
+  GET_APPBAR_INFO
 } from '../actions/types'
 
 const initialState = {
@@ -10,6 +11,8 @@ const initialState = {
   opinions: [],
   opinionsLength: 0,
   loadig: true,
+  name: '',
+  avatar: '',
   error: null
 }
 
@@ -19,12 +22,17 @@ function profileReducer(state = initialState, action) {
   switch (type) {
     case GET_PROFILE:
       return {
-        ...state,
         profile: payload.profile,
         opinions: payload.opinions,
         opinionsLength: payload.opinionsLength,
         error: null,
         loading: false
+      }
+    case GET_APPBAR_INFO:
+      return {
+          ...state,
+          name: payload.profile.name,
+          avatar: payload.profile.avatar
       }
     case PROFILE_ERROR:
       return {

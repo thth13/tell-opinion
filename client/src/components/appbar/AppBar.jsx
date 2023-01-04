@@ -16,8 +16,8 @@ let AppBar = ({user, profile,
   let [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (user && !profile) {
-      getCurrentProfile()
+    if (user && !profile.name) {
+      getCurrentProfile(true)
     }
   }, [user, profile])
   
@@ -84,7 +84,7 @@ let AppBar = ({user, profile,
 let mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   user: state.auth.user,
-  profile: state.profile.profile
+  profile: state.profile
 })
  
 export default connect(mapStateToProps, {getCurrentProfile, logoutsUser})(AppBar)
