@@ -8,7 +8,11 @@ import { Link } from "react-router-dom"
 const ProfileInfo = ({
   profile, isMyProfile, opinionsLength
 }) => {
-  const isShowLine = (profile && profile.social) ? true : false
+  const isShowLine = (profile && profile.social) && (
+    profile.social.facebook 
+    || profile.social.instagram 
+    || profile.social.twitter 
+    || profile.social.youtube) ? true : false
 
   return (
     <section className={c(styles.info, styles.section)}>

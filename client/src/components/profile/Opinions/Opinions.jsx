@@ -30,6 +30,10 @@ const Opinions = ({
           setIsShowAdviceInMyProfile={setIsShowAdviceInMyProfile} 
         />
       }
+      {!isMyProfile && !isOneDayAfter && <p className={styles.advice}>
+        Вы уже оставляли мнение этому пользователю сегодня.
+        Повторите завтра
+      </p>}
       <div className={styles.opinionItemsContainer}>
         {opinions && opinions.length < 1 && 
           <p className={styles.noOpinions}>
@@ -43,10 +47,6 @@ const Opinions = ({
           <BottomScrollListener onBottom={loadMore} />
         }
       </div>
-      {!isMyProfile && isOneDayAfter && <p className={styles.advice}>
-        Вы уже оставляли мнение этому пользователю сегодня.
-        Повторите завтра
-      </p>}
     </section>
   )
 }
