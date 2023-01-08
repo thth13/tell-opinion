@@ -59,7 +59,7 @@ const Profile = ({
           content={`Leave an anonymous opinion to user ${params.username}`}
         />
         <meta property="og:title" content="Tell Opinion" />
-        <meta property="og:image" content={previewImage} />
+        <meta property="og:image" content="https://tell-opinion.com/static/media/previewImage.b185bb3bf266c9fdf051.png" />
       </MetaTags>
       <AppBar />
       <main>
