@@ -8,6 +8,8 @@ import styles from "./styles.module.css"
 import ThanksPopup from "../thanks-popup/ThanksPopup"
 import ProfileInfo from "./ProfileInfo/ProfileInfo"
 import Opinions from "./Opinions/Opinions"
+import MetaTags from 'react-meta-tags'
+import previewImage from "../../img/previewImage.png"
 
 const Profile = ({
   getCurrentProfile, getProfileByName, newOpinion, loadMoreOpinions,
@@ -50,6 +52,15 @@ const Profile = ({
 
   return (
     <div>
+      <MetaTags>
+        {user && <title>{params.username} | Tell Opinion</title>}
+        <meta
+          name="description"
+          content={`Leave an anonymous opinion to user ${params.username}`}
+        />
+        <meta property="og:title" content="Tell Opinion" />
+        <meta property="og:image" content={previewImage} />
+      </MetaTags>
       <AppBar />
       <main>
         <div className={styles.container}>

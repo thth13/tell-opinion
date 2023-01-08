@@ -9,6 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import styles from "./styles.module.css"
 import AppBar from "../appbar/AppBar"
 import ImagePreviewer from "../image-previewer/ImagePreviewer"
+import MetaTags from 'react-meta-tags'
 
 // TODO: валидация
 const schema = yup.object({
@@ -76,6 +77,9 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
 
   return (
     <div>
+       <MetaTags>
+        {user && <title>Edit profile | Tell Opinion</title>}
+      </MetaTags>
       <AppBar/>
       <main className={styles.container}>
         <header className={styles.header}>

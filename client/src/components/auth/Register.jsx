@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import c from 'classnames';
-import * as yup from "yup";
-import { Link, Navigate } from 'react-router-dom';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import styles from "./styles.module.css";
-import logo from "../../img/logo.svg";
-import { registerUser } from '../../actions/auth';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from "react"
+import c from 'classnames'
+import * as yup from "yup"
+import { Link, Navigate } from 'react-router-dom'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
+import styles from "./styles.module.css"
+import logo from "../../img/logo.svg"
+import { registerUser } from '../../actions/auth'
+import { connect } from 'react-redux'
+import MetaTags from 'react-meta-tags'
 
 const schema = yup.object({
   login: yup.string().required(),
@@ -15,7 +16,7 @@ const schema = yup.object({
   password: yup.string().required('Password is required').min(1),
   confirmPassword: yup.string()
      .oneOf([yup.ref('password'), null], 'Passwords must match')
-}).required();
+}).required()
 
 const Register = ({ registerUser, auth, serverErrors }) => {
   const [errors, setErrors] = useState({})
@@ -38,6 +39,9 @@ const Register = ({ registerUser, auth, serverErrors }) => {
 
   return (
     <div className={c(styles.container, styles.registerContainer)}>
+      <MetaTags>
+        <title>Sign up | Tell Opinion</title>
+      </MetaTags>
       <div className={styles.root}>
         <Link to={`/`}>
           <img className={styles.logo} src={logo} alt="Logo of Tell Opinion" />
@@ -131,12 +135,12 @@ const Register = ({ registerUser, auth, serverErrors }) => {
     //     </span>
     //   </form>
     // </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
   serverErrors: state.errors
-});
+})
 
-export default connect(mapStateToProps, { registerUser })(Register);
+export default connect(mapStateToProps, { registerUser })(Register)

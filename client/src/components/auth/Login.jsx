@@ -12,6 +12,7 @@ import { gapi } from 'gapi-script'
 import logo from "../../img/logo.svg"
 import { loginUser, googleLoginUser } from '../../actions/auth'
 import { connect } from 'react-redux'
+import MetaTags from 'react-meta-tags'
 
 const schema = yup.object({
   email: yup.string().email().required(),
@@ -61,6 +62,9 @@ const Login = ({ loginUser, googleLoginUser, serverErrors, auth }) => {
 
   return (
     <div className={styles.container}>
+      <MetaTags>
+        <title>Sign in | Tell Opinion</title>
+      </MetaTags>
       <div className={styles.root}>
         <Link to={`/`}>
           <img className={styles.logo} src={logo} alt="Logo of Tell Opinion" />

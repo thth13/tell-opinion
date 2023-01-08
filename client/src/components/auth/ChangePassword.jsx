@@ -8,6 +8,7 @@ import styles from "./styles.module.css"
 import logo from "../../img/logo.svg"
 import { changePassword } from '../../actions/auth'
 import { connect } from 'react-redux'
+import MetaTags from 'react-meta-tags'
 
 const schema = yup.object({
   oldPassword: yup.string().required('Password is required').min(1),
@@ -35,6 +36,9 @@ const Register = ({ changePassword, serverErrors }) => {
 
   return (
     <div className={c(styles.container, styles.registerContainer)}>
+      <MetaTags>
+        <title>Change password | Tell Opinion</title>
+      </MetaTags>
       <div className={styles.root}>
         <Link to={`/`}>
           <img className={styles.logo} src={logo} alt="Logo of Tell Opinion" />

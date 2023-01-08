@@ -37,7 +37,7 @@ const Opinions = ({
       <div className={styles.opinionItemsContainer}>
         {opinions && opinions.length < 1 && 
           <p className={styles.noOpinions}>
-            {isMyProfile ? 'You dont have any opinions' : 'User has no opinions'}
+            {isMyProfile ? 'You don`t have any opinions' : 'User has no opinions'}
           </p>
         }
         {opinions && opinions.map(item => (
