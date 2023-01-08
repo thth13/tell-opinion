@@ -6,6 +6,7 @@ import styles from "./styles.module.css"
 import AppBar from "./../appbar/AppBar"
 import image from "../../img/people.gif"
 import previewImage from "../../img/previewImage.png"
+import MetaTags from 'react-meta-tags'
 
 let Landing = ({ auth }) => {
   if (auth.isAuthenticated) {
