@@ -55,7 +55,7 @@ const Profile = ({
       <MetaTags>
         {user && <title>{params.username} | Tell Opinion</title>}
         <meta
-          name="og:description"
+          name="description"
           content={`Leave an anonymous opinion to user ${params.username}`}
         />
         <meta property="og:title" content={`${params.username} | Tell Opinion`} />
