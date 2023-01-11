@@ -52,14 +52,14 @@ const Profile = ({
 
   return (
     <div>
-      <MetaTags>
+      <Helmet>
         {user && <title>{params.username} | Tell Opinion</title>}
         <meta
-          name="description"
+          name="og:description"
           content={`Leave an anonymous opinion to user ${params.username}`}
         />
         <meta property="og:title" content={`${params.username} | Tell Opinion`} />
-      </MetaTags>
+      </Helmet>
       <AppBar />
       <main>
         <div className={styles.container}>
