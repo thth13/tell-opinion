@@ -55,11 +55,10 @@ const Profile = ({
       <MetaTags>
         {user && <title>{params.username} | Tell Opinion</title>}
         <meta
-          name="description"
+          name="og:description"
           content={`Leave an anonymous opinion to user ${params.username}`}
         />
-        <meta property="og:title" content="Tell Opinion" />
-        <meta property="og:image" content="https://tell-opinion.com/static/media/previewImage.b185bb3bf266c9fdf051.png" />
+        <meta property="og:title" content={`${params.username} | Tell Opinion`} />
       </MetaTags>
       <AppBar />
       <main>

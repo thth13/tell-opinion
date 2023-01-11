@@ -5,8 +5,6 @@ import { connect } from "react-redux"
 import styles from "./styles.module.css"
 import AppBar from "./../appbar/AppBar"
 import image from "../../img/people.gif"
-import previewImage from "../../img/previewImage.png"
-import MetaTags from 'react-meta-tags'
 
 let Landing = ({ auth }) => {
   if (auth.isAuthenticated) {
@@ -15,9 +13,6 @@ let Landing = ({ auth }) => {
 
   return !auth.loading && (
     <div className={styles.body}>
-      <MetaTags>
-        <meta property="og:image" content={previewImage} />
-      </MetaTags>
       <AppBar/>
       <main className={styles.container}>
         <div className={styles.authBox}>
