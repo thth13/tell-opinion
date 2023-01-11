@@ -8,7 +8,7 @@ import styles from "./styles.module.css"
 import ThanksPopup from "../thanks-popup/ThanksPopup"
 import ProfileInfo from "./ProfileInfo/ProfileInfo"
 import Opinions from "./Opinions/Opinions"
-import MetaTags from 'react-meta-tags'
+import { Helmet } from 'react-helmet-async';
 import previewImage from "../../img/previewImage.png"
 
 const Profile = ({
