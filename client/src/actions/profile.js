@@ -55,7 +55,9 @@ export const getProfileByName = username => async dispatch => {
 
 export const editProfile = data => async dispatch => {
   try {
-    await api.post(`/profile`, data)
+    await api.post(`/profile`, data, {headers: {
+      'Content-Type': 'multipart/form-data'
+    }})
   } catch (err) {
     console.log(err)
   }
