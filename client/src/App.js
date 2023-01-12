@@ -46,7 +46,7 @@ const App = () => {
         <Route exact path="/restorepassword" element={<RestorePassword />} />
         <Route exact path="/editprofile" element={<EditProfile />} />
         <Route exact path="/search" element={<Search />} />
-        <Route exact path="/@:username" element={<Profile />} />
+        <Route exact path="/:username" element={<Profile />} />
         <Route exact path="/resetpassword/:token" element={<NewPassword />} />
       </Routes>
     </Provider>

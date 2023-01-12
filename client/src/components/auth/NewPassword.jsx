@@ -35,7 +35,7 @@ const NewPassword = ({ resetPassword, auth, serverErrors }) => {
   ), [clientErrors, serverErrors])
 
   if (auth.isAuthenticated && auth.user) {
-    return <Navigate to={`/@${auth.user.login}`} />
+    return <Navigate to={`/${auth.user.login}`} />
   }
 
   return (

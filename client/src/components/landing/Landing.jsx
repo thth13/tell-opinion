@@ -8,7 +8,7 @@ import image from "../../img/people.gif"
 
 let Landing = ({ auth }) => {
   if (auth.isAuthenticated) {
-    return <Navigate to={`/@${auth.user.login}`} />
+    return <Navigate to={`/${auth.user.login}`} />
   }
 
   return !auth.loading && (

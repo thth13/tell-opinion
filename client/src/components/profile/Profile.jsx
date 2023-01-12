@@ -8,7 +8,7 @@ import styles from "./styles.module.css"
 import ThanksPopup from "../thanks-popup/ThanksPopup"
 import ProfileInfo from "./ProfileInfo/ProfileInfo"
 import Opinions from "./Opinions/Opinions"
-import MetaTags from 'react-meta-tags'
+import { Helmet } from "react-helmet";
 import previewImage from "../../img/previewImage.png"
 
 const Profile = ({
@@ -52,14 +52,14 @@ const Profile = ({
 
   return (
     <div>
-      <MetaTags>
+      <Helmet>
         {user && <title>{params.username} | Tell Opinion</title>}
         <meta
           name="og:description"
           content={`Leave an anonymous opinion to user ${params.username}`}
         />
         <meta property="og:title" content={`${params.username} | Tell Opinion`} />
-      </MetaTags>
+      </Helmet>
       <AppBar />
       <main>
         <div className={styles.container}>

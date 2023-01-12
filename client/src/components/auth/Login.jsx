@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import c from 'classnames'
-import { GoogleLogin } from 'react-google-login'
+import { GoogleLogin } from '@leecheuk/react-google-login'
 import * as yup from "yup"
 import { Link, Navigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -12,7 +12,7 @@ import { gapi } from 'gapi-script'
 import logo from "../../img/logo.svg"
 import { loginUser, googleLoginUser } from '../../actions/auth'
 import { connect } from 'react-redux'
-import MetaTags from 'react-meta-tags'
+import { Helmet } from "react-helmet";
 
 const schema = yup.object({
   email: yup.string().email().required(),
@@ -57,14 +57,14 @@ const Login = ({ loginUser, googleLoginUser, serverErrors, auth }) => {
   ), [clientErrors, serverErrors])
 
   if (auth.isAuthenticated && auth.user) {
-    return <Navigate to={`/@${auth.user.login}`} />
+    return <Navigate to={`/${auth.user.login}`} />
   }
 
   return (
     <div className={styles.container}>
-      <MetaTags>
+      <Helmet>
         <title>Sign in | Tell Opinion</title>
-      </MetaTags>
+      </Helmet>
       <div className={styles.root}>
         <Link to={`/`}>
           <img className={styles.logo} src={logo} alt="Logo of Tell Opinion" />
