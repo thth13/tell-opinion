@@ -177,7 +177,8 @@ router.post('/google', async (req, res) => {
       await user.save()
 
       const profile = new Profile({
-        user: user.id
+        user: user.id,
+        login: user.login
       })
 
       await profile.save()

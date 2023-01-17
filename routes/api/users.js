@@ -9,6 +9,54 @@ const validateRegisterForm = require('../../validation/register');
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
 
+// @route   GET api/users/find/:username/:userslength
+// @desc    Find users
+// @access  Public
+router.get('/find/:username/:userslength', async ({params: {username, userslength}}, res) => {
+  const length = Number.parseInt(userslength)
+
+  try {
+    let userList;
+
+    if (username !== 'undefined') {
+      userList = await Profile.find({
+        login: { $regex: username, $options: "i" }
+      }).skip(length).limit(10);
+    } else {
+      userList = await Profile.find().skip(length).limit(10);
+    }
+
+    return res.json(userList);
+  } catch (err) {
+    console.error(err.message)
+    return res.status(500).json({msg: 'Server error'})
+  }
+});
+
+// @route   GET api/users/find/:username/:userslength
+// @desc    Get more users
+// @access  Public
+// router.get('/find/:username/:userslength', async ({params: {username, userslength}}, res) => {
+//   const length = Number.parseInt(userslength)
+
+//   try {
+//     let userList
+
+//     if (username !== 'undefined') {
+//       userList = await Profile.find({
+//         login: { $regex: username, $options: "i" }
+//       }).skip(length).limit(1);
+//     } else {
+//       userList = await Profile.find().skip(length).limit(1);
+//     }
+//     console.log(userList)
+//     return res.json(userList);
+//   } catch (err) {
+//     console.log(err.message)
+//     return res.status(500).json({msg: 'Server error'})
+//   }
+// });
+
 // @route   POST api/users
 // @desc    Register user
 // @access  Public
@@ -47,8 +95,9 @@ router.post('/', async (req, res) => {
 
     await user.save();
     // TODO: Как-то странно. проверить
-    profile = new Profile({
-      user: user.id
+    const profile = new Profile({
+      user: user.id,
+      login: user.login
     })
 
     await profile.save();

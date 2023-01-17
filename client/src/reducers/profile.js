@@ -3,7 +3,9 @@ import {
   PROFILE_ERROR,
   NEW_OPINION,
   MORE_OPINIONS,
-  GET_APPBAR_INFO
+  GET_APPBAR_INFO,
+  GET_USER_LIST,
+  MORE_USERS
 } from '../actions/types'
 
 const initialState = {
@@ -13,6 +15,7 @@ const initialState = {
   loadig: true,
   name: '',
   avatar: '',
+  userList: [],
   error: null
 }
 
@@ -52,6 +55,18 @@ function profileReducer(state = initialState, action) {
       return {
         ...state,
         opinions: state.opinions.concat(payload)
+      }
+    }
+    case GET_USER_LIST: {
+      return {
+        ...state,
+        userList: payload
+      }
+    }
+    case MORE_USERS: {
+      return {
+        ...state,
+        userList: state.userList.concat(payload)
       }
     }
     default:

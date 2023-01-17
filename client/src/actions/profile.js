@@ -5,7 +5,9 @@ import {
   PROFILE_ERROR,
   NEW_OPINION,
   MORE_OPINIONS,
-  GET_APPBAR_INFO
+  GET_APPBAR_INFO,
+  GET_USER_LIST,
+  MORE_USERS
 } from './types'
 
 export const getCurrentProfile = isAppBar => async dispatch => {
@@ -90,6 +92,32 @@ export const loadMoreOpinions = (profileId, opinionsLength) => async dispatch =>
 
     dispatch({
       type: MORE_OPINIONS,
+      payload: res.data
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const getUserList = userName => async dispatch => {
+  try {
+    const res = await api.get(`/users/find/${userName ? userName : undefined}/0`)
+
+    dispatch({
+      type: GET_USER_LIST,
+      payload: res.data
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const loadMoreUsers = (userName, usersLength) => async dispatch => {
+  try {
+    const res = await api.get(`/users/find/${userName ? userName : undefined}/${usersLength}`)
+
+    dispatch({
+      type: MORE_USERS,
       payload: res.data
     })
   } catch (err) {
