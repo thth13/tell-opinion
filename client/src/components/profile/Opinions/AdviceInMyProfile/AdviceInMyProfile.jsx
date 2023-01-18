@@ -10,7 +10,7 @@ const AdviceInMyProfile = ({name, setIsShowAdviceInMyProfile}) => {
     <div className={styles.adviceInMyProfile}>
       <button className={styles.closeAdviceButton} onClick={closeAdvice}></button>
       {name && <span className={styles.adviceName}>{name}, </span>}
-      {name ? 'ч' : 'Ч'}тобы получать больше мнений, делитесь сайтом в соц.сетях. 
+      {name ? 't' : 'T'}o get more opinions, share the site on social networks.
     </div>
   )
 }

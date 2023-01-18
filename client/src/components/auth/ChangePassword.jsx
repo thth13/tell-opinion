@@ -44,7 +44,7 @@ const Register = ({ changePassword, serverErrors }) => {
           <img className={styles.logo} src={logo} alt="Logo of Tell Opinion" />
         </Link>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <h2 className={styles.headText}>Изменение пароля</h2>
+          <h2 className={styles.headText}>Change Password</h2>
         <input
           className={c(styles.fields, {[styles.error]: errors.oldPassword })}
           placeholder="Old password"

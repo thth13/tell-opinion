@@ -29,7 +29,7 @@ const ProfileInfo = ({
       <h3 className={styles.nickName}>@{profile && profile.user.login}</h3>
       <p className={styles.description}>{profile && profile.description}</p>
       {isMyProfile && <Link to="/editProfile">
-        <button className={c(styles.editProfileBtton, styles.editProfileBttonNarrow)}>Редактировать профиль</button>
+        <button className={c(styles.editProfileBtton, styles.editProfileBttonNarrow)}>Edit profile</button>
       </Link>}
       <div className={styles.contacts}>
         <div className="infoSocial">
@@ -41,7 +41,7 @@ const ProfileInfo = ({
         <div className={styles.opinionCount}>{opinionsLength} opinions</div>
       </div>
       {isMyProfile && <Link to="/editProfile">
-        <button className={c(styles.editProfileBtton, styles.editProfileBttonWide)}>Редактировать профиль</button>
+        <button className={c(styles.editProfileBtton, styles.editProfileBttonWide)}>Edit profile</button>
       </Link>}
     </section>
   )

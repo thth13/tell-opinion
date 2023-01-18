@@ -71,8 +71,8 @@ const Login = ({ loginUser, googleLoginUser, serverErrors, auth }) => {
         </Link>        
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <h2 className={styles.headText}>
-            Регистрируйся<br/>
-            и получай анонимные мнения о себе
+            Sign up and get<br/>
+            anonymous opinion about yourself
           </h2>
           <input
             className={c(styles.fields, { [styles.error]: errors.email })}

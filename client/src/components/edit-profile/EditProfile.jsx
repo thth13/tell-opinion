@@ -86,7 +86,7 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
           <button className={styles.backArrowButton} onClick={comeBack}>
             <span className={styles.backArrow}></span>
           </button>
-          <h1 className={styles.mainTitle}>Редактирование профиля</h1>
+          <h1 className={styles.mainTitle}>Profile editing</h1>
         </header>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.editWrapper}>
@@ -97,7 +97,7 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
             />
             <div className={styles.fieldsContainer}>
               <div className={styles.descriptionContainer}>
-                <h2 className={c(styles.descriptionTitle, styles.descriptionTitleSmallHidden)}>Данные</h2>
+                <h2 className={c(styles.descriptionTitle, styles.descriptionTitleSmallHidden)}>Data</h2>
                 <input
                   className={c(styles.fields, { [styles.error]: errors.password })}
                   placeholder="Name"
@@ -133,8 +133,8 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
                 />
               </div>
               <div className={styles.buttonsContainer}>
-                <input className={styles.submitButton} type="submit" value="Сохранить изменения"/>
-                <button className={styles.cancelButton} onClick={comeBack}>Выйти без изменений</button>
+                <input className={styles.submitButton} type="submit" value="Save changes"/>
+                <button className={styles.cancelButton} onClick={comeBack}>Exit without change</button>
                 <Link to="/changepassword"><button className={styles.changePasswordButton}>Change password</button></Link>
               </div>
             </div>

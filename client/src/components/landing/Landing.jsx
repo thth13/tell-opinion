@@ -17,13 +17,13 @@ let Landing = ({ auth }) => {
       <main className={styles.container}>
         <div className={styles.authBox}>
           <h1 className={styles.mainTitle}>
-            <span className={styles.mainTitleAccent}>Узнай,</span><br/>
-            что о тебе<br/>
-            думают другие
+            <span className={styles.mainTitleAccent}>Find out,</span><br/>
+            what others<br/>
+            think of you
           </h1>
           <p className={styles.descriptionNarrow}>
-            Регистрируйся и получай<br/> 
-            анонимные мнения о себе
+            Sign up and get anonymous<br/>
+            opinion about yourself
           </p>
           <Link to={`/login`}>
             <button className={styles.startButton}>Start</button>
@@ -43,9 +43,9 @@ let Landing = ({ auth }) => {
         </div>
         <div className={styles.descriptionBox}>
           <p className={styles.description}>
-            Регистрируйся<br/>
-            и получай анонимные<br/>
-            мнения о себе
+            Sign up<br/>
+            and get anonymous<br/>
+            opinion about yourself
           </p>
           <img src={image} alt="" className={styles.image} />
         </div>

@@ -11,7 +11,16 @@ import { connect } from 'react-redux'
 import { Helmet } from "react-helmet";
 
 const schema = yup.object({
-  login: yup.string().required(),
+  login: yup.string().required().notOneOf(
+    [
+     'register',
+     'login',
+     'changepassword',
+     'restorepassword',
+     'editprofile',
+     'search',
+     'find'
+    ], 'Login unavailable'),
   email: yup.string().email().required(),
   password: yup.string().required('Password is required').min(1),
   confirmPassword: yup.string()
@@ -26,6 +35,7 @@ const Register = ({ registerUser, auth, serverErrors }) => {
   })
 
   const onSubmit = data => {
+    console.log(data)
     registerUser(data)
   }
 
@@ -48,8 +58,8 @@ const Register = ({ registerUser, auth, serverErrors }) => {
         </Link>        
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <h2 className={styles.headText}>
-            Регистрируйся<br/>
-            и получай анонимные мнения о себе
+            Sign up and get<br/>
+            anonymous opinion about yourself
           </h2>
           <input
           className={c(styles.fields, {[styles.error]: errors.login })}

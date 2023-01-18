@@ -18,8 +18,8 @@ let ThanksPopup = ({isShowThanksPopup, setIsShowThanksPopup}) => {
   return (
     <div className={styles.popupWrapper}>
       <div className={styles.popup}>
-        <h2 className={styles.title}>Спасибо за ваше мнение!</h2>
-        <p className={styles.prompt}>*Мнения можно оставлять раз в день</p>
+        <h2 className={styles.title}>Thank you for your opinion!</h2>
+        <p className={styles.prompt}>*Opinions can be posted once a day</p>
       </div>
     </div>
   )

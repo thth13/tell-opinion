@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://thth13:1111@cluster0.mkkee.mongodb.net/?retryWrites=true&w=majority",
-  "jwtSecret": "secret"
+  "mongoURI": "mongodb+srv://tellop:lOMLmh2um8qcjukY@cluster0.mkkee.mongodb.net/tellopinion?retryWrites=true&w=majority",
+  "jwtSecret": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY3NDA4NDgzOCwiaWF0IjoxNjc0MDg0ODM4fQ.UwmXe2U86xHNFljgXSjtneeSVww-UKnPzySCajw6wRw"
 }

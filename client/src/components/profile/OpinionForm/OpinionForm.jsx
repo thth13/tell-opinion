@@ -17,7 +17,7 @@ const OpinionForm = ({newOpinion, profile, setIsShowThanksPopup}) => {
 
   return (
     <form className={styles.opinionForm} onSubmit={onSubmit}>
-      <textarea className={styles.opinionField} value={opinionText} onChange={onChange} placeholder="Оставьте свое мнение(Это абсолютно анонимно)"></textarea>
+      <textarea className={styles.opinionField} value={opinionText} onChange={onChange} placeholder="Leave your opinion (It's completely anonymous)"></textarea>
       <button className={styles.opinionSubmitButton}>Send</button>
     </form>
   )

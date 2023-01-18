@@ -6,10 +6,10 @@ let WaitPopup = () => {
     <div className={styles.popupWrapper}>
       <div className={styles.popup}>
         <h2 className={styles.title}>
-          Вы уже оставляли мнение этому пользователю сегодня. 
-          <br/>Повторите завтра.
+          You have already left the opinion of this user today.
+          <br/>Try tomorrow.
          </h2>
-        <p className={styles.prompt}>*Мнения можно оставлять раз в день </p>
+        <p className={styles.prompt}>*Opinions can be posted once a day </p>
       </div>
     </div>
   )

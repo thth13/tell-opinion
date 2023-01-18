@@ -16,7 +16,7 @@ const Opinions = ({
 
   return profile && (
     <section className={c(styles.opinions, styles.section)}>
-      <h2 className={styles.opinionsTitle}>Мнения</h2>
+      <h2 className={styles.opinionsTitle}>Opinions</h2>
       {!isMyProfile && isOneDayAfter && 
         <OpinionForm
           newOpinion={newOpinion} 
@@ -31,8 +31,8 @@ const Opinions = ({
         />
       }
       {!isMyProfile && !isOneDayAfter && <p className={styles.advice}>
-        Вы уже оставляли мнение этому пользователю сегодня.
-        Повторите завтра
+        You have already left an opinion for this user today.
+        Repeat tomorrow
       </p>}
       <div className={styles.opinionItemsContainer}>
         {opinions && opinions.length < 1 && 

@@ -41,7 +41,7 @@ const ImagePreviewer = ({avatar, register, errors}) => {
       />
       <label htmlFor="input"
         className={c(styles.label, {[styles.error]: errors.avatar})}
-      >Выбрать фото</label>
+      >Select photo</label>
       {errors.avatar && <p className={styles.errorText}>{errors.avatar.message}</p>}
     </div>
   ) 
