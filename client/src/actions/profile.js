@@ -14,12 +14,12 @@ export const getCurrentProfile = isAppBar => async dispatch => {
   try {
     const res = await api.get('/profile/me')
     
-    if (isAppBar) {
-      dispatch({
-        type: GET_APPBAR_INFO,
-        payload: res.data
-      })
-    } else {
+    dispatch({
+      type: GET_APPBAR_INFO,
+      payload: res.data
+    })
+
+    if (!isAppBar) {
       dispatch({
         type: GET_PROFILE,
         payload: res.data

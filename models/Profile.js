@@ -22,6 +22,10 @@ const ProfileSchema = new Schema({
     type: Number,
     default: 0
   },
+  verifed: {
+    type: Boolean,
+    default: false
+  },
   social: {
     instagram: {
       type: String

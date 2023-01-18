@@ -25,6 +25,7 @@ function profileReducer(state = initialState, action) {
   switch (type) {
     case GET_PROFILE:
       return {
+        ...state,
         profile: payload.profile,
         opinions: payload.opinions,
         opinionsLength: payload.opinionsLength,
