@@ -33,7 +33,7 @@ const FindUsers = ({getUserList, userList, user, loadMoreUsers}) => {
   }, [getUserList])
 
   const comeBack = () => {
-    navigate(`/${user.login}`)
+    navigate(`/`)
   }
 
   return (
