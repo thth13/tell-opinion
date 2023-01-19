@@ -115,4 +115,10 @@ export const googleLoginUser = token => async dispatch => {
   }
 }
 
-export const logoutsUser = () => ({type: LOGOUT})
+// export const logoutsUser = () => ({type: LOGOUT})
+
+export const logoutsUser = () => async dispatch => {
+  localStorage.removeItem('adviceClosed')
+
+  dispatch({type: LOGOUT})
+}

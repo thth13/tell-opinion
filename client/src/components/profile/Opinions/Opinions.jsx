@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import c from "classnames"
 import styles from "./styles.module.css"
 import OpinionItem from "../OpinionItem/OpinionItem"
@@ -12,7 +12,20 @@ const Opinions = ({
   isOneDayAfter, newOpinion, setIsShowThanksPopup,
   opinionsLength, loadMore
 }) => {
-  const [isShowAdviceInMyProfile, setIsShowAdviceInMyProfile] = useState(true);
+  const [isShowAdviceInMyProfile, setIsShowAdviceInMyProfile] = useState();
+  
+  const closeAdviceInMyprofile = () => {
+    setIsShowAdviceInMyProfile(false);
+    localStorage.setItem('adviceClosed', false)
+  }
+
+  useEffect(() => {
+    if (!localStorage.adviceClosed)  {
+      setIsShowAdviceInMyProfile(true)
+    } else {
+      setIsShowAdviceInMyProfile(false)
+    }
+  }, [])
 
   return profile && (
     <section className={c(styles.opinions, styles.section)}>
@@ -27,7 +40,7 @@ const Opinions = ({
       {isMyProfile && isShowAdviceInMyProfile &&
         <AdviceInMyProfile 
           name={profile.name}
-          setIsShowAdviceInMyProfile={setIsShowAdviceInMyProfile} 
+          setIsShowAdviceInMyProfile={closeAdviceInMyprofile} 
         />
       }
       {!isMyProfile && !isOneDayAfter && <p className={styles.advice}>
