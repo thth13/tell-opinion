@@ -2,11 +2,14 @@ import React from "react"
 import c from "classnames"
 import { Link, Navigate } from "react-router-dom"
 import { connect } from "react-redux"
+import { useTranslation } from 'react-i18next'
 import styles from "./styles.module.css"
 import AppBar from "./../appbar/AppBar"
 import image from "../../img/people.gif"
 
-let Landing = ({ auth }) => {
+const Landing = ({ auth }) => {
+  const { t } = useTranslation();
+
   if (auth.isAuthenticated) {
     return <Navigate to={`/${auth.user.login}`} />
   }
@@ -20,6 +23,7 @@ let Landing = ({ auth }) => {
             <span className={styles.mainTitleAccent}>Find out,</span><br/>
             what others<br/>
             think of you
+            {t('text')}
           </h1>
           <p className={styles.descriptionNarrow}>
             Sign up and get anonymous<br/>
