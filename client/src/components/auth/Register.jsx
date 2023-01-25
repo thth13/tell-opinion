@@ -20,7 +20,8 @@ const schema = yup.object({
      'editprofile',
      'search',
      'find'
-    ], 'Login unavailable'),
+    ], 'Login unavailable')
+    .trim('Login cannot include leading and trailing spaces'),    
   email: yup.string().email().required(),
   password: yup.string().required('Password is required').min(1),
   confirmPassword: yup.string()
