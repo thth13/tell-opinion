@@ -21,9 +21,9 @@ router.get('/find/:username/:userslength', async ({params: {username, userslengt
     if (username !== 'undefined') {
       userList = await Profile.find({
         login: { $regex: username, $options: "i" }
-      }).skip(length).limit(10);
+      }).skip(length).limit(10).sort({date: -1});
     } else {
-      userList = await Profile.find().skip(length).limit(10);
+      userList = await Profile.find().skip(length).limit(10).sort({date: -1});
     }
 
     return res.json(userList);
