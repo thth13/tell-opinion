@@ -51,6 +51,13 @@
 
 .link {
   color: blue;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.copyIcon {
+  margin-bottom: 2px;
+  margin-left: 5px;
 }
 
 @media screen and (max-width: 767px) {
