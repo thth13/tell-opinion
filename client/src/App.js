@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Provider } from 'react-redux'
 import { Routes, Route, useLocation } from 'react-router-dom'
-// import ReactGA from 'react-ga';
+import ReactGA from 'react-ga';
 import store from './store'
 import setAuthToken from './utils/setAuthToken'
 import {loadUser} from './actions/auth'
@@ -19,9 +19,9 @@ import FindUsers from './components/find-users/FindUsers'
 
 import './App.css'
 
-// const TRACKING_ID = "G-Y3MT7ZXTS8";
+const TRACKING_ID = "G-Y3MT7ZXTS8";
 
-// ReactGA.initialize(TRACKING_ID);
+ReactGA.initialize(TRACKING_ID);
 
 const App = () => {
   let location = useLocation();
@@ -38,7 +38,9 @@ const App = () => {
     })
   }, [])
 
-
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0)
