@@ -16,10 +16,10 @@ let AppBar = ({user, profile,
   let [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (user && !profile.name) {
+    // if (user && !profile.name) {
       getCurrentProfile(true)
-    }
-  }, [user, profile])
+    // }
+  }, [])
   
   let toggleMenu = () => {
     if (!isMenuOpen) setIsMenuOpen(true)
