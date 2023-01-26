@@ -115,7 +115,7 @@ const Register = ({ registerUser, auth, serverErrors, googleLoginUser }) => {
         />
         {errors.confirmPassword && <span className={styles.errorText}>{errors.confirmPassword.message}</span>}
         <button className={c(styles.button, styles.sendButton)}>Register</button>
-        <GoogleLogin
+        {/* <GoogleLogin
             clientId={clientId}
             render={renderProps => (
               <button
@@ -126,7 +126,7 @@ const Register = ({ registerUser, auth, serverErrors, googleLoginUser }) => {
             )}
             onSuccess={googleResponse}
             onFailute={onFailure}
-          />
+          /> */}
         <span className={styles.haveAccount}>
           Already have an account?<br/>
           <Link to="/login">Sign In</Link>
