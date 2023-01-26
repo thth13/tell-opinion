@@ -40,6 +40,7 @@ const Opinions = ({
       {isMyProfile && isShowAdviceInMyProfile &&
         <AdviceInMyProfile 
           name={profile.name}
+          login={profile.login}
           setIsShowAdviceInMyProfile={closeAdviceInMyprofile} 
         />
       }

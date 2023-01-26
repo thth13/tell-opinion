@@ -49,6 +49,10 @@
   font-weight: 700;
 }
 
+.link {
+  color: blue;
+}
+
 @media screen and (max-width: 767px) {
   .adviceInMyProfile {
     width: 89.333%;

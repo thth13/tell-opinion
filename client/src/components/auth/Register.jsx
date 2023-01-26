@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react"
 import c from 'classnames'
 import * as yup from "yup"
 import { Link, Navigate } from 'react-router-dom'
+import { GoogleLogin } from '@leecheuk/react-google-login'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import styles from "./styles.module.css"
 import logo from "../../img/logo.svg"
-import { registerUser } from '../../actions/auth'
+import { registerUser, googleLoginUser } from '../../actions/auth'
 import { connect } from 'react-redux'
 import { Helmet } from "react-helmet";
+import { gapi } from 'gapi-script'
 
 const schema = yup.object({
   login: yup.string().required().notOneOf(
@@ -27,8 +29,9 @@ const schema = yup.object({
   confirmPassword: yup.string()
      .oneOf([yup.ref('password'), null], 'Passwords must match')
 }).required()
+const clientId = '853830546263-7jh0en2tn5i292pfg7l0a3v8hodjmr1s.apps.googleusercontent.com'
 
-const Register = ({ registerUser, auth, serverErrors }) => {
+const Register = ({ registerUser, auth, serverErrors, googleLoginUser }) => {
   const [errors, setErrors] = useState({})
 
   const {register, handleSubmit, formState: { errors: clientErrors }} = useForm({
@@ -40,12 +43,32 @@ const Register = ({ registerUser, auth, serverErrors }) => {
     registerUser(data)
   }
 
+  const googleResponse = async (response) => {
+    if (response.tokenId) {
+      googleLoginUser(response.tokenId)
+    }
+  }
+
+  const onFailure = error => {
+    console.log(error)
+  }
+
   useEffect(() => (
     setErrors({ ...serverErrors.errors, ...clientErrors})
   ), [clientErrors, serverErrors])
 
+  useEffect(() => {
+    const initClient = () => {
+        gapi.auth2.init({
+            clientId,
+            scope: ''
+        })
+    }
+    gapi.load('client:auth2', initClient)
+  })
+
   if (auth.isAuthenticated && auth.user) {
-    return <Navigate to={`/${auth.user.login}`} />
+    return <Navigate to={`/editProfile`} />
   }
 
   return (
@@ -91,7 +114,19 @@ const Register = ({ registerUser, auth, serverErrors }) => {
           {...register("confirmPassword")}
         />
         {errors.confirmPassword && <span className={styles.errorText}>{errors.confirmPassword.message}</span>}
-        <button className={c(styles.button, styles.sendButton, styles.buttonMarginBottom)}>Register</button>
+        <button className={c(styles.button, styles.sendButton)}>Register</button>
+        <GoogleLogin
+            clientId={clientId}
+            render={renderProps => (
+              <button
+                onClick={renderProps.onClick}
+                className={c(styles.button, styles.viaGoogle)}>
+                  Sign up with Google
+              </button>
+            )}
+            onSuccess={googleResponse}
+            onFailute={onFailure}
+          />
         <span className={styles.haveAccount}>
           Already have an account?<br/>
           <Link to="/login">Sign In</Link>
@@ -154,4 +189,4 @@ const mapStateToProps = (state) => ({
   serverErrors: state.errors
 })
 
-export default connect(mapStateToProps, { registerUser })(Register)
+export default connect(mapStateToProps, { registerUser, googleLoginUser })(Register)
