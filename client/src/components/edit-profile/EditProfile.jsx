@@ -13,11 +13,7 @@ import { Helmet } from "react-helmet";
 
 // TODO: валидация
 const schema = yup.object({
-  avatar: yup.mixed().test("fileSize", "The file size is too large", value => {
-      // if (typeof value === "string") return true
-      // if (!value.length) return true
-      return value[0].size <= 200000000
-    })
+  avatar: yup.mixed()
     .test("fileType", "File must be image type of JPEG or PNG", value => {
       if (value[0] === undefined) return true
       if (typeof value === "string") return true
