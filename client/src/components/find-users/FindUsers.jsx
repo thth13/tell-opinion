@@ -25,7 +25,7 @@ const FindUsers = ({getUserList, userList, user, loadMoreUsers}) => {
   }
 
   const loadMore = () => {
-    loadMoreUsers(userName, userList.length);
+    loadMoreUsers(userName, userList.length)
   }
 
   useEffect(() => {
