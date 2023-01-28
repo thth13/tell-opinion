@@ -10,6 +10,9 @@ const OpinionSchema = new Schema({
     type: String,
     required: true
   },
+  answer: {
+    type: String
+  },
   date: {
     type: Date,
     default: Date.now

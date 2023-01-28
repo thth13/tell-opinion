@@ -84,8 +84,34 @@ router.get('/user/:username', async ({params: {username}}, res) => {
   }
 )
 
+// @route   POST api/profile/addView
+// @desc    Add view
+// @access  Public
+router.post('/addView', async (req, res) => {
+})
+
+// @route   POST api/profile/addAnswer
+// @desc    Add answer
+// @access  Public
+router.post('/addAnswer', async (req, res) => {
+  const {opinionId, text} = req.body
+
+  try {
+    const opinion = await Opinion.findOneAndUpdate(
+      { _id: opinionId },
+      { answer: text },
+      { new: true, upsert: true, setDefaultOnInsert: true }
+    )
+
+    return res.json(opinion)
+  } catch (err) {
+    console.error(err.message)
+    return res.status(500).json({msg: 'Server error'})
+  }
+})
+
 // @route   GET api/profile/moreopinions/:username
-// @desct   Get more opinions
+// @desc    Get more opinions
 // @access  Public
 router.get('/user/moreopinions/:profileId/:opinionsLength', async (req, res) => {
 	const length = Number.parseInt(req.params.opinionsLength)
@@ -180,7 +206,7 @@ router.post('/', auth, upload.single('avatar'), async (req, res) => {
   profileFields.social = socialFields
 
   try {
-    let profile = await Profile.findOneAndUpdate(
+    const profile = await Profile.findOneAndUpdate(
       { user: req.user.id },
       { $set: profileFields },
       { new: true, upsert: true, setDefaultOnInsert: true }

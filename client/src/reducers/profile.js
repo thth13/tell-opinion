@@ -5,7 +5,8 @@ import {
   MORE_OPINIONS,
   GET_APPBAR_INFO,
   GET_USER_LIST,
-  MORE_USERS
+  MORE_USERS,
+  ADD_ANSWER
 } from '../actions/types'
 
 const initialState = {
@@ -68,6 +69,15 @@ function profileReducer(state = initialState, action) {
       return {
         ...state,
         userList: state.userList.concat(payload)
+      }
+    }
+    case ADD_ANSWER: {
+      console.log(payload)
+      return {
+        ...state,
+        opinions: state.opinions.map((opinion) => 
+          opinion._id === payload._id ? payload : opinion
+        )
       }
     }
     default:

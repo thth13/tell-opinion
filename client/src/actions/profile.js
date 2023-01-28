@@ -7,7 +7,8 @@ import {
   MORE_OPINIONS,
   GET_APPBAR_INFO,
   GET_USER_LIST,
-  MORE_USERS
+  MORE_USERS,
+  ADD_ANSWER
 } from './types'
 
 export const getCurrentProfile = isAppBar => async dispatch => {
@@ -82,6 +83,19 @@ export const newOpinion = (profileId, text) => async dispatch => {
     })
   } catch (err) {
     // TODO: обработка ошибок
+    console.log(err)
+  }
+}
+
+export const addAnswer = (opinionId, text) => async dispatch => {
+  try {
+    const res = await api.post('/profile/addAnswer', {opinionId, text})
+
+    dispatch({
+      type: ADD_ANSWER,
+      payload: res.data
+    })
+  } catch (err) {
     console.log(err)
   }
 }
