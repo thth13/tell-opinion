@@ -32,7 +32,7 @@ const OpinionItem = ({addAnswer, item, auth: {user}}) => {
       
       {!item.answer && isMyProfile && (
         <>
-          <button className={styles.addAnswerButton} onClick={setAddAnswer}>Add answer</button>
+          {!handleAddAnswer && <button className={styles.addAnswerButton} onClick={setAddAnswer}>Add answer</button>}
           {handleAddAnswer && (
             <form onSubmit={onSubmit} className={styles.answerForm}>
               <input
@@ -40,6 +40,7 @@ const OpinionItem = ({addAnswer, item, auth: {user}}) => {
                 value={answerText}
                 onChange={onChange}
                 placeholder="Enter your answer"
+                autoFocus
               />
               <button type='submit' className={styles.sendButton}>Send</button>
             </form>
