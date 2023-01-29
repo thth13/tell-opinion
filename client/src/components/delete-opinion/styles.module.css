@@ -4,7 +4,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: rgba(163, 166, 171, 0.47);
+  background: rgba(163, 166, 171, 0.47);
   backdrop-filter: blur(40px);
 }
 
@@ -12,10 +12,14 @@
   position: fixed;
   top: 50%;
   left: 50%;
+  border-radius: 2px;
+  text-align: center;
   transform: translate(-50%, -50%);
-  padding: 330px 113px 40px;
+  padding: 25px 20px;
+  padding-bottom: 10px;
+  /* padding: 330px 113px 40px; */
   background-color: #FFFFFF;
-  background-image: url("./../../img/landingImg.svg"), url("./../../img/waitPopupBankground.svg");
+  /* background-image: url("./../../img/landingImg.svg"), url("./../../img/waitPopupBankground.svg"); */
   background-repeat: no-repeat;
   background-position: top 40px right 162px, center;
   background-size: 157px auto, 100%;
@@ -41,6 +45,29 @@
   color: #FF7474;
 }
 
+.buttonsWrapper {
+  display: flex;
+  margin-top: 25px;
+}
+
+.button {
+  /* width: 100%; */
+  margin-bottom: 14px;
+  width: 100px;
+  padding: 7px 0px;
+  background: 
+    linear-gradient(86.13deg, #0075FF 17.96%, #95C6FF 90.14%);
+  color: #FFFFFF;  
+}
+
+.cancelButton {
+  margin-left: 25px;
+  background: white;
+  border: 1px solid #0075FF;
+  color: #0075FF;
+  border-color: #0075FF;
+}
+
 @media screen and (max-width: 767px) {
   .popupWrapper {
     background: rgba(76, 87, 100, 0.7);
@@ -48,7 +75,7 @@
   }
 
   .popup {
-    padding: 285px 7.5vw 40px;
+    /* padding: 285px 7.5vw 40px; */
     background-position: top 40px right 17vw, top 45% center;
     background-size: 118px auto, 140%;
   }

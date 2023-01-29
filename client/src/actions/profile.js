@@ -8,7 +8,8 @@ import {
   GET_APPBAR_INFO,
   GET_USER_LIST,
   MORE_USERS,
-  ADD_ANSWER
+  ADD_ANSWER,
+  DELETE_OPINION
 } from './types'
 
 export const getCurrentProfile = isAppBar => async dispatch => {
@@ -107,6 +108,19 @@ export const loadMoreOpinions = (profileId, opinionsLength) => async dispatch =>
     dispatch({
       type: MORE_OPINIONS,
       payload: res.data
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const deleteOpinion = (id) => async dispatch => {
+  try {
+    await api.delete(`/profile/deleteOpinion/${id}`)
+
+    dispatch({
+      type: DELETE_OPINION,
+      payload: id
     })
   } catch (err) {
     console.log(err)

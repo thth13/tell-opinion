@@ -6,7 +6,8 @@ import {
   GET_APPBAR_INFO,
   GET_USER_LIST,
   MORE_USERS,
-  ADD_ANSWER
+  ADD_ANSWER,
+  DELETE_OPINION
 } from '../actions/types'
 
 const initialState = {
@@ -51,6 +52,13 @@ function profileReducer(state = initialState, action) {
         ...state,
         opinions: [payload, ...state.opinions],
         loading: false
+      }
+    }
+    case DELETE_OPINION: {
+      return {
+        ...state,
+        opinionsLength: state.opinionsLength--,
+        opinions: state.opinions.filter(item => item._id !== action.payload),
       }
     }
     case MORE_OPINIONS: {

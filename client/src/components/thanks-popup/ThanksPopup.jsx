@@ -2,7 +2,7 @@ import React from "react"
 import { useEffect } from "react"
 import styles from "./styles.module.css"
 
-let ThanksPopup = ({isShowThanksPopup, setIsShowThanksPopup}) => {
+const ThanksPopup = ({isShowThanksPopup, setIsShowThanksPopup}) => {
   useEffect(() => {
     const hidePopup = e => {
       if (e.target.className !== styles.popup) {

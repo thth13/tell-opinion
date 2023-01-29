@@ -147,6 +147,17 @@ router.post('/user/opinion/:id', checkObjectId('id'), async (req, res) => {
   }
 })
 
+// @route   DELETE api/profile/deleteOpinion
+// @desc    Delete opinion
+// @acess   Private
+router.delete('/deleteOpinion/:id', auth, async (req, res) => {
+  const {id} = req.params
+
+  Opinion.findOneAndDelete({ _id: id })
+    .then(() => res.json({success:true}))
+    .catch(err => console.log(err))
+})
+
 // @route   POST api/profile
 // @desc    Create or update user profile
 // @access  Private

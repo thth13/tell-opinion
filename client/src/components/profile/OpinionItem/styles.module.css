@@ -20,6 +20,11 @@
   word-break: break-word;
 }
 
+.headOpinion {
+  display: flex;
+  justify-content: space-between;
+}
+
 .field {
   box-sizing: border-box;
   margin-right: 10px;
