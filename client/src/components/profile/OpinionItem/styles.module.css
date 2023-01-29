@@ -20,16 +20,6 @@
   word-break: break-word;
 }
 
-.addAnswerButton {
-  margin-top: 5px;
-  margin-bottom: 0px;
-  cursor: pointer;
-  margin-bottom: 10px;
-  float: right;
-  font-weight: bold;
-  color: #0075FF;
-}
-
 .field {
   box-sizing: border-box;
   margin-right: 10px;
@@ -73,6 +63,17 @@
   border-left: 2px solid gray;
   padding-left: 5px;
   overflow-wrap: break-word;
+}
+
+.addAnswerButtonWrapper {
+  text-align: right;
+}
+
+.addAnswerButton {
+  margin-top: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #0075FF;
 }
 
 @media screen and (max-width: 767px) {
