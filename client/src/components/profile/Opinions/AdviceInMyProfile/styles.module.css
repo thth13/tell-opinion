@@ -53,6 +53,8 @@
   color: blue;
   display: inline-block;
   cursor: pointer;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .copyIcon {

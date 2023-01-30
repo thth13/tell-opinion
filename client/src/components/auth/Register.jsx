@@ -23,7 +23,8 @@ const schema = yup.object({
      'search',
      'find'
     ], 'Login unavailable')
-    .trim('Login cannot include leading and trailing spaces'),    
+    .trim('Login cannot include leading and trailing spaces')
+    .test('login', 'login cannot contain a spaces', (value) => !value.includes(' ')),    
   email: yup.string().email().required(),
   password: yup.string().required('Password is required').min(1),
   confirmPassword: yup.string()
@@ -39,7 +40,6 @@ const Register = ({ registerUser, auth, serverErrors, googleLoginUser }) => {
   })
 
   const onSubmit = data => {
-    console.log(data)
     registerUser(data)
   }
 
