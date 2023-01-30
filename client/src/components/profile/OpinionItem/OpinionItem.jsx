@@ -44,17 +44,19 @@ const OpinionItem = ({addAnswer, item, auth: {user}}) => {
             setHandleDeleteOpinionPopup={setHandleDeleteOpinionPopup}
           />
         }
-        <Kebab size='medium'>
-        {/* <MenuItem icon={<EditIcon />} onClick={() => Toast.push('Отредактировано')}>
-          Report
-        </MenuItem> */}
-        <MenuItem
-          icon={<TrashIcon />}
-          onClick={deleteOpinion}
-        >
-          Delete
-        </MenuItem>
-      </Kebab>
+        {isMyProfile && 
+          <Kebab size='medium'>
+           {/* <MenuItem icon={<EditIcon />} onClick={() => Toast.push('Отредактировано')}>
+             Report
+           </MenuItem> */}
+           <MenuItem
+             icon={<TrashIcon />}
+             onClick={deleteOpinion}
+           >
+             Delete
+           </MenuItem>
+          </Kebab>
+        }
     </div>
       <p className={styles.opinionBody}>{item.text}</p>
       {item.answer && <p className={styles.opinionAnswer}>{item.answer}</p>}
