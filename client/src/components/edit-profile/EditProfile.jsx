@@ -107,26 +107,32 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
               </div>
               <div className={styles.socialContainer}>
                 <h2 className={styles.descriptionTitle}>Соц.сети</h2>
+                <div className={styles.inputWrapper}>
+                  <div className={styles.inputHint}>@</div>
+                  <input
+                    className={c(styles.fields, styles.userNameField, { [styles.error]: errors.password })}
+                    placeholder="Instagram"
+                    {...register("instagram")}
+                  />
+                </div>
                 <input
                   className={c(styles.fields, { [styles.error]: errors.password })}
-                  placeholder="Instagram"
-                  {...register("instagram")}
-                />
-                <input
-                  className={c(styles.fields, { [styles.error]: errors.password })}
-                  placeholder="Facebook"
+                  placeholder="Facebook link"
                   {...register("facebook")}
                 />
                 <input
                   className={c(styles.fields, { [styles.error]: errors.password })}
-                  placeholder="YouTube"
+                  placeholder="YouTube link"
                   {...register("youtube")}
                 />
-                <input
-                  className={c(styles.fields, { [styles.error]: errors.password })}
-                  placeholder="Twitter"
-                  {...register("twitter")}
-                />
+                <div className={styles.inputWrapper}>
+                  <div className={styles.inputHint}>@</div>
+                  <input
+                    className={c(styles.fields, styles.userNameField, { [styles.error]: errors.password })}
+                    placeholder="Twitter"
+                    {...register("twitter")}
+                  />
+                </div>
               </div>
               <div className={styles.buttonsContainer}>
                 <input className={styles.submitButton} type="submit" value="Save changes"/>

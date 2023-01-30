@@ -6,19 +6,6 @@
   background-size: cover;
 }
 
-@media screen and (max-width: 1536px) {
-  .container {
-    max-width: 92%;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .container {
-    max-width: 100%;
-    padding: 0 5.333%;
-  }
-}
-
 .header {
   display: flex;
   flex-direction: row;
@@ -59,23 +46,6 @@
   color: #2E3238;
 }
 
-@media screen and (max-width: 767px) {
-  .header {
-    margin-bottom: 20px;
-    margin-right: 12px;
-    padding-top: 25px;
-  }
-
-  .backArrow {
-    width: 20px;
-  }
-
-  .mainTitle {
-    font-weight: 400;
-    font-size: 20px;    
-  }
-}
-
 .editWrapper {
   display: flex;
   flex-direction: row;
@@ -104,19 +74,6 @@
   margin-bottom: 40px;
 }
 
-@media screen and (max-width: 1536px) {
-  .fieldsContainer {
-    width: 60%;
-  }
-}
-
-.descriptionTitle {
-  margin-bottom: 17px;
-  font-weight: 700;
-  font-size: 20px;
-  color: #2E3238;  
-}
-
 .fields {
   box-sizing: border-box;
   width: 100%;
@@ -126,6 +83,34 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 26px;
+}
+
+.userNameField {
+  padding-left: 55px;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.inputHint {
+  background:rgba(46, 50, 56, 0.2);
+  position: absolute;
+  height: 48px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.descriptionTitle {
+  margin-bottom: 17px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #2E3238;  
 }
 
 .textArea {
@@ -187,6 +172,16 @@
   background-size: cover;
 }
 
+@media screen and (max-width: 1536px) {
+  .container {
+    max-width: 92%;
+  }
+
+  .fieldsContainer {
+    width: 60%;
+  }
+}
+
 @media screen and (max-width: 1023px) {
   .descriptionContainer {
     width: 100%;
@@ -212,6 +207,11 @@
 }
 
 @media screen and (max-width: 767px) {
+  .container {
+    max-width: 100%;
+    padding: 0 5.333%;
+  }
+
   .fieldsContainer {
     width: 100%;
   }
@@ -244,5 +244,20 @@
 
   .cancelButton {
     margin-bottom: 168px;
+  }
+
+  .header {
+    margin-bottom: 20px;
+    margin-right: 12px;
+    padding-top: 25px;
+  }
+
+  .backArrow {
+    width: 20px;
+  }
+
+  .mainTitle {
+    font-weight: 400;
+    font-size: 20px;    
   }
 }
