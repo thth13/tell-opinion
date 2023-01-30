@@ -4,6 +4,7 @@ import {connect} from "react-redux"
 import {useNavigate} from 'react-router-dom'
 import {getUserList, loadMoreUsers} from '../../actions/profile'
 import {BottomScrollListener} from 'react-bottom-scroll-listener'
+import  {  useBottomScrollListener  }  from  'react-bottom-scroll-listener' ;
 import { Link } from 'react-router-dom'
 import noAvatar from "../../img/noAvatar.png"
 import AppBar from "../appbar/AppBar"
@@ -12,8 +13,10 @@ import styles from './styles.module.css'
 
 const FindUsers = ({getUserList, userList, user, loadMoreUsers}) => {
   const navigate = useNavigate()
+
   const [userName, setUserName] = useState('')
-  
+  const [isLoading, setIsLoading] = useState(false)
+
   const onChange = e => {
     setUserName(e.target.value)
   }
@@ -24,9 +27,12 @@ const FindUsers = ({getUserList, userList, user, loadMoreUsers}) => {
    getUserList(userName)
   }
 
-  const loadMore = () => {
-    loadMoreUsers(userName, userList.length)
+  const loadMore = async () => {
+    setIsLoading(true)
+    await loadMoreUsers(userName, userList.length)
+    setIsLoading(false)
   }
+  useBottomScrollListener(loadMore);
 
   useEffect(() => {
     getUserList()
@@ -58,7 +64,7 @@ const FindUsers = ({getUserList, userList, user, loadMoreUsers}) => {
           />
           <button className={styles.findButton} type='submit'>Find</button>
         </form>
-        {userList && userList.map(item => (
+        {userList && userList.map((item, i) => (
           <Link to={`/${item.login}`}>
             <div className={styles.userBlock}>
               <img
@@ -74,7 +80,10 @@ const FindUsers = ({getUserList, userList, user, loadMoreUsers}) => {
             </div>
           </Link>
         ))}
-        <BottomScrollListener onBottom={loadMore} />
+        {/* <div ref={scrollRef}>Callback will be invoked when this container is scrolled to bottom.</div>; */}
+
+        {/* <button style={{marginBottom: 500}} onClick={loadMore}>klic</button> */}
+        {/* {!isLoading && <BottomScrollListener onBottom={loadMore} />} */}
       </main>
     </>
   )

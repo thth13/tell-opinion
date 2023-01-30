@@ -106,7 +106,7 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
                 />
               </div>
               <div className={styles.socialContainer}>
-                <h2 className={styles.descriptionTitle}>Соц.сети</h2>
+                <h2 className={styles.descriptionTitle}>Social networks</h2>
                 <div className={styles.inputWrapper}>
                   <div className={styles.inputHint}>@</div>
                   <input
