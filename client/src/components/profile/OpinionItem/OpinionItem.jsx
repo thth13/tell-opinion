@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import {addAnswer} from '../../../actions/profile'
 import DeleteOpinionPopup from '../../delete-opinion/DeleteOpinionPopup'
@@ -9,11 +9,10 @@ import {connect} from 'react-redux'
 import styles from './styles.module.css'
 import moment from 'moment'
 
-const OpinionItem = ({addAnswer, item, auth: {user}}) => {
-  const params = useParams()
+const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
   const [handleAddAnswer, setHandleAddAnswer] = useState(false)
   const [answerText, setAnswerText] = useState('')
-  const [isMyProfile] = useState(user && user.login === params.username)
+  const [isMyProfile, setIsMyProfile] = useState(false)
   const [handleDeleteOpinionPopup, setHandleDeleteOpinionPopup] = useState(false)
 
   const setAddAnswer = () => setHandleAddAnswer(!handleAddAnswer)
@@ -25,14 +24,22 @@ const OpinionItem = ({addAnswer, item, auth: {user}}) => {
   const onSubmit = e => {
     e.preventDefault()
 
-    addAnswer(item._id, answerText)
+    if (answerText) {
+      addAnswer(item._id, answerText)
+    }    
     setHandleAddAnswer(false)
   }
 
   const deleteOpinion = () => {
     setHandleDeleteOpinionPopup(true)
-    // Toast.push('Deleted')
+    Toast.push('Deleted')
   }
+
+  useEffect(() => {
+    if (user && user.login ===  profile.profile.login) {
+      setIsMyProfile(true)
+    }
+  }, [user, profile])
 
   return (
     <div key={item.date} className={styles.opinionItem}>
@@ -87,7 +94,8 @@ const OpinionItem = ({addAnswer, item, auth: {user}}) => {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile
 })
 
 export default connect(mapStateToProps, {addAnswer})(OpinionItem)
