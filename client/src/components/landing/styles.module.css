@@ -156,9 +156,10 @@ color: #2E3238;
 
   .descriptionNarrow {
     display: block;
+    max-width: 300px;
   }
 
-  .description{
+  .description {
     display: none;
   }
   

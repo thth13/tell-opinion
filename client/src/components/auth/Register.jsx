@@ -5,6 +5,7 @@ import { Link, Navigate } from 'react-router-dom'
 import { GoogleLogin } from '@leecheuk/react-google-login'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
+import {useTranslation} from 'react-i18next'
 import styles from "./styles.module.css"
 import logo from "../../img/logo.svg"
 import { registerUser, googleLoginUser } from '../../actions/auth'
@@ -34,6 +35,7 @@ const clientId = '853830546263-7jh0en2tn5i292pfg7l0a3v8hodjmr1s.apps.googleuserc
 
 const Register = ({ registerUser, auth, serverErrors, googleLoginUser }) => {
   const [errors, setErrors] = useState({})
+  const {t} = useTranslation()
 
   const {register, handleSubmit, formState: { errors: clientErrors }} = useForm({
     resolver: yupResolver(schema)
@@ -82,26 +84,25 @@ const Register = ({ registerUser, auth, serverErrors, googleLoginUser }) => {
         </Link>        
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <h2 className={styles.headText}>
-            Sign up and get<br/>
-            anonymous opinion about yourself
+            {t('signUpAndGetOpinion')}
           </h2>
           <input
           className={c(styles.fields, {[styles.error]: errors.login })}
-          placeholder="Login"
+          placeholder={t('loginPlaceholder')}
           size="40"
           {...register("login")}
         />
         {errors.login && <span className={styles.errorText}>{errors.login.message}</span>}
         <input
           className={c(styles.fields, {[styles.error]: errors.email })}
-          placeholder="Email address"
+          placeholder={t('emailPlaceholder')}
           size="40"
           {...register("email")}
         />
         {errors.email && <span className={styles.errorText}>{errors.email.message}</span>}
         <input
           className={c(styles.fields, {[styles.error]: errors.password })}
-          placeholder="Password"
+          placeholder={t('passwordPlaceholder')}
           type="password"
           {...register("password")}
         />
@@ -109,12 +110,12 @@ const Register = ({ registerUser, auth, serverErrors, googleLoginUser }) => {
         <input
           className={c(styles.fields, {[styles.error]: errors.confirmPassword })}
           name="confirmPassword"
-          placeholder="Confirm password"
+          placeholder={t('confirmPasswordPlaceholder')}
           type="password"
           {...register("confirmPassword")}
         />
         {errors.confirmPassword && <span className={styles.errorText}>{errors.confirmPassword.message}</span>}
-        <button className={c(styles.button, styles.sendButton)}>Register</button>
+        <button className={c(styles.button, styles.sendButton)}>{t('signUp')}</button>
         {/* <GoogleLogin
             clientId={clientId}
             render={renderProps => (
@@ -128,8 +129,8 @@ const Register = ({ registerUser, auth, serverErrors, googleLoginUser }) => {
             onFailute={onFailure}
           /> */}
         <span className={styles.haveAccount}>
-          Already have an account?<br/>
-          <Link to="/login">Sign In</Link>
+          {t('alreadyHaveAnAccount')}<br/>
+          <Link to="/login">{t('signIn')}</Link>
         </span>
         </form>
       </div>

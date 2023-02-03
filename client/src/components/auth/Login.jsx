@@ -6,6 +6,7 @@ import { Link, Navigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import styles from './styles.module.css'
+import {useTranslation} from 'react-i18next'
 import { gapi } from 'gapi-script'
 // import google from './../../img/googlel.svg'
 // import instagram from './../../img/instagram.svg'
@@ -21,6 +22,7 @@ const schema = yup.object({
 const clientId = '853830546263-7jh0en2tn5i292pfg7l0a3v8hodjmr1s.apps.googleusercontent.com'
 
 const Login = ({ loginUser, googleLoginUser, serverErrors, auth }) => {
+  const {t} = useTranslation()
   const [errors, setErrors] = useState({})
 
   useEffect(() => {
@@ -71,42 +73,42 @@ const Login = ({ loginUser, googleLoginUser, serverErrors, auth }) => {
         </Link>        
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <h2 className={styles.headText}>
-            Sign up and get<br/>
-            anonymous opinion about yourself
+            {t('signUpAndGetOpinion')}
           </h2>
           <input
             className={c(styles.fields, { [styles.error]: errors.email })}
-            placeholder="Email address"
+            placeholder={t('emailPlaceholder')}
             size="40"
             {...register("email")}
           />
           {errors.email && <span className={styles.errorText}>{errors.email.message}</span>}
           <input
             className={c(styles.fields, { [styles.error]: errors.password })}
-            placeholder="Password"
+            placeholder={t('passwordPlaceholder')}
             type="password"
             {...register("password")}
           />
           {errors.password && <span className={styles.errorText}>{errors.password.message}</span>}
           <div className={styles.forgotPassword}>
-            <Link to="/restorepassword">Forgot password?</Link>
+            <Link to="/restorepassword">{t('forgotPassword')}</Link>
           </div>
-          <input type={'submit'} className={c(styles.button, styles.sendButton)} value="Login"/>
+          <button type={'submit'} className={c(styles.button, styles.sendButton)}>{t('signIn')}</button>
           {/* <button type={'submit'} className={c(styles.button, styles.viaGoogle)}>Sign in via Google</button> */}
           <GoogleLogin
             clientId={clientId}
             render={renderProps => (
               <button
                 onClick={renderProps.onClick}
-                className={c(styles.button, styles.viaGoogle)}>
-                  Sign in with Google
+                className={c(styles.button, styles.viaGoogle)}
+              >
+                {t('signInWithGoogle')}
               </button>
             )}
             onSuccess={googleResponse}
             onFailute={onFailure}
           />
-          <span className={styles.haveAccount}>Dont have an account?<br/> 
-          <Link to="/register">Sign Up</Link></span>
+          <span className={styles.haveAccount}>{t('dontHaveAnAccout')}<br/> 
+          <Link to="/register">{t('signUp')}</Link></span>
         </form>
       </div>
     </div>

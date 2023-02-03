@@ -1,29 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import c from 'classnames';
-import * as yup from "yup";
-import { Link, Navigate } from 'react-router-dom';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
+import React, { useState, useEffect } from 'react'
+import c from 'classnames'
+import * as yup from "yup"
+import { Link, Navigate } from 'react-router-dom'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
+import {useTranslation} from 'react-i18next'
 import styles from './styles.module.css'
-import logo from "../../img/logo.svg";
-import { loginUser } from '../../actions/auth';
-import { connect } from 'react-redux';
+import logo from "../../img/logo.svg"
+import { loginUser } from '../../actions/auth'
+import { connect } from 'react-redux'
 import { restorePassword } from '../../actions/auth'
-import api from '../../utils/api'
 
 const schema = yup.object({
   email: yup.string().email().required()
-}).required();
+}).required()
 
 const RestorePassword = ({ auth: { isRestorePassword }, restorePassword, serverErrors }) => {
+  const {t} = useTranslation()
   const {register, handleSubmit, formState: { errors: clientErrors }} = useForm({
     resolver: yupResolver(schema)
-  });
-  const [errors, setErrors] = useState({});
+  })
+  const [errors, setErrors] = useState({})
 
   const onSubmit = (data) => {
-    restorePassword(data);
-  };
+    restorePassword(data)
+  }
 
   useEffect(() => (
     setErrors({ ...serverErrors.errors, ...clientErrors })
@@ -38,31 +39,36 @@ const RestorePassword = ({ auth: { isRestorePassword }, restorePassword, serverE
         {!isRestorePassword ? (
           <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
             <h2 className={styles.headText}>
-              Restore password
+              {t('restorePassword')}
             </h2>
             <input
               className={c(styles.fields, { [styles.error]: errors.email })}
-              placeholder="Email address"
+              placeholder={t('emailPlaceholder')}
               size="40"
               {...register("email")}
             />
             {errors.email && <span className={styles.errorText}>{errors.email.message}</span>}
-            <input type={'submit'} className={c(styles.button, styles.sendButton, styles.buttonMarginBottom)} value="Restore password"/>
-            <span className={styles.haveAccount}>Or 
-              <Link to="/register"> Sign Up</Link>
+            <button
+              type={'submit'}
+              className={c(styles.button, styles.sendButton)}
+            >
+                {t('restorePassword')}
+              </button>
+            <span className={styles.haveAccount}>{t('or')} 
+              <Link to="/register"> {t('signUp')}</Link>
             </span>
           </form>
         ) : (
-          <h2 className={styles.emailSended}>We have sent a message to your email to reset your password.</h2>
+          <h2 className={styles.emailSended}>{t('weHaveSentMessage')}</h2>
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => ({
   serverErrors: state.errors,
   auth: state.auth
-});
+})
 
-export default connect(mapStateToProps, {restorePassword})(RestorePassword);
+export default connect(mapStateToProps, {restorePassword})(RestorePassword)

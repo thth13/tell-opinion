@@ -1,8 +1,10 @@
-import React, {useState} from "react"
-import copyIcon from "../../../../img/copy-icon.svg"
-import styles from "./styles.module.css"
+import React, {useState} from 'react'
+import copyIcon from '../../../../img/copy-icon.svg'
+import {useTranslation} from 'react-i18next'
+import styles from './styles.module.css'
 
 const AdviceInMyProfile = ({name, setIsShowAdviceInMyProfile, login}) => {
+  const {t} = useTranslation()
   const [showCopiedTooltip, setShowCopiedTooltip] = useState(false);
 
   const closeAdvice = () => {
@@ -19,13 +21,13 @@ const AdviceInMyProfile = ({name, setIsShowAdviceInMyProfile, login}) => {
     <div className={styles.adviceInMyProfile}>
       <button className={styles.closeAdviceButton} onClick={closeAdvice}></button>
       {name && <span className={styles.adviceName}>{name}, </span>}
-      {name ? 't' : 'T'}o receive opinions, share a link to your account in social networks
+      {name ? t('t') : t('T')}{t('toReceiveOpinions')}
       <span onClick={copyLink} className={styles.link}>
         Your link: https://tell-opinion.com/{login}
         <img className={styles.copyIcon} src={copyIcon} alt='Copy link icon' />
       </span>
         {showCopiedTooltip && 
-          <div className={styles.copiedTooltip}>Copied!</div>
+          <div className={styles.copiedTooltip}>{t('copied')}</div>
         }
     </div>
   )

@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react"
-import { connect } from "react-redux"
+import React, {useEffect} from "react"
+import {connect} from "react-redux"
 import * as yup from "yup"
 import c from "classnames"
-import { Link, useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-import { editProfile, getCurrentProfile } from '../../actions/profile'
-import { yupResolver } from '@hookform/resolvers/yup'
+import {Link, useNavigate} from 'react-router-dom'
+import {useForm} from 'react-hook-form'
+import {useTranslation} from 'react-i18next'
+import {editProfile, getCurrentProfile} from '../../actions/profile'
+import {yupResolver} from '@hookform/resolvers/yup'
 import styles from "./styles.module.css"
 import AppBar from "../appbar/AppBar"
 import ImagePreviewer from "../image-previewer/ImagePreviewer"
-import { Helmet } from "react-helmet";
+import {Helmet} from "react-helmet";
 
 // TODO: валидация
 const schema = yup.object({
@@ -26,11 +27,7 @@ const schema = yup.object({
 }).required()
 
 const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
-  useEffect(() => {
-    if (profile === null) {
-      getCurrentProfile()
-    } 
-  })
+  const {t} = useTranslation()
   const navigate = useNavigate()
 
   const {register, handleSubmit, reset, formState: { errors }} = useForm({
@@ -45,12 +42,6 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
           twitter: profile && profile?.social && profile.social?.twitter
         }
   })
-
-  useEffect(() => {
-    if (profile) {
-      reset(profile)
-    }
-  }, [profile])
 
   const onSubmit = async (data) => {
     const formData = new FormData()
@@ -71,6 +62,18 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
     navigate(`/${user.login}`)
   }
 
+  useEffect(() => {
+    if (profile) {
+      reset(profile)
+    }
+  }, [profile])
+  
+  useEffect(() => {
+    if (profile === null) {
+      getCurrentProfile()
+    } 
+  })
+
   return (
     <div>
        <Helmet>
@@ -82,7 +85,7 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
           <button className={styles.backArrowButton} onClick={comeBack}>
             <span className={styles.backArrow}></span>
           </button>
-          <h1 className={styles.mainTitle}>Profile editing</h1>
+          <h1 className={styles.mainTitle}>{t('profileEditing')}</h1>
         </header>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.editWrapper}>
@@ -93,20 +96,22 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
             />
             <div className={styles.fieldsContainer}>
               <div className={styles.descriptionContainer}>
-                <h2 className={c(styles.descriptionTitle, styles.descriptionTitleSmallHidden)}>Data</h2>
+                <h2 className={c(styles.descriptionTitle, styles.descriptionTitleSmallHidden)}>
+                  {t('data')}
+                </h2>
                 <input
                   className={c(styles.fields, { [styles.error]: errors.password })}
-                  placeholder="Name"
+                  placeholder={t('namePlaceholder')}
                   {...register("name")}
                 />
                 <textarea
                   className={c(styles.textArea, { [styles.error]: errors.password })}
-                  placeholder="Description"
+                  placeholder={t('descriptionPlaceholder')}
                   {...register("description")}
                 />
               </div>
               <div className={styles.socialContainer}>
-                <h2 className={styles.descriptionTitle}>Social networks</h2>
+                <h2 className={styles.descriptionTitle}>{t('socialNetworks')}</h2>
                 <div className={styles.inputWrapper}>
                   <div className={styles.inputHint}>@</div>
                   <input
@@ -117,12 +122,12 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
                 </div>
                 <input
                   className={c(styles.fields, { [styles.error]: errors.password })}
-                  placeholder="Facebook link"
+                  placeholder={`Facebook ${t('link')}`}
                   {...register("facebook")}
                 />
                 <input
                   className={c(styles.fields, { [styles.error]: errors.password })}
-                  placeholder="YouTube link"
+                  placeholder={`YouTube ${t('link')}`}
                   {...register("youtube")}
                 />
                 <div className={styles.inputWrapper}>
@@ -135,9 +140,9 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
                 </div>
               </div>
               <div className={styles.buttonsContainer}>
-                <input className={styles.submitButton} type="submit" value="Save changes"/>
-                <button className={styles.cancelButton} onClick={comeBack}>Exit without change</button>
-                <Link to="/changepassword"><button className={styles.changePasswordButton}>Change password</button></Link>
+                <input className={styles.submitButton} type="submit" value={t('saveChanges')}/>
+                <button className={styles.cancelButton} onClick={comeBack}>{t('exitWithoutChange')}</button>
+                <Link to="/changepassword"><button className={styles.changePasswordButton}>{t('changePassword')}</button></Link>
               </div>
             </div>
           </div>

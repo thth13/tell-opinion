@@ -3,6 +3,7 @@ import c from "classnames"
 import styles from "./styles.module.css"
 import OpinionItem from "../OpinionItem/OpinionItem"
 import OpinionForm from "../OpinionForm/OpinionForm"
+import {useTranslation} from 'react-i18next'
 import AdviceInMyProfile from "./AdviceInMyProfile/AdviceInMyProfile"
 import {BottomScrollListener} from 'react-bottom-scroll-listener';
 import {useState} from "react"
@@ -12,6 +13,7 @@ const Opinions = ({
   isOneDayAfter, newOpinion, setIsShowThanksPopup,
   opinionsLength, loadMore
 }) => {
+  const {t} = useTranslation()
   const [isShowAdviceInMyProfile, setIsShowAdviceInMyProfile] = useState();
   
   const closeAdviceInMyprofile = () => {
@@ -51,7 +53,7 @@ const Opinions = ({
       <div className={styles.opinionItemsContainer}>
         {opinions && opinions.length < 1 && 
           <p className={styles.noOpinions}>
-            {isMyProfile ? 'You don`t have any opinions' : 'User has no opinions'}
+            {isMyProfile ? t('youDontHaveAnyOpinions') : t('userHasNoOpinions')}
           </p>
         }
         {opinions && opinions.map(item => (

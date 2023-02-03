@@ -12,7 +12,6 @@ import RestorePassword from './components/auth/RestorePassword'
 import Landing from './components/landing/Landing'
 import Profile from './components/profile/Profile'
 import EditProfile from './components/edit-profile/EditProfile'
-import Search from './components/search/Search'
 import ChangePassword from './components/auth/ChangePassword'
 import NewPassword from './components/auth/NewPassword'
 import FindUsers from './components/find-users/FindUsers'
@@ -55,7 +54,6 @@ const App = () => {
         <Route exact path="/changepassword" element={<ChangePassword />} />
         <Route exact path="/restorepassword" element={<RestorePassword />} />
         <Route exact path="/editprofile" element={<EditProfile />} />
-        <Route exact path="/search" element={<Search />} />
         <Route exact path="/:username" element={<Profile />} />
         <Route exact path="/resetpassword/:token" element={<NewPassword />} />
         <Route exact path="/find" element={<FindUsers />} />

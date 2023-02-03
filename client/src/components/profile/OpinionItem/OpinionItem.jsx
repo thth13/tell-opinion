@@ -4,12 +4,14 @@ import {addAnswer} from '../../../actions/profile'
 import DeleteOpinionPopup from '../../delete-opinion/DeleteOpinionPopup'
 import EditIcon from '@skbkontur/react-icons/Edit'
 import TrashIcon from '@skbkontur/react-icons/Trash'
+import {useTranslation} from 'react-i18next'
 import { MenuItem, Toast, Kebab } from '@skbkontur/react-ui'
 import {connect} from 'react-redux'
 import styles from './styles.module.css'
 import moment from 'moment'
 
 const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
+  const {t} = useTranslation()
   const [handleAddAnswer, setHandleAddAnswer] = useState(false)
   const [answerText, setAnswerText] = useState('')
   const [isMyProfile, setIsMyProfile] = useState(false)
@@ -32,7 +34,7 @@ const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
 
   const deleteOpinion = () => {
     setHandleDeleteOpinionPopup(true)
-    Toast.push('Deleted')
+    // Toast.push(t('deleted'))
   }
 
   useEffect(() => {
@@ -60,7 +62,7 @@ const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
              icon={<TrashIcon />}
              onClick={deleteOpinion}
            >
-             Delete
+             {t('delete')}
            </MenuItem>
           </Kebab>
         }
@@ -72,7 +74,7 @@ const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
         <>
           {!handleAddAnswer && 
             <div className={styles.addAnswerButtonWrapper}>
-              <button className={styles.addAnswerButton} onClick={setAddAnswer}>Add answer</button>
+              <button className={styles.addAnswerButton} onClick={setAddAnswer}>{t('addAnswer')}</button>
               </div>
             }
           {handleAddAnswer && (
@@ -81,10 +83,10 @@ const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
                 className={styles.field}
                 value={answerText}
                 onChange={onChange}
-                placeholder='Enter your answer'
+                placeholder={t('enterYourAnswer')}
                 autoFocus
               />
-              <button type='submit' className={styles.sendButton}>Send</button>
+              <button type='submit' className={styles.sendButton}>{t('send')}</button>
             </form>
           )}
         </>

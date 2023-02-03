@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import styles from "./styles.module.css"
 import logo from "../../img/logo.svg"
+import {useTranslation} from 'react-i18next'
 import { changePassword } from '../../actions/auth'
 import { connect } from 'react-redux'
 import { Helmet } from "react-helmet";
@@ -17,7 +18,8 @@ const schema = yup.object({
   .oneOf([yup.ref('newPassword'), null], 'Passwords must match')
 }).required()
 
-const Register = ({ changePassword, serverErrors }) => {
+const ChangePassword = ({ changePassword, serverErrors }) => {
+  const {t} = useTranslation()
   const navigate = useNavigate()
   const [errors, setErrors] = useState({})
 
@@ -44,10 +46,10 @@ const Register = ({ changePassword, serverErrors }) => {
           <img className={styles.logo} src={logo} alt="Logo of Tell Opinion" />
         </Link>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <h2 className={styles.headText}>Change Password</h2>
+          <h2 className={styles.headText}>{t('changePassword')}</h2>
         <input
           className={c(styles.fields, {[styles.error]: errors.oldPassword })}
-          placeholder="Old password"
+          placeholder={t('oldPasswordPlaceholder')}
           type="password"
           {...register("oldPassword")}
         />
@@ -55,7 +57,7 @@ const Register = ({ changePassword, serverErrors }) => {
         <input
           className={c(styles.fields, {[styles.error]: errors.newPassword })}
           name="newPassword"
-          placeholder="New password"
+          placeholder={t('newPasswordPlaceholder')}
           type="password"
           {...register("newPassword")}
         />
@@ -63,12 +65,12 @@ const Register = ({ changePassword, serverErrors }) => {
         <input
           className={c(styles.fields, {[styles.error]: errors.confirmPassword })}
           name="confirmPassword"
-          placeholder="Confirm new password"
+          placeholder={t('confirmNewPasswordPlaceholder')}
           type="password"
           {...register("confirmPassword")}
         />
         {errors.confirmPassword && <span className={styles.errorText}>{errors.confirmPassword.message}</span>}
-        <button className={c(styles.button, styles.sendButton, styles.buttonMarginBottom)}>Change password</button>
+        <button className={c(styles.button, styles.sendButton, styles.buttonMarginBottom)}>{t('changePassword')}</button>
         </form>
       </div>
     </div>
@@ -80,4 +82,4 @@ const mapStateToProps = (state) => ({
   serverErrors: state.errors
 })
 
-export default connect(mapStateToProps, { changePassword })(Register)
+export default connect(mapStateToProps, { changePassword })(ChangePassword)

@@ -1,10 +1,13 @@
 import React from "react"
 import c from 'classnames'
 import {connect} from 'react-redux'
+import {useTranslation} from 'react-i18next'
 import {deleteOpinion} from "../../actions/profile"
 import styles from "./styles.module.css"
 
 const DeleteOpinionPopup = ({opinionId, deleteOpinion, setHandleDeleteOpinionPopup}) => {
+  const {t} = useTranslation()
+  
   const confirmDelete = () => {
     deleteOpinion(opinionId)
 
@@ -16,14 +19,14 @@ const DeleteOpinionPopup = ({opinionId, deleteOpinion, setHandleDeleteOpinionPop
   return (
     <div className={styles.popupWrapper}>
       <div className={styles.popup}>
-        <p>Are you sure?</p>
+        <p>{t('areYouSure')}</p>
         <div className={styles.buttonsWrapper}>
-          <button className={styles.button} onClick={confirmDelete}>Yes</button>
+          <button className={styles.button} onClick={confirmDelete}>{t('yes')}</button>
           <button
             className={c(styles.button, styles.cancelButton)}
             onClick={closePopup}
           >
-            Cancel
+            {t('cancel')}
           </button>
         </div>
 

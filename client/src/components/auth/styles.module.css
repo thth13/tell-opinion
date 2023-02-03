@@ -43,6 +43,7 @@
   font-size: 22px;
   line-height: 30px;
   text-align: center;
+  max-width: 400px;
 }
 
 .fields {
@@ -218,7 +219,8 @@
   }
   
   .headText {
-    max-width: 65%;
+    max-width: 70.744%;
+    /* max-width: 75%; */
     margin-bottom: 20px;
     font-size: 16px;
     line-height: 22px;

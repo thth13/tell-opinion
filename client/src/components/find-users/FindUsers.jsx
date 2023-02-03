@@ -3,6 +3,7 @@ import {Helmet} from "react-helmet"
 import {connect} from "react-redux"
 import {useNavigate} from 'react-router-dom'
 import {getUserList, loadMoreUsers} from '../../actions/profile'
+import {useTranslation} from 'react-i18next'
 import {BottomScrollListener} from 'react-bottom-scroll-listener'
 import  {  useBottomScrollListener  }  from  'react-bottom-scroll-listener' ;
 import { Link } from 'react-router-dom'
@@ -12,6 +13,7 @@ import AppBar from "../appbar/AppBar"
 import styles from './styles.module.css'
 
 const FindUsers = ({getUserList, userList, user, loadMoreUsers}) => {
+  const {t} = useTranslation()
   const navigate = useNavigate()
 
   const [userName, setUserName] = useState('')
@@ -53,16 +55,16 @@ const FindUsers = ({getUserList, userList, user, loadMoreUsers}) => {
           <button className={styles.backArrowButton} onClick={comeBack}>
             <span className={styles.backArrow}></span>
           </button>
-          <h1 className={styles.mainTitle}>User list</h1>
+          <h1 className={styles.mainTitle}>{t('userList')}</h1>
         </header>
         <form onSubmit={onSubmit} className={styles.searchForm}>
           <input
             className={styles.field}
             value={userName}
             onChange={onChange}
-            placeholder='Find user'
+            placeholder={t('findUser')}
           />
-          <button className={styles.findButton} type='submit'>Find</button>
+          <button className={styles.findButton} type='submit'>{t('find')}</button>
         </form>
         {userList && userList.map((item, i) => (
           <Link to={`/${item.login}`}>
