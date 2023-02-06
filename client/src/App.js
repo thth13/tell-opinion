@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { Provider } from 'react-redux'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import ReactGA from 'react-ga';
@@ -46,19 +46,21 @@ const App = () => {
   }, [location])
 
   return (
-    <Provider store={store}>
-      <Routes>
-        <Route exact path="/" element={<Landing />} />
-        <Route exact path="/register" element={<Register />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/changepassword" element={<ChangePassword />} />
-        <Route exact path="/restorepassword" element={<RestorePassword />} />
-        <Route exact path="/editprofile" element={<EditProfile />} />
-        <Route exact path="/:username" element={<Profile />} />
-        <Route exact path="/resetpassword/:token" element={<NewPassword />} />
-        <Route exact path="/find" element={<FindUsers />} />
-      </Routes>
-    </Provider>
+    <Suspense fallback={'Loading...'}>
+      <Provider store={store}>
+        <Routes>
+          <Route exact path="/" element={<Landing />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/changepassword" element={<ChangePassword />} />
+          <Route exact path="/restorepassword" element={<RestorePassword />} />
+          <Route exact path="/editprofile" element={<EditProfile />} />
+          <Route exact path="/:username" element={<Profile />} />
+          <Route exact path="/resetpassword/:token" element={<NewPassword />} />
+          <Route exact path="/find" element={<FindUsers />} />
+        </Routes>
+      </Provider>
+    </Suspense>
   )
 }
 

@@ -65,7 +65,7 @@ let AppBar = ({user, profile,
               <li className={styles.languageSelect}>
                 <button onClick={changeLanguage} name='en' className={styles.languageButton}>EN</button>
                 <span> / </span>
-                <button onClick={changeLanguage} name='ua 'className={styles.languageButton}>UA</button>
+                <button onClick={changeLanguage} name='ua' className={styles.languageButton}>UA</button>
               </li>
               <li className={styles.menuItem} >
                 <Link to={`/editProfile`}>{t('editProfile')}</Link> 
