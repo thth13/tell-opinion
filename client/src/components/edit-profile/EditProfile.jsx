@@ -5,7 +5,7 @@ import c from "classnames"
 import {Link, useNavigate} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import {useTranslation} from 'react-i18next'
-import {editProfile, getCurrentProfile} from '../../actions/profile'
+import {editProfile, getMyProfile} from '../../actions/profile'
 import {yupResolver} from '@hookform/resolvers/yup'
 import styles from "./styles.module.css"
 import AppBar from "../appbar/AppBar"
@@ -26,7 +26,7 @@ const schema = yup.object({
   // password: yup.string().required(),
 }).required()
 
-const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
+const EditProfile = ({user, profile, editProfile, getMyProfile}) => {
   const {t} = useTranslation()
   const navigate = useNavigate()
 
@@ -36,10 +36,10 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
           name: profile && profile?.name,
           description: profile && profile?.description,
           avatar: profile && profile?.avatar,
-          instagram: profile && profile?.social && profile.social?.instagram,
-          facebook: profile && profile?.social && profile.social?.facebook,
-          youtube: profile && profile?.social && profile.social?.youtube,
-          twitter: profile && profile?.social && profile.social?.twitter
+          instagram: profile && profile?.social ? profile.social?.instagram : '',
+          facebook: profile && profile?.social ? profile.social?.facebook : '',
+          youtube: profile && profile?.social ? profile.social?.youtube : '',
+          twitter: profile && profile?.social ? profile.social?.twitter : ''
         }
   })
 
@@ -69,10 +69,8 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
   }, [profile])
   
   useEffect(() => {
-    if (profile === null) {
-      getCurrentProfile()
-    } 
-  })
+    getMyProfile()
+  }, [])
 
   return (
     <div>
@@ -155,7 +153,7 @@ const EditProfile = ({user, profile, editProfile, getCurrentProfile}) => {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  profile: state.profile.profile
+  profile: state.profile.myProfile
 })
 
-export default connect(mapStateToProps, {editProfile, getCurrentProfile})(EditProfile)
+export default connect(mapStateToProps, {editProfile, getMyProfile})(EditProfile)

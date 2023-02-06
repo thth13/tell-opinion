@@ -7,7 +7,8 @@ import {
   GET_USER_LIST,
   MORE_USERS,
   ADD_ANSWER,
-  DELETE_OPINION
+  DELETE_OPINION,
+  GET_MY_PROFILE
 } from '../actions/types'
 
 const initialState = {
@@ -18,7 +19,8 @@ const initialState = {
   name: '',
   avatar: '',
   userList: [],
-  error: null
+  error: null,
+  myProfile: null,
 }
 
 function profileReducer(state = initialState, action) {
@@ -31,6 +33,13 @@ function profileReducer(state = initialState, action) {
         profile: payload.profile,
         opinions: payload.opinions,
         opinionsLength: payload.opinionsLength,
+        error: null,
+        loading: false
+      }
+    case GET_MY_PROFILE:
+      return {
+        ...state,
+        myProfile: payload.profile,
         error: null,
         loading: false
       }

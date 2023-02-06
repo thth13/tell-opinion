@@ -9,8 +9,28 @@ import {
   GET_USER_LIST,
   MORE_USERS,
   ADD_ANSWER,
-  DELETE_OPINION
+  DELETE_OPINION,
+  GET_MY_PROFILE
 } from './types'
+
+export const getMyProfile = () => async dispatch => {
+  try {
+    const res = await api.get('/profile/me')
+
+    dispatch({
+      type: GET_MY_PROFILE,
+      payload: res.data
+    })
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: {
+        msg: err.response.data.msg,
+        status: err.response.status
+      }
+    })
+  }
+}
 
 export const getCurrentProfile = isAppBar => async dispatch => {
   try {
