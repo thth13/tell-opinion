@@ -14,7 +14,7 @@ const Opinions = ({
   opinionsLength, loadMore
 }) => {
   const {t} = useTranslation()
-  const [isShowAdviceInMyProfile, setIsShowAdviceInMyProfile] = useState();
+  const [isShowAdviceInMyProfile, setIsShowAdviceInMyProfile] = useState()
   
   const closeAdviceInMyprofile = () => {
     setIsShowAdviceInMyProfile(false);
@@ -31,7 +31,7 @@ const Opinions = ({
 
   return profile && (
     <section className={c(styles.opinions, styles.section)}>
-      <h2 className={styles.opinionsTitle}>Opinions</h2>
+      <h2 className={styles.opinionsTitle}>{t('opinionsTitle')}</h2>
       {!isMyProfile && isOneDayAfter && 
         <OpinionForm
           newOpinion={newOpinion} 
@@ -47,8 +47,7 @@ const Opinions = ({
         />
       }
       {!isMyProfile && !isOneDayAfter && <p className={styles.advice}>
-        You have already left an opinion for this user today.
-        Repeat tomorrow
+        {t('youHaveAlreadyOpinion')}
       </p>}
       <div className={styles.opinionItemsContainer}>
         {opinions && opinions.length < 1 && 
