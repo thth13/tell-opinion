@@ -1,5 +1,5 @@
 const express = require('express')
-const multer = require("multer")
+const multer = require('multer')
 const util = require('util')
 const fs = require('fs')
 const unlinkFile = util.promisify(fs.unlink)
@@ -16,7 +16,7 @@ const Opinion = require('../../models/Opinion')
 
 const upload = multer({ dest: 'uploads/' })
 
-const opinionsLimit = 10;
+const opinionsLimit = 10
 
 // @route   GET api/profile/me
 // @desc    Get current users profile
@@ -24,25 +24,25 @@ const opinionsLimit = 10;
 router.get('/me', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
-      user: req.user.id
+      user: req.user.id,
     }).populate('user', ['login', 'avatar'])
 
     const opinions = await Opinion.find({
-      profile: profile._id
-    }).populate('profile', ['text'])
-      .sort({date: -1})
+      profile: profile._id,
+    })
+      .populate('profile', ['text'])
+      .sort({ date: -1 })
       .limit(opinionsLimit)
 
     const opinionsLength = await Opinion.countDocuments({
-      profile: profile._id
+      profile: profile._id,
     })
 
     if (!profile) {
-      return res.status(400).json({msg: 'There is no profile for this user'})
+      return res.status(400).json({ msg: 'There is no profile for this user' })
     }
 
-    res.json({profile, opinions, opinionsLength})
-
+    res.json({ profile, opinions, opinionsLength })
   } catch (err) {
     console.log(err.message)
     res.status(500).end('Server Error')
@@ -52,49 +52,48 @@ router.get('/me', auth, async (req, res) => {
 // @route   GET api/profile/user/:username
 // @desct   Get profile by user name
 // @access  Public
-router.get('/user/:username', async ({params: {username}}, res) => {
-    try {
-      const user = await User.findOne({
-        login: username
-      })
+router.get('/user/:username', async ({ params: { username } }, res) => {
+  try {
+    const user = await User.findOne({
+      login: username,
+    })
 
-      if (!user) return res.status(400).json({msg: 'Profile not found'})
+    if (!user) return res.status(400).json({ msg: 'Profile not found' })
 
-      const profile = await Profile.findOne({
-        user: user._id
-      }).populate('user', ['login', 'avatar'])
+    const profile = await Profile.findOne({
+      user: user._id,
+    }).populate('user', ['login', 'avatar'])
 
-      const opinions = await Opinion.find({
-        profile: profile._id
-      }).populate('profile', ['text'])
-        .sort({date: -1})
-        .limit(opinionsLimit)
+    const opinions = await Opinion.find({
+      profile: profile._id,
+    })
+      .populate('profile', ['text'])
+      .sort({ date: -1 })
+      .limit(opinionsLimit)
 
-      const opinionsLength = await Opinion.countDocuments({
-        profile: profile._id
-      })
+    const opinionsLength = await Opinion.countDocuments({
+      profile: profile._id,
+    })
 
-      if (!profile) return res.status(400).json({msg: 'Profile not found'})
-   
-      return res.json({profile, opinions, opinionsLength})
-    } catch (err) {
-      console.error(err.message)
-      return res.status(500).json({msg: 'Server error'})
-    }
+    if (!profile) return res.status(400).json({ msg: 'Profile not found' })
+
+    return res.json({ profile, opinions, opinionsLength })
+  } catch (err) {
+    console.error(err.message)
+    return res.status(500).json({ msg: 'Server error' })
   }
-)
+})
 
 // @route   POST api/profile/addView
 // @desc    Add view
 // @access  Public
-router.post('/addView', async (req, res) => {
-})
+router.post('/addView', async (req, res) => {})
 
 // @route   POST api/profile/addAnswer
 // @desc    Add answer
 // @access  Public
 router.post('/addAnswer', async (req, res) => {
-  const {opinionId, text} = req.body
+  const { opinionId, text } = req.body
 
   try {
     const opinion = await Opinion.findOneAndUpdate(
@@ -106,27 +105,33 @@ router.post('/addAnswer', async (req, res) => {
     return res.json(opinion)
   } catch (err) {
     console.error(err.message)
-    return res.status(500).json({msg: 'Server error'})
+    return res.status(500).json({ msg: 'Server error' })
   }
 })
 
 // @route   GET api/profile/moreopinions/:username
 // @desc    Get more opinions
 // @access  Public
-router.get('/user/moreopinions/:profileId/:opinionsLength', async (req, res) => {
-	const length = Number.parseInt(req.params.opinionsLength)
+router.get(
+  '/user/moreopinions/:profileId/:opinionsLength',
+  async (req, res) => {
+    const length = Number.parseInt(req.params.opinionsLength)
 
-  try {
-    const opinions = await Opinion.find({
-      profile: req.params.profileId
-    }).sort({date: -1}).skip(length).limit(opinionsLimit)
+    try {
+      const opinions = await Opinion.find({
+        profile: req.params.profileId,
+      })
+        .sort({ date: -1 })
+        .skip(length)
+        .limit(opinionsLimit)
 
-    res.json(opinions)
-  } catch (err) {
-    console.log(err.message)
-    res.status(500).end('Server error')
+      res.json(opinions)
+    } catch (err) {
+      console.log(err.message)
+      res.status(500).send('Server error')
+    }
   }
-})
+)
 
 // @route   POST api/profile/user/opinion/:id
 // @desc    New opinion about user
@@ -137,8 +142,8 @@ router.post('/user/opinion/:id', checkObjectId('id'), async (req, res) => {
   try {
     const opinion = await new Opinion({
       text: req.body.text,
-      profile: req.params.id
-    }).save();
+      profile: req.params.id,
+    }).save()
 
     res.json(opinion)
   } catch (err) {
@@ -151,25 +156,18 @@ router.post('/user/opinion/:id', checkObjectId('id'), async (req, res) => {
 // @desc    Delete opinion
 // @acess   Private
 router.delete('/deleteOpinion/:id', auth, async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params
 
   Opinion.findOneAndDelete({ _id: id })
-    .then(() => res.json({success:true}))
-    .catch(err => console.log(err))
+    .then(() => res.json({ success: true }))
+    .catch((err) => console.log(err))
 })
 
 // @route   POST api/profile
 // @desc    Create or update user profile
 // @access  Private
 router.post('/', auth, upload.single('avatar'), async (req, res) => {
-  const {
-    name,
-    description,
-    instagram,
-    facebook,
-    twitter,
-    youtube
-  } = req.body
+  const { name, description, instagram, facebook, twitter, youtube } = req.body
 
   const profileFields = {
     user: req.user.id,
@@ -181,30 +179,32 @@ router.post('/', auth, upload.single('avatar'), async (req, res) => {
     const file = fs.readFileSync(req.file.path)
     // TODO: fix bucket to env
     const params = {
-      Bucket: "tell-opinion-image",
+      Bucket: 'tell-opinion-image',
       Key: req.file.filename,
       Body: file,
-      ACL: "public-read"
+      ACL: 'public-read',
     }
 
     try {
       await s3.send(new PutObjectCommand(params))
       const profile = await Profile.findOne({
-        user: req.user.id
-      }).select('avatar');
+        user: req.user.id,
+      }).select('avatar')
 
       if (profile.avatar) {
-        await s3.send(new DeleteObjectCommand({
-          Bucket: "tell-opinion-image",
-          Key: profile.avatar
-        }));
+        await s3.send(
+          new DeleteObjectCommand({
+            Bucket: 'tell-opinion-image',
+            Key: profile.avatar,
+          })
+        )
       }
 
       profileFields.avatar = params.Key
       await unlinkFile(req.file.path)
     } catch (err) {
       await unlinkFile(req.file.path)
-      console.log("Error", err)
+      console.log('Error', err)
     }
   }
 
@@ -222,7 +222,7 @@ router.post('/', auth, upload.single('avatar'), async (req, res) => {
       { $set: profileFields },
       { new: true, upsert: true, setDefaultOnInsert: true }
     )
-    
+
     return res.json(profile)
   } catch (err) {
     console.error(err.message)

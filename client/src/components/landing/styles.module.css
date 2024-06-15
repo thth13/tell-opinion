@@ -1,7 +1,7 @@
 .body {
   background-image: url(../../img/landingBackground.svg), url(../../img/landingDots.svg);
   background-repeat: no-repeat;
-  background-position: top 7% right, center;
+  background-position: bottom 7% right, center;
   background-size: 70.9375vw, cover;
 }
 
@@ -133,7 +133,7 @@ color: #2E3238;
 @media screen and (max-width: 719px) {
   .body {
     background-position: top 5% right 25%, center;
-    background-size: 160%;
+    background-size: 140%;
   }
 
   .container {
@@ -164,9 +164,10 @@ color: #2E3238;
   }
   
   .image {
-    width: 49.85074626865672%;
-    height: auto;
-    margin-bottom: 13px;
+    /* width: 49.85074626865672%; */
+    /* height: auto; */
+    /* margin-bottom: 13px; */
+    display: none
   }
 
   .startButton {
