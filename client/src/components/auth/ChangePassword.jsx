@@ -37,7 +37,7 @@ const ChangePassword = ({ changePassword, serverErrors }) => {
   ), [clientErrors, serverErrors])
 
   return (
-    <div className={c(styles.container, styles.registerContainer)}>
+    <div className={styles.container}>
       <Helmet>
         <title>Change password | Tell Opinion</title>
       </Helmet>

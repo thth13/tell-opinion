@@ -74,7 +74,7 @@ const Register = ({ registerUser, auth, serverErrors, googleLoginUser }) => {
   }
 
   return (
-    <div className={c(styles.container, styles.registerContainer)}>
+    <div className={styles.container}>
       <Helmet>
         <title>Sign up | Tell Opinion</title>
       </Helmet>

@@ -41,7 +41,7 @@ const NewPassword = ({ resetPassword, auth, serverErrors }) => {
   }
 
   return (
-    <div className={c(styles.container, styles.registerContainer)}>
+    <div className={styles.container}>
       <div className={styles.root}>
         <Link to={`/`}>
           <img className={styles.logo} src={logo} alt='Logo of Tell Opinion' />

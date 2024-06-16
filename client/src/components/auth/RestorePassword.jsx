@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import c from 'classnames'
 import * as yup from "yup"
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import {useTranslation} from 'react-i18next'
 import styles from './styles.module.css'
 import logo from "../../img/logo.svg"
-import { loginUser } from '../../actions/auth'
 import { connect } from 'react-redux'
 import { restorePassword } from '../../actions/auth'
 

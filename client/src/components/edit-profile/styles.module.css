@@ -242,8 +242,9 @@
     margin-bottom: 14px;
   }
 
-  .cancelButton {
-    margin-bottom: 168px;
+  .changePasswordButton {
+    margin: 0;
+    margin-bottom: 50px;
   }
 
   .header {
