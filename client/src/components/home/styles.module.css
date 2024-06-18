@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 83.333%;
+  margin: 0 auto;
+  padding-top: 100px;
+  background-image: url(../../img/profileDots.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.errorMessage {
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    max-width: 100%;
+    padding-top: 25px;
+  }
+
+  .errorMessage {
+    margin-top: 50px;
+  }
+}

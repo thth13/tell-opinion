@@ -103,6 +103,17 @@ color: #2E3238;
   height: auto;
 }
 
+.loadingScreen {
+  height: 98vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 25%;
+}
+
 @media screen and (max-width: 1536px) {
   .container {
     max-width: 92%;
@@ -134,6 +145,10 @@ color: #2E3238;
   .body {
     background-position: top 5% right 25%, center;
     background-size: 140%;
+  }
+
+  .logo {
+    width: 55%;
   }
 
   .container {

@@ -1,10 +1,10 @@
 import React, { Suspense, useEffect } from 'react'
-import { Provider } from 'react-redux'
-import { Routes, Route, useLocation } from 'react-router-dom'
+// import { Routes, Route, useLocation } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, useLocation } from 'react-router-dom'
 // import ReactGA from 'react-ga'
-import store from './store'
 import setAuthToken from './utils/setAuthToken'
-import { loadUser } from './actions/auth'
+import { connect } from "react-redux"
+import { loadUser, logoutsUser } from './actions/auth'
 import { LOGOUT } from './actions/types'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
@@ -17,23 +17,48 @@ import NewPassword from './components/auth/NewPassword'
 import FindUsers from './components/find-users/FindUsers'
 
 import './App.css'
+import Home from './components/home/Home'
+import LoadingScreen from './components/landing/LoadingScreen'
 
 // const TRACKING_ID = 'G-Y3MT7ZXTS8'
 
 // ReactGA.initialize(TRACKING_ID)
 
-const App = () => {
-  let location = useLocation()
+const App = ({loadUser, logoutsUser, auth: {isAuthenticated, loading}}) => {
+  // let location = useLocation()
+
+  const HomePage = () => {
+    if (loading) {
+      return <LoadingScreen />
+    } else if (!loading) {
+      return isAuthenticated ? <Home /> : <Landing />
+    }
+  }
+
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: HomePage(),
+    },
+    { path: '/register', element: <Register /> },
+    { path: '/login', element: <Login /> },
+    { path: '/changepassword', element: <ChangePassword /> },
+    { path: '/restorepassword', element: <RestorePassword /> },
+    { path: '/editprofile', element: <EditProfile /> },
+    { path: '/:username', element: <Profile /> },
+    { path: '/resetpassword/:token', element: <NewPassword /> },
+    { path: '/find', element: <FindUsers /> },
+  ])
 
   useEffect(() => {
     if (localStorage.token) {
       setAuthToken(localStorage.token)
     }
 
-    store.dispatch(loadUser())
+    loadUser()
 
     window.addEventListener('storage', () => {
-      if (!localStorage.token) store.dispatch({ type: LOGOUT })
+      if (!localStorage.token) logoutsUser()
     })
   }, [])
 
@@ -41,27 +66,22 @@ const App = () => {
   //   ReactGA.pageview(window.location.pathname + window.location.search)
   // }, [])
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [location])
+  // useEffect(() => {
+  //   window.scrollTo(0, 0)
+  // }, [location])
 
   return (
     <Suspense fallback={'Loading...'}>
-      <Provider store={store}>
-        <Routes>
-          <Route exact path="/" element={<Landing />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/changepassword" element={<ChangePassword />} />
-          <Route exact path="/restorepassword" element={<RestorePassword />} />
-          <Route exact path="/editprofile" element={<EditProfile />} />
-          <Route exact path="/:username" element={<Profile />} />
-          <Route exact path="/resetpassword/:token" element={<NewPassword />} />
-          <Route exact path="/find" element={<FindUsers />} />
-        </Routes>
-      </Provider>
+      <RouterProvider router={router} />
     </Suspense>
   )
 }
 
-export default App
+const mapStateToProps = state => ({
+  auth: state.auth,
+  profile: state.profile.profile,
+  error: state.profile.error,
+})
+
+
+export default connect(mapStateToProps, {loadUser, logoutsUser})(App)

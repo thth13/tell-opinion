@@ -10,9 +10,9 @@ import image from "../../img/people.gif"
 const Landing = ({ auth }) => {
   const {t} = useTranslation()
 
-  if (auth.isAuthenticated) {
-    return <Navigate to={`/${auth.user.login}`} />
-  }
+  // if (auth.isAuthenticated) {
+    // return <Navigate to={`/${auth.user.login}`} />
+  // }
 
   return (
     <div className={styles.body}>
