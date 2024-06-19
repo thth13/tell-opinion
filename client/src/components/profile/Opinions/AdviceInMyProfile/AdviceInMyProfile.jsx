@@ -26,9 +26,9 @@ const AdviceInMyProfile = ({name, setIsShowAdviceInMyProfile, login}) => {
         Your link: https://tell-opinion.com/{login}
         <img className={styles.copyIcon} src={copyIcon} alt='Copy link icon' />
       </span>
-        {showCopiedTooltip && 
-          <div className={styles.copiedTooltip}>{t('copied')}</div>
-        }
+      {showCopiedTooltip && 
+        <div className={styles.copiedTooltip}>{t('copied')}</div>
+      }
     </div>
   )
 }
