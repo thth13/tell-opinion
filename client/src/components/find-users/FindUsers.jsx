@@ -11,6 +11,7 @@ import noAvatar from "../../img/noAvatar.png"
 import AppBar from "../appbar/AppBar"
 
 import styles from './styles.module.css'
+import Navbar from '../navbar/Navbar'
 
 const FindUsers = ({getUserList, userList, user, loadMoreUsers}) => {
   const {t} = useTranslation()
@@ -87,6 +88,7 @@ const FindUsers = ({getUserList, userList, user, loadMoreUsers}) => {
         {/* <button style={{marginBottom: 500}} onClick={loadMore}>klic</button> */}
         {/* {!isLoading && <BottomScrollListener onBottom={loadMore} />} */}
       </main>
+      <Navbar />
     </>
   )
 }

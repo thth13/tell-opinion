@@ -10,6 +10,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo"
 import Opinions from "./Opinions/Opinions"
 import { Helmet } from "react-helmet";
 import previewImage from "../../img/previewImage.png"
+import Navbar from "../navbar/Navbar"
 
 const Profile = ({
   getCurrentProfile, getProfileByName, newOpinion, loadMoreOpinions,
@@ -93,6 +94,7 @@ const Profile = ({
       {/* {!isOneDayAfter && userOpinionInfo  && (
         <WaitPopup/>
       )} */}
+      <Navbar />
     </div>
   )
 }

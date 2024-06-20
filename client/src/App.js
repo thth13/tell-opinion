@@ -15,10 +15,10 @@ import EditProfile from './components/edit-profile/EditProfile'
 import ChangePassword from './components/auth/ChangePassword'
 import NewPassword from './components/auth/NewPassword'
 import FindUsers from './components/find-users/FindUsers'
-
-import './App.css'
 import Home from './components/home/Home'
 import LoadingScreen from './components/landing/LoadingScreen'
+import Notifications from './components/notifications/Notifications'
+import './App.css'
 
 // const TRACKING_ID = 'G-Y3MT7ZXTS8'
 
@@ -42,6 +42,7 @@ const App = ({loadUser, logoutsUser, auth: {isAuthenticated, loading}}) => {
     },
     { path: '/register', element: <Register /> },
     { path: '/login', element: <Login /> },
+    { path: '/notifications', element: <Notifications /> },
     { path: '/changepassword', element: <ChangePassword /> },
     { path: '/restorepassword', element: <RestorePassword /> },
     { path: '/editprofile', element: <EditProfile /> },
