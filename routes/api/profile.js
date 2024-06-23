@@ -28,6 +28,7 @@ router.get('/me', auth, async (req, res) => {
     }).populate('user', ['login', 'avatar'])
 
     const opinions = await Opinion.find({
+      isPublished: true,
       profile: profile._id,
     })
       .populate('profile', ['text'])
@@ -52,16 +53,19 @@ router.get('/me', auth, async (req, res) => {
 // @route   GET api/profile/unpublished/:username
 // @desct   Get new opinions
 // @access  Private
-router.get('/unpublished/:userId', async ({ params: { userId } }, res) =>{
+router.get('/unpublished/:userId', async ({ params: { userId } }, res) => {
   try {
-    const opinions = await Opinion.find({
+    const profile = await Profile.findOne({
       user: userId,
+    })
+
+    const opinions = await Opinion.find({
+      profile: profile._id,
       isPublished: false
     })
-      .populate('profile', ['text'])
       .sort({ date: -1 })
 
-    return res.json(opinions)
+      return res.json(opinions)
   } catch (err) {
     console.error(err.message)
     return res.status(500).json({ msg: 'Server error' })
@@ -86,6 +90,7 @@ router.get('/user/:username', async ({ params: { username } }, res) => {
     if (!profile) return res.status(400).json({ msg: 'Profile not found' })
 
     const opinions = await Opinion.find({
+      isPublished: true,
       profile: profile._id,
     })
       .populate('profile', ['text'])
