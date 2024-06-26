@@ -5,13 +5,12 @@ import DeleteOpinionPopup from '../delete-opinion/DeleteOpinionPopup'
 import EditIcon from '@skbkontur/react-icons/Edit'
 import TrashIcon from '@skbkontur/react-icons/Trash'
 import {useTranslation} from 'react-i18next'
-import { MenuItem, Toast, Kebab } from '@skbkontur/react-ui'
 import c from 'classnames'
 import {connect} from 'react-redux'
 import styles from './styles.module.css'
 import moment from 'moment'
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import answerIcon from '../../img/answer-icon.svg'
 
 const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
@@ -32,7 +31,16 @@ const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
 
     if (answerText) {
       await addAnswer(item._id, answerText)
-      // toast("Wow so easy!")
+      toast.success(`🦄 ${t('success')}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
     }
 
     setHandleAddAnswer(false)
@@ -69,6 +77,7 @@ const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
           </div>
         </form>
       )}
+      <ToastContainer />
     </div>
   )
 }

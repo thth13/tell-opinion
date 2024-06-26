@@ -53,5 +53,6 @@
   "link": "link",
   "saveChanges": "Save changes",
   "exitWithoutChange": "Exit without change",
-  "logout": "Logout"
+  "logout": "Logout",
+  "success": "Successfully published"
 }

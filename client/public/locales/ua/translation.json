@@ -53,5 +53,6 @@
   "link": "url",
   "saveChanges": "Зберегти змiни",
   "exitWithoutChange": "Вийти без змін",
-  "logout": "Вийти"
+  "logout": "Вийти",
+  "success": "Успішно опубліковано"
 }
