@@ -1,13 +1,21 @@
-import React from "react"
+import React, {useEffect} from "react"
 import {useParams} from "react-router-dom"
 import {connect} from "react-redux"
 import AppBar from "../appbar/AppBar"
 import styles from "./styles.module.css"
 import {Helmet} from "react-helmet";
 import Navbar from "../navbar/Navbar"
+import {getNotifications} from "../../actions/profile"
+import OpinionItem from "./OpinionItem"
 
-const Notifications = () => {
+const Notifications = ({getNotifications, auth, notifications}) => {
   const params = useParams()
+
+  useEffect(() => {
+    if (auth.user) {
+      getNotifications(auth.user._id)
+    }
+  }, [auth])
 
   return (
     <div>
@@ -22,7 +30,10 @@ const Notifications = () => {
       <AppBar />
       <main>
         <div className={styles.container}>
-         <h1>Notifications</h1>
+          <h3 className={styles.headText}>You have {notifications.length} new notifications</h3>
+          {notifications && notifications.map(item => (
+            <OpinionItem key={item.date} item={item} />
+          ))}
         </div>
       </main>
       <Navbar />
@@ -31,12 +42,12 @@ const Notifications = () => {
 }
 
 const mapStateToProps = state => ({
-  // auth: state.auth,
-  // profile: state.profile.profile,
+  auth: state.auth,
+  notifications: state.profile.notifications,
+  profile: state.profile.profile
   // error: state.profile.error,
-  // opinions: state.profile.opinions,
-  // opinionsLength: state.profile.opinionsLength
 })
 
 export default connect(mapStateToProps, {
+  getNotifications
 })(Notifications)

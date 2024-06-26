@@ -8,12 +8,14 @@ import {
   MORE_USERS,
   ADD_ANSWER,
   DELETE_OPINION,
-  GET_MY_PROFILE
+  GET_MY_PROFILE,
+  GET_NOTIFICATIONS
 } from '../actions/types'
 
 const initialState = {
   profile: null,
   opinions: [],
+  notifications: [],
   opinionsLength: 0,
   loadig: true,
   name: '',
@@ -89,12 +91,15 @@ function profileReducer(state = initialState, action) {
       }
     }
     case ADD_ANSWER: {
-      console.log(payload)
       return {
         ...state,
-        opinions: state.opinions.map((opinion) => 
-          opinion._id === payload._id ? payload : opinion
-        )
+        notifications: state.notifications.filter(item => item._id !== payload._id),
+      }
+    }
+    case GET_NOTIFICATIONS: {
+      return {
+        ...state,
+        notifications: payload
       }
     }
     default:

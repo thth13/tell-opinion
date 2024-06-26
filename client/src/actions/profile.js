@@ -11,6 +11,7 @@ import {
   ADD_ANSWER,
   DELETE_OPINION,
   GET_MY_PROFILE,
+  GET_NOTIFICATIONS
 } from './types'
 
 export const getMyProfile = () => async (dispatch) => {
@@ -19,6 +20,25 @@ export const getMyProfile = () => async (dispatch) => {
 
     dispatch({
       type: GET_MY_PROFILE,
+      payload: res.data,
+    })
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: {
+        msg: err.response.data.msg,
+        status: err.response.status,
+      },
+    })
+  }
+}
+
+export const getNotifications = (userId) => async (dispatch) => {
+  try {
+    const res = await api.get(`/profile/unpublished/${userId}`)
+
+    dispatch({
+      type: GET_NOTIFICATIONS,
       payload: res.data,
     })
   } catch (err) {

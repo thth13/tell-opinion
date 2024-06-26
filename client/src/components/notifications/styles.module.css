@@ -1,0 +1,126 @@
+.headText {
+  padding: 24px 5.585%;
+}
+
+.opinionItem {
+  /* padding: 40px 0; */
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 24px 5.585%;
+  display: flex;
+  flex-direction: column;
+}
+
+.opinionInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.opinionItem:last-child {
+  border: none;
+}
+
+.opinionDate {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.opinionBody {
+  font-weight: 700;
+  font-size: 20px;
+  word-break: break-word;
+}
+
+.headOpinion {
+  display: flex;
+  justify-content: space-between;
+}
+
+.field {
+  box-sizing: border-box;
+  /* margin-right: 10px; */
+  border: 1px solid rgba(35, 38, 48, 0.2);
+  border: none;
+  background-color: #EEF6FF;
+  /* max-width: 388px; */
+  /* width: 80%; */
+  height: 120px;
+  border-radius: 2px;
+  padding: 5px 20px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+  /* margin: 0 5.585%; */
+
+}
+
+.field:focus {
+  border: 1px solid #232630;
+}
+
+.buttonsBlock {
+  margin-left: auto;
+}
+
+.sendButton {
+  width: 122px;
+  font-weight: 700;
+  border: none;
+  background: 
+    linear-gradient(86.13deg, #0075FF 17.96%, #95C6FF 90.14%);
+  font-size: 16px;  border-radius: 3px;
+  color: white;
+  margin-left: 25px;
+  padding: 14px;
+}
+
+
+.cancelButton {
+  margin-left: 25px;
+  background: white;
+  border: 1px solid #0075FF;
+  color: #0075FF;
+  border-color: #0075FF;
+}
+
+.answerForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  max-width: 100%;
+}
+
+.opinionAnswer {
+  margin-left: 20px;
+  margin-top: 5px;
+  border-left: 2px solid gray;
+  padding-left: 5px;
+  overflow-wrap: break-word;
+}
+
+.addAnswerButtonWrapper {
+  text-align: right;
+}
+
+.addAnswerButton {
+  margin-top: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #0075FF;
+}
+
+@media screen and (max-width: 767px) {
+  .opinionItem {
+    padding: 24px 5.585%;
+  }
+  
+  .opinionDate {
+    font-size: 14px;
+  }
+  
+  .opinionBody {
+    font-size: 16px;
+  }
+}

@@ -36,6 +36,7 @@ router.get('/me', auth, async (req, res) => {
       .limit(opinionsLimit)
 
     const opinionsLength = await Opinion.countDocuments({
+      isPublished: true,
       profile: profile._id,
     })
 
@@ -122,7 +123,7 @@ router.post('/addAnswer', async (req, res) => {
   try {
     const opinion = await Opinion.findOneAndUpdate(
       { _id: opinionId },
-      { answer: text },
+      { answer: text, isPublished: true },
       { new: true, upsert: true, setDefaultOnInsert: true }
     )
 
