@@ -6,6 +6,7 @@ import styles from "./styles.module.css"
 import {Helmet} from "react-helmet";
 import Navbar from "../navbar/Navbar"
 import {getNotifications} from "../../actions/profile"
+import { ToastContainer } from 'react-toastify';
 import OpinionItem from "./OpinionItem"
 
 const Notifications = ({getNotifications, auth, notifications}) => {
@@ -37,6 +38,7 @@ const Notifications = ({getNotifications, auth, notifications}) => {
         </div>
       </main>
       <Navbar />
+      <ToastContainer />
     </div>
   )
 }

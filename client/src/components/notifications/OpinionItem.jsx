@@ -31,6 +31,7 @@ const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
 
     if (answerText) {
       await addAnswer(item._id, answerText)
+
       toast.success(`🦄 ${t('success')}`, {
         position: "top-center",
         autoClose: 5000,
@@ -40,7 +41,7 @@ const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
         draggable: true,
         progress: undefined,
         theme: "colored",
-        });
+      });
     }
 
     setHandleAddAnswer(false)
@@ -77,7 +78,6 @@ const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
           </div>
         </form>
       )}
-      <ToastContainer />
     </div>
   )
 }
