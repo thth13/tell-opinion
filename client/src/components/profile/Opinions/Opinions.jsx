@@ -14,20 +14,20 @@ const Opinions = ({
   opinionsLength, loadMore
 }) => {
   const {t} = useTranslation()
-  const [isShowAdviceInMyProfile, setIsShowAdviceInMyProfile] = useState()
+  // const [isShowAdviceInMyProfile, setIsShowAdviceInMyProfile] = useState()
   
-  const closeAdviceInMyprofile = () => {
-    setIsShowAdviceInMyProfile(false);
-    localStorage.setItem('adviceClosed', false)
-  }
+  // const closeAdviceInMyprofile = () => {
+  //   setIsShowAdviceInMyProfile(false);
+  //   localStorage.setItem('adviceClosed', false)
+  // }
 
-  useEffect(() => {
-    if (!localStorage.adviceClosed)  {
-      setIsShowAdviceInMyProfile(true)
-    } else {
-      setIsShowAdviceInMyProfile(false)
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!localStorage.adviceClosed)  {
+  //     setIsShowAdviceInMyProfile(true)
+  //   } else {
+  //     setIsShowAdviceInMyProfile(false)
+  //   }
+  // }, [])
 
   return profile && (
     <section className={c(styles.opinions, styles.section)}>
@@ -39,13 +39,13 @@ const Opinions = ({
           setIsShowThanksPopup={setIsShowThanksPopup} 
         />
       }
-      {isMyProfile && isShowAdviceInMyProfile &&
+      {/* {isMyProfile && isShowAdviceInMyProfile &&
         <AdviceInMyProfile 
           name={profile.name}
           login={profile.login}
           setIsShowAdviceInMyProfile={closeAdviceInMyprofile} 
         />
-      }
+      } */}
       {!isMyProfile && !isOneDayAfter && <p className={styles.advice}>
         {t('youHaveAlreadyOpinion')}
       </p>}

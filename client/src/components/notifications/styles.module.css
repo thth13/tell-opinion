@@ -4,8 +4,8 @@
 
 .opinionItem {
   /* padding: 40px 0; */
-  padding-bottom: 30px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  /* padding-bottom: 30px; */
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
   padding: 24px 5.585%;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@
 }
 
 .opinionItem:last-child {
-  border: none;
+  /* border: none; */
 }
 
 .opinionDate {
@@ -113,7 +113,10 @@
 
 @media screen and (max-width: 767px) {
   .opinionItem {
-    padding: 24px 5.585%;
+    /* padding: 24px 5.585%; */
+    background-color: #F6F6F6;
+    border-radius: 10px;
+    margin: 0 10px;
   }
   
   .opinionDate {
