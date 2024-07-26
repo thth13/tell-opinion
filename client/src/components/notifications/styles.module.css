@@ -9,6 +9,7 @@
   padding: 24px 5.585%;
   display: flex;
   flex-direction: column;
+  background-color: #F9F9F9;
 }
 
 .opinionInfo {
@@ -114,9 +115,9 @@
 @media screen and (max-width: 767px) {
   .opinionItem {
     /* padding: 24px 5.585%; */
-    background-color: #F6F6F6;
     border-radius: 10px;
     margin: 0 10px;
+    margin-bottom: 10px;
   }
   
   .opinionDate {

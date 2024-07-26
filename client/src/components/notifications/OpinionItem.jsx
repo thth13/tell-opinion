@@ -54,14 +54,14 @@ const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
 
   return (
     <div className={styles.opinionItem}>
-      <div className={styles.opinionInfo}>
+      <div onClick={setAddAnswer} className={styles.opinionInfo}>
         <div>
           <div className={styles.headOpinion}>
             <span className={styles.opinionDate}>{moment(item.date).fromNow()}</span>
           </div>
           <p className={styles.opinionBody}>{item.text}</p>
         </div>
-        {!handleAddAnswer && <button onClick={setAddAnswer}><img src={answerIcon} /></button>}
+        {!handleAddAnswer && <img src={answerIcon} />}
       </div>
       {handleAddAnswer && (
         <form onSubmit={onSubmit} className={styles.answerForm}>
