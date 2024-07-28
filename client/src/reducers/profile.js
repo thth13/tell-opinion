@@ -9,7 +9,8 @@ import {
   ADD_ANSWER,
   DELETE_OPINION,
   GET_MY_PROFILE,
-  GET_NOTIFICATIONS
+  GET_NOTIFICATIONS,
+  SET_NUMBER_NOTIFICATIONS
 } from '../actions/types'
 
 const initialState = {
@@ -17,7 +18,8 @@ const initialState = {
   opinions: [],
   notifications: [],
   opinionsLength: 0,
-  loadig: true,
+  loading: true,
+  numberNotifications: 0,
   name: '',
   avatar: '',
   userList: [],
@@ -37,6 +39,11 @@ function profileReducer(state = initialState, action) {
         opinionsLength: payload.opinionsLength,
         error: null,
         loading: false
+      }
+    case SET_NUMBER_NOTIFICATIONS:
+      return {
+        ...state,
+        numberNotifications: payload
       }
     case GET_MY_PROFILE:
       return {
@@ -94,6 +101,7 @@ function profileReducer(state = initialState, action) {
       return {
         ...state,
         notifications: state.notifications.filter(item => item._id !== payload._id),
+        numberNotifications: --state.numberNotifications
       }
     }
     case GET_NOTIFICATIONS: {

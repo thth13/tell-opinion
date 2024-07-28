@@ -12,6 +12,7 @@ const { OAuth2Client } = require('google-auth-library')
 const validateLoginForm = require('../../validation/login');
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
+const Opinion = require('../../models/Opinion')
 
 // @route POST api/auth/recover
 // @desct Recover password - Generates token and Sends password reset email
@@ -99,7 +100,17 @@ router.post('/reset/:token', async (req, res) => {
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
-    res.json(user);
+
+    const profile = await Profile.findOne({
+      user: user._id,
+    })
+
+    const notificationsLength = await Opinion.countDocuments({
+      isPublished: false,
+      profile: profile._id,
+    })
+
+    res.json({user, notificationsLength});
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

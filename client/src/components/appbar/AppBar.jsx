@@ -11,7 +11,7 @@ import { Link } from "react-router-dom"
 import { logoutsUser } from "../../actions/auth"
 import noAvatar from "../../img/noAvatar.png"
 
-let AppBar = ({user, profile, 
+let AppBar = ({user, profile,
   getCurrentProfile, logoutsUser, 
   isAuthenticated}) => {
   let [isMenuOpen, setIsMenuOpen] = useState(false);

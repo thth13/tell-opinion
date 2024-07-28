@@ -7,7 +7,7 @@ import searchIcon from '../../img/searchnav.svg'
 import noAvatar from "../../img/noAvatar.png"
 import { Link } from 'react-router-dom'
 
-const Navbar = ({profile, user}) => {
+const Navbar = ({profile, user, numberNotifications}) => {
   return (
     <div className={styles.root}>
       <Link to={'/'} className={styles.kek}>
@@ -17,6 +17,9 @@ const Navbar = ({profile, user}) => {
       </Link>
       <Link to={'/notifications'}>
         <button className={styles.button}>
+          {numberNotifications > 0 &&
+            <div className={styles.numberNotifications}>{numberNotifications}</div>
+          }
           <img src={mailIcon} className={styles.icon} />
         </button>
       </Link>
@@ -40,6 +43,7 @@ const Navbar = ({profile, user}) => {
 const mapStateToProps = state => ({
   user: state.auth.user,
   profile: state.profile.profile,
+  numberNotifications: state.profile.numberNotifications
 })
 
 

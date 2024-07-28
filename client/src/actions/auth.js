@@ -6,7 +6,8 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   GET_ERORRS,
-  RESTORE_PASSWORD
+  RESTORE_PASSWORD,
+  SET_NUMBER_NOTIFICATIONS
 } from './types'
 
 export const loadUser = () => async dispatch => {
@@ -16,6 +17,11 @@ export const loadUser = () => async dispatch => {
     dispatch({
       type: USER_LOADED,
       payload: res.data
+    })
+
+    dispatch({
+      type: SET_NUMBER_NOTIFICATIONS,
+      payload: res.data.notificationsLength
     })
   } catch (err) {
     dispatch({
