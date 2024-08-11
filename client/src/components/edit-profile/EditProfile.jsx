@@ -2,7 +2,7 @@ import React, {useEffect} from "react"
 import {connect} from "react-redux"
 import * as yup from "yup"
 import c from "classnames"
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, useNavigate, useLocation} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import {useTranslation} from 'react-i18next'
 import {editProfile, getMyProfile} from '../../actions/profile'
@@ -29,18 +29,19 @@ const schema = yup.object({
 const EditProfile = ({user, profile, editProfile, getMyProfile}) => {
   const {t} = useTranslation()
   const navigate = useNavigate()
+  const {state} = useLocation();
 
   const {register, handleSubmit, reset, formState: { errors }} = useForm({
-      resolver: yupResolver(schema),
-        defaultValues: {
-          name: profile && profile?.name,
-          description: profile && profile?.description,
-          avatar: profile && profile?.avatar,
-          instagram: profile && profile?.social ? profile.social?.instagram : '',
-          facebook: profile && profile?.social ? profile.social?.facebook : '',
-          youtube: profile && profile?.social ? profile.social?.youtube : '',
-          twitter: profile && profile?.social ? profile.social?.twitter : ''
-        }
+    resolver: yupResolver(schema),
+      defaultValues: {
+        name: profile && profile?.name,
+        description: profile && profile?.description,
+        avatar: profile && profile?.avatar,
+        instagram: profile && profile?.social ? profile.social?.instagram : '',
+        facebook: profile && profile?.social ? profile.social?.facebook : '',
+        youtube: profile && profile?.social ? profile.social?.youtube : '',
+        twitter: profile && profile?.social ? profile.social?.twitter : ''
+    }
   })
 
   const onSubmit = async (data) => {
@@ -79,15 +80,28 @@ const EditProfile = ({user, profile, editProfile, getMyProfile}) => {
       </Helmet>
       <AppBar/>
       <main className={styles.container}>
-        <header className={styles.header}>
-          <button className={styles.backArrowButton} onClick={comeBack}>
-            <span className={styles.backArrow}></span>
-          </button>
-          <h1 className={styles.mainTitle}>{t('profileEditing')}</h1>
-        </header>
+        {state?.isNewUser ? (
+          <>
+            <h3 className={styles.profileCreated}>You profile succesfylly created</h3>
+            <div className={styles.profileCreatedNotice}>
+              <span>Now you can fill out your profile or go to the
+                <Link to={'/'}>
+                  <span className={styles.homePageLink}>home page</span>
+                </Link>
+              </span>
+            </div>
+          </>
+        ) : (
+          <header className={styles.header}>
+            <button className={styles.backArrowButton} onClick={comeBack}>
+              <span className={styles.backArrow}></span>
+            </button>
+            <h1 className={styles.mainTitle}>{t('profileEditing')}</h1>
+          </header>
+        )}
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.editWrapper}>
-            <ImagePreviewer 
+            <ImagePreviewer
               avatar={profile && profile.avatar && `https://spaces.tell-opinion.com/${profile.avatar}`}
               register={register}
               errors={errors}

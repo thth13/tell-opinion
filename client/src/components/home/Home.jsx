@@ -32,10 +32,10 @@ const Profile = () => {
               <span>https://tell-opinion.com/thth13</span>
             </div>
           </div>
-          <div className={styles.socialItems}>
-            <img src={instagramIcon} className={styles.icon} />
-            <img src={twitterIcon} />
-          </div>
+          {/*<div className={styles.socialItems}>*/}
+          {/*  <img src={instagramIcon} className={styles.icon} />*/}
+          {/*  <img src={twitterIcon} />*/}
+          {/*</div>*/}
         </div>
       </main>
       <Navbar />

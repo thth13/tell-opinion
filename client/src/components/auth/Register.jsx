@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import c from 'classnames'
 import * as yup from "yup"
-import { Link, Navigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { GoogleLogin } from '@leecheuk/react-google-login'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
@@ -34,6 +34,7 @@ const schema = yup.object({
 const clientId = '853830546263-7jh0en2tn5i292pfg7l0a3v8hodjmr1s.apps.googleusercontent.com'
 
 const Register = ({ registerUser, auth, serverErrors, googleLoginUser }) => {
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({})
   const {t} = useTranslation()
 
@@ -70,7 +71,7 @@ const Register = ({ registerUser, auth, serverErrors, googleLoginUser }) => {
   })
 
   if (auth.isAuthenticated && auth.user) {
-    return <Navigate to={`/editProfile`} />
+    navigate('/editProfile', { state: { isNewUser: true } });
   }
 
   return (

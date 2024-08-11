@@ -172,6 +172,26 @@
   background-size: cover;
 }
 
+.profileCreated {
+  font-size: 21px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.profileCreatedNotice {
+  background: #F6F6F6;
+  padding: 10px;
+  margin: 15px auto;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.homePageLink {
+  color: blue;
+  text-decoration: underline;
+  margin-left: 5px;
+}
+
 @media screen and (max-width: 1536px) {
   .container {
     max-width: 92%;
