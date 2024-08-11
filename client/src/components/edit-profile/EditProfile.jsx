@@ -56,7 +56,7 @@ const EditProfile = ({user, profile, editProfile, getMyProfile}) => {
     data.twitter && formData.append('twitter', data.twitter)
 
     await editProfile(formData)
-    navigate('/')
+    navigate(`/${user.login}`)
   }
 
   const comeBack = () => {
