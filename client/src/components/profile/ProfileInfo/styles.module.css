@@ -44,6 +44,32 @@
   object-fit: cover;
 }
 
+.nameSkeleton {
+  width: 100px;
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+.descriptionSkeleton {
+  width: 200px;
+  height: 10px;
+  margin-bottom: 20px;
+}
+
+.nickNameSkeleton {
+  width: 100px;
+  height: 10px;
+  margin-bottom: 23px;
+}
+
+.contactsSkeleton {
+  width: 250px;
+}
+
+.contactsSkeletonItem {
+  height: 45px;
+}
+
 .name {
   margin-bottom: 23px;
   font-weight: 700;

@@ -14,6 +14,12 @@
   font-size: 16px;
 }
 
+.opinionDateSkeleton {
+  width: 75px;
+  height: 10px;
+  margin-bottom: 15px;
+}
+
 .opinionBody {
   font-weight: 700;
   font-size: 20px;

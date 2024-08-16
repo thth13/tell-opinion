@@ -19,6 +19,7 @@ import Home from './components/home/Home'
 import LoadingScreen from './components/landing/LoadingScreen'
 import Notifications from './components/notifications/Notifications'
 import './App.css'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 // const TRACKING_ID = 'G-Y3MT7ZXTS8'
 
@@ -71,11 +72,7 @@ const App = ({loadUser, logoutsUser, auth: {isAuthenticated, loading}}) => {
   //   window.scrollTo(0, 0)
   // }, [location])
 
-  return (
-    <Suspense fallback={'Loading...'}>
-      <RouterProvider router={router} />
-    </Suspense>
-  )
+  return <RouterProvider router={router} />
 }
 
 const mapStateToProps = state => ({

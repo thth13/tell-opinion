@@ -7,10 +7,12 @@ import {getCurrentProfile, getProfileByName, newOpinion, loadMoreOpinions} from 
 import styles from "./styles.module.css"
 import ThanksPopup from "../thanks-popup/ThanksPopup"
 import ProfileInfo from "./ProfileInfo/ProfileInfo"
+import ProfileInfoSkeleton from "./ProfileInfo/ProfileInfoSkeleton"
 import Opinions from "./Opinions/Opinions"
 import { Helmet } from "react-helmet";
 import previewImage from "../../img/previewImage.png"
 import Navbar from "../navbar/Navbar"
+import OpinionsSkeleton from "./Opinions/OpinionsSkeleton"
 
 const Profile = ({
   getCurrentProfile, getProfileByName, newOpinion, loadMoreOpinions,
@@ -18,7 +20,8 @@ const Profile = ({
   profile,
   error,
   opinions,
-  opinionsLength
+  opinionsLength,
+  loading
 }) => {
   const params = useParams()
   const [isMyProfile, setIsMyProfile] = useState(false)
@@ -28,14 +31,6 @@ const Profile = ({
   const loadMore = () => {
     loadMoreOpinions(profile._id, opinions.length);
   }
-
-  useEffect(() => {
-    if (user && user.login === params.username) {
-      getCurrentProfile()
-    } else {
-      getProfileByName(params.username)
-    }
-  }, [getCurrentProfile, getProfileByName, params, user])
 
   useEffect(() => {
     if (opinions) {
@@ -51,6 +46,14 @@ const Profile = ({
     userOpinionInfo ?
     moment().isAfter(moment(userOpinionInfo.date).add(1, 'day')) : true
 
+  useEffect(() => {
+    if (user && user.login === params.username) {
+      getCurrentProfile()
+    } else {
+      getProfileByName(params.username)
+    }
+  }, [])
+
   return (
     <div>
       <Helmet>
@@ -64,22 +67,31 @@ const Profile = ({
       <AppBar />
       <main>
         <div className={styles.container}>
-          <ProfileInfo
-            profile={profile}
-            isMyProfile={isMyProfile} 
-            opinions={opinions}
-            opinionsLength={opinionsLength}
-          />
-          <Opinions
-            profile={profile}
-            opinions={opinions} 
-            newOpinion={newOpinion}
-            isMyProfile={isMyProfile}
-            isOneDayAfter={isOneDayAfter}
-            setIsShowThanksPopup={setIsShowThanksPopup}
-            opinionsLength={opinionsLength}
-            loadMore={loadMore}
-          />
+          {loading ? (
+            <>
+              <ProfileInfoSkeleton />
+              <OpinionsSkeleton />
+            </>
+          ) : (
+            <>
+              <ProfileInfo
+                profile={profile}
+                isMyProfile={isMyProfile} 
+                opinions={opinions}
+                opinionsLength={opinionsLength}
+              />
+              <Opinions
+                profile={profile}
+                opinions={opinions} 
+                newOpinion={newOpinion}
+                isMyProfile={isMyProfile}
+                isOneDayAfter={isOneDayAfter}
+                setIsShowThanksPopup={setIsShowThanksPopup}
+                opinionsLength={opinionsLength}
+                loadMore={loadMore}
+              />
+            </>
+          )}
           {(error && error.msg) && 
             <h1 className={styles.errorMessage}>{error.msg}</h1>
           }
@@ -102,6 +114,7 @@ const Profile = ({
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile.profile,
+  loading: state.profile.loading,
   error: state.profile.error,
   opinions: state.profile.opinions,
   opinionsLength: state.profile.opinionsLength
