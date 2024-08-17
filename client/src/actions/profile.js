@@ -11,7 +11,8 @@ import {
   ADD_ANSWER,
   DELETE_OPINION,
   GET_MY_PROFILE,
-  GET_NOTIFICATIONS
+  GET_NOTIFICATIONS,
+  CLEAR_PROFILE
 } from './types'
 
 export const getMyProfile = () => async (dispatch) => {
@@ -53,6 +54,8 @@ export const getNotifications = (userId) => async (dispatch) => {
 }
 
 export const getCurrentProfile = (isAppBar) => async (dispatch) => {
+  dispatch({type: CLEAR_PROFILE})
+
   try {
     const res = await api.get('/profile/me')
 
@@ -80,6 +83,8 @@ export const getCurrentProfile = (isAppBar) => async (dispatch) => {
 
 export const getProfileByName = (username) => async (dispatch) => {
   try {
+    dispatch({type: CLEAR_PROFILE})
+
     const res = await api.get(`/profile/user/${username}`)
 
     dispatch({

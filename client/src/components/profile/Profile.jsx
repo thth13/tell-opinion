@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from "react"
 import moment from "moment"
-import {useParams} from "react-router-dom"
-import {connect} from "react-redux"
+import { useParams } from "react-router-dom"
+import { connect } from "react-redux"
 import AppBar from "../appbar/AppBar"
-import {getCurrentProfile, getProfileByName, newOpinion, loadMoreOpinions} from "../../actions/profile"
+import { getCurrentProfile, getProfileByName, newOpinion, loadMoreOpinions } from "../../actions/profile"
 import styles from "./styles.module.css"
 import ThanksPopup from "../thanks-popup/ThanksPopup"
 import ProfileInfo from "./ProfileInfo/ProfileInfo"
@@ -16,7 +16,7 @@ import OpinionsSkeleton from "./Opinions/OpinionsSkeleton"
 
 const Profile = ({
   getCurrentProfile, getProfileByName, newOpinion, loadMoreOpinions,
-  auth: {user},
+  auth: { user },
   profile,
   error,
   opinions,
@@ -42,9 +42,9 @@ const Profile = ({
     setIsMyProfile(user && user.login === params.username)
   }, [user, setIsMyProfile, params.username])
 
-  const isOneDayAfter = 
+  const isOneDayAfter =
     userOpinionInfo ?
-    moment().isAfter(moment(userOpinionInfo.date).add(1, 'day')) : true
+      moment().isAfter(moment(userOpinionInfo.date).add(1, 'day')) : true
 
   useEffect(() => {
     if (user && user.login === params.username) {
@@ -52,7 +52,7 @@ const Profile = ({
     } else {
       getProfileByName(params.username)
     }
-  }, [])
+  }, [params.username])
 
   return (
     <div>
@@ -67,7 +67,7 @@ const Profile = ({
       <AppBar />
       <main>
         <div className={styles.container}>
-          {loading ? (
+          {loading && !profile ? (
             <>
               <ProfileInfoSkeleton />
               <OpinionsSkeleton />
@@ -76,13 +76,13 @@ const Profile = ({
             <>
               <ProfileInfo
                 profile={profile}
-                isMyProfile={isMyProfile} 
+                isMyProfile={isMyProfile}
                 opinions={opinions}
                 opinionsLength={opinionsLength}
               />
               <Opinions
                 profile={profile}
-                opinions={opinions} 
+                opinions={opinions}
                 newOpinion={newOpinion}
                 isMyProfile={isMyProfile}
                 isOneDayAfter={isOneDayAfter}
@@ -92,15 +92,15 @@ const Profile = ({
               />
             </>
           )}
-          {(error && error.msg) && 
+          {/* {(error && error.msg) &&
             <h1 className={styles.errorMessage}>{error.msg}</h1>
-          }
+          } */}
         </div>
       </main>
-      {isShowThanksPopup && 
-        <ThanksPopup 
+      {isShowThanksPopup &&
+        <ThanksPopup
           isShowThanksPopup={isShowThanksPopup}
-          setIsShowThanksPopup={setIsShowThanksPopup} 
+          setIsShowThanksPopup={setIsShowThanksPopup}
         />
       }
       {/* {!isOneDayAfter && userOpinionInfo  && (
@@ -121,8 +121,8 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, {
-  getCurrentProfile, 
-  getProfileByName, 
+  getCurrentProfile,
+  getProfileByName,
   newOpinion,
   loadMoreOpinions
 })(Profile)

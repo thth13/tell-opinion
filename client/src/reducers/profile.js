@@ -10,7 +10,8 @@ import {
   DELETE_OPINION,
   GET_MY_PROFILE,
   GET_NOTIFICATIONS,
-  SET_NUMBER_NOTIFICATIONS
+  SET_NUMBER_NOTIFICATIONS,
+  CLEAR_PROFILE
 } from '../actions/types'
 
 const initialState = {
@@ -39,6 +40,14 @@ function profileReducer(state = initialState, action) {
         opinionsLength: payload.opinionsLength,
         error: null,
         loading: false
+      }
+    case CLEAR_PROFILE:
+      return {
+        ...state,
+        profile: undefined,
+        opinions: [],
+        opinionsLength: 0,
+        loading: true
       }
     case SET_NUMBER_NOTIFICATIONS:
       return {
