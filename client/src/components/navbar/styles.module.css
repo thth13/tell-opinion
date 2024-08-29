@@ -14,6 +14,16 @@
   padding: 0px 5.333%;
 }
 
+.menuItem {
+  background-color: #FFFFFF;
+  padding: 5px 15px;
+  border-radius: 20px;
+}
+
+.selectedItem {
+  background-color: #EEF6FF;
+}
+
 .icon {
   width: 25px;
   height: 25px;
