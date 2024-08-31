@@ -18,7 +18,7 @@ app.use(express.static('public'))
 
 // app.use('/avatars', express.static('avatars'));
 
-if (true) {
+if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
 
   app.get('*', (req, res) => {
