@@ -6,7 +6,7 @@
   "author": "thth13q",
   "license": "MIT",
   "scripts": {
-    "start": "set NODE_ENV=development && node index.js",
+    "start": "node index.js",
     "server": "nodemon server --ignore client",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run client\" \"npm run server\"",
