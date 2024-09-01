@@ -14,7 +14,7 @@ const Profile = require('../../models/Profile')
 const User = require('../../models/User')
 const Opinion = require('../../models/Opinion')
 
-const upload = multer({ dest: 'uploads/' })
+const upload = multer({ dest: 'tmp/' })
 
 const opinionsLimit = 10
 
