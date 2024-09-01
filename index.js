@@ -2,8 +2,6 @@ const express = require('express')
 const connectDB = require('./config/db')
 // const bodyParser = require('body-parser');
 const path = require('path')
-process.env['NODE_CONFIG_DIR'] = path.join(path.resolve("./"),"config/")
-
 
 const app = express()
 
