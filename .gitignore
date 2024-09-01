@@ -4,3 +4,4 @@ config/production.json
 client/.eslintcache
 client/build/
 public/avatars
+.vercel
