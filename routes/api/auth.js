@@ -3,7 +3,6 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const auth = require('../../middleware/auth');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 const crypto = require('crypto');
 const sendEmail = require('../../config/emailSender');
 const generator = require('string-generator-js');
@@ -265,7 +264,7 @@ router.post('/', async (req, res) => {
 
     jwt.sign(
       payload,
-      config.get('jwtSecret'),
+      process.env.JWT_SECRET,
       { expiresIn: '5 days' },
       (err, token) => {
         if (err) throw err;
