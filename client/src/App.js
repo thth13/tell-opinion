@@ -72,7 +72,11 @@ const App = ({loadUser, logoutsUser, auth: {isAuthenticated, loading}}) => {
   //   window.scrollTo(0, 0)
   // }, [location])
 
-  return <RouterProvider router={router} />
+  return (
+    <Suspense fallback={'Loading...'}>
+      <RouterProvider router={router} />
+    </Suspense>
+  )
 }
 
 const mapStateToProps = state => ({
