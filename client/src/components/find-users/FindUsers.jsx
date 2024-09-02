@@ -71,7 +71,7 @@ const FindUsers = ({getUserList, userList, user, loadMoreUsers}) => {
           <Link to={`/${item.login}`}>
             <div className={styles.userBlock}>
               <img
-                src={item && item.avatar ? `https://spaces.tell-opinion.com/${item.avatar}` : noAvatar}
+                src={item && item.avatar ? `https://tell-opinion-images.fra1.digitaloceanspaces.com/${item.avatar}` : noAvatar}
                 alt='avatar'
                 className={styles.avatar}
               />

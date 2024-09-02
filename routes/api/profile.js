@@ -204,7 +204,7 @@ router.post('/', auth, upload.single('avatar'), async (req, res) => {
     const file = fs.readFileSync(req.file.path)
     // TODO: fix bucket to env
     const params = {
-      Bucket: 'tell-opinion-image',
+      Bucket: 'tell-opinion-images',
       Key: req.file.filename,
       Body: file,
       ACL: 'public-read',
@@ -219,7 +219,7 @@ router.post('/', auth, upload.single('avatar'), async (req, res) => {
       if (profile.avatar) {
         await s3.send(
           new DeleteObjectCommand({
-            Bucket: 'tell-opinion-image',
+            Bucket: 'tell-opinion-images',
             Key: profile.avatar,
           })
         )

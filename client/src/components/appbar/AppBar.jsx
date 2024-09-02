@@ -54,7 +54,7 @@ let AppBar = ({user, profile,
             <button className={styles.arrowButton}></button>
             <div className={styles.avatarWrapper}>
               <img 
-                src={profile && profile.avatar ? `https://spaces.tell-opinion.com/${profile.avatar}` : noAvatar}
+                src={profile && profile.avatar ? `https://tell-opinion-images.fra1.digitaloceanspaces.com/${profile.avatar}` : noAvatar}
                 alt="avatar"
                 className={styles.avatar} 
               />

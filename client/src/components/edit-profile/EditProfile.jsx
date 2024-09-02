@@ -102,7 +102,7 @@ const EditProfile = ({user, profile, editProfile, getMyProfile}) => {
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.editWrapper}>
             <ImagePreviewer
-              avatar={profile && profile.avatar && `https://spaces.tell-opinion.com/${profile.avatar}`}
+              avatar={profile && profile.avatar && `https://tell-opinion-images.fra1.digitaloceanspaces.com/${profile.avatar}`}
               register={register}
               errors={errors}
             />

@@ -47,7 +47,7 @@ const Navbar = ({profile, user, numberNotifications}) => {
       >
         <button className={styles.button}>
           <img
-            src={profile?.avatar ? `https://spaces.tell-opinion.com/${profile.avatar}` : noAvatar}
+            src={profile?.avatar ? `https://tell-opinion-images.fra1.digitaloceanspaces.com/${profile.avatar}` : noAvatar}
             className={styles.avatar}
           />
         </button>
