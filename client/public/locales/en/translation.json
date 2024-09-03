@@ -54,5 +54,6 @@
   "saveChanges": "Save changes",
   "exitWithoutChange": "Exit without change",
   "logout": "Logout",
-  "success": "Successfully published"
+  "success": "Successfully published",
+  "linkCopied": "Link copied!"
 }

@@ -78,6 +78,7 @@ const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
           </div>
         </form>
       )}
+      <ToastContainer />
     </div>
   )
 }
