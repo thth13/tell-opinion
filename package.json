@@ -29,6 +29,7 @@
     "nodemailer": "^6.9.0",
     "react-bottom-scroll-listener": "^5.1.0",
     "react-meta-tags": "^1.0.1",
+    "sharp": "^0.33.5",
     "string-generator-js": "^2.0.2",
     "yup": "^0.32.11"
   },

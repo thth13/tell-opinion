@@ -4,7 +4,7 @@ const util = require('util')
 const fs = require('fs')
 const unlinkFile = util.promisify(fs.unlink)
 const router = express.Router()
-
+const sharp = require("sharp")
 const auth = require('../../middleware/auth')
 const checkObjectId = require('../../middleware/checkObjectId')
 const { PutObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3')
@@ -201,7 +201,15 @@ router.post('/', auth, upload.single('avatar'), async (req, res) => {
   }
 
   if (req.file) {
-    const file = fs.readFileSync(req.file.path)
+    const { path } = req.file
+    const ref = `${path}.webp`
+
+    await sharp(path)
+      .webp({ quality: 80 })
+      .toFile(ref)
+
+    const file = fs.readFileSync(ref)
+
     // TODO: fix bucket to env
     const params = {
       Bucket: 'tell-opinion-images',
@@ -227,8 +235,10 @@ router.post('/', auth, upload.single('avatar'), async (req, res) => {
 
       profileFields.avatar = params.Key
       await unlinkFile(req.file.path)
+      await unlinkFile(ref)
     } catch (err) {
       await unlinkFile(req.file.path)
+      await unlinkFile(ref)
       console.log('Error', err)
     }
   }

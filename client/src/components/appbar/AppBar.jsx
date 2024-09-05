@@ -3,6 +3,7 @@ import c from "classnames"
 import { useNavigate } from 'react-router-dom'
 import styles from "./styles.module.css"
 import logo from "../../img/logo.svg"
+import settingsIcon from "../../img/settings-icon.svg"
 import { connect } from "react-redux"
 import { getCurrentProfile } from "../../actions/profile"
 import {useTranslation} from 'react-i18next'
@@ -52,13 +53,6 @@ let AppBar = ({user, profile,
               {profile && profile.name}
             </div>
             <button className={styles.arrowButton}></button>
-            <div className={styles.avatarWrapper}>
-              <img 
-                src={profile && profile.avatar ? `https://tell-opinion-images.fra1.digitaloceanspaces.com/${profile.avatar}` : noAvatar}
-                alt="avatar"
-                className={styles.avatar} 
-              />
-            </div>
           </button>
           <nav className={styles.menu}>
             <ul>
