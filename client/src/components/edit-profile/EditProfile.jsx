@@ -26,7 +26,7 @@ const schema = yup.object({
   // password: yup.string().required(),
 }).required()
 
-const EditProfile = ({user, profile, editProfile, getMyProfile}) => {
+const EditProfile = ({user, profile, editProfile, getMyProfile, avatar}) => {
   const {t} = useTranslation()
   const navigate = useNavigate()
   const {state} = useLocation();
@@ -102,7 +102,7 @@ const EditProfile = ({user, profile, editProfile, getMyProfile}) => {
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.editWrapper}>
             <ImagePreviewer
-              avatar={profile && profile.avatar && `https://tell-opinion-images.fra1.digitaloceanspaces.com/${profile.avatar}`}
+              avatar={avatar && `https://tell-opinion-images.fra1.digitaloceanspaces.com/${avatar}`}
               register={register}
               errors={errors}
             />
@@ -167,7 +167,8 @@ const EditProfile = ({user, profile, editProfile, getMyProfile}) => {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  profile: state.profile.myProfile
+  profile: state.profile.myProfile,
+  avatar: state.profile.avatar
 })
 
 export default connect(mapStateToProps, {editProfile, getMyProfile})(EditProfile)
