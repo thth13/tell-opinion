@@ -8,7 +8,6 @@ import mailIcon from '../../img/mailnav.svg'
 import searchIcon from '../../img/searchnav.svg'
 import noAvatar from '../../img/noAvatar.png'
 
-
 const Navbar = ({profile, user, numberNotifications}) => {
   const location = useLocation();
 
@@ -58,7 +57,7 @@ const Navbar = ({profile, user, numberNotifications}) => {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  profile: state.profile.profile,
+  profile: state.profile,
   numberNotifications: state.profile.numberNotifications
 })
 

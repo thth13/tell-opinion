@@ -10,15 +10,16 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo"
 import ProfileInfoSkeleton from "./ProfileInfo/ProfileInfoSkeleton"
 import Opinions from "./Opinions/Opinions"
 import { Helmet } from "react-helmet";
-import previewImage from "../../img/previewImage.png"
 import Navbar from "../navbar/Navbar"
 import OpinionsSkeleton from "./Opinions/OpinionsSkeleton"
 
 const Profile = ({
-  getCurrentProfile, getProfileByName, newOpinion, loadMoreOpinions,
+  getCurrentProfile,
+  getProfileByName,
+  newOpinion,
+  loadMoreOpinions,
   auth: { user },
   profile,
-  error,
   opinions,
   opinionsLength,
   loading

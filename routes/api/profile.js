@@ -205,7 +205,7 @@ router.post('/', auth, upload.single('avatar'), async (req, res) => {
     const ref = `${path}.webp`
 
     await sharp(path)
-      .webp({ quality: 80 })
+      .webp({ quality: 30 })
       .toFile(ref)
 
     const file = fs.readFileSync(ref)
