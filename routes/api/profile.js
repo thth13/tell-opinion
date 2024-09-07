@@ -99,6 +99,7 @@ router.get('/user/:username', async ({ params: { username } }, res) => {
       .limit(opinionsLimit)
 
     const opinionsLength = await Opinion.countDocuments({
+      isPublished: true,
       profile: profile._id,
     })
 
