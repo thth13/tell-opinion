@@ -82,9 +82,9 @@ export const getCurrentProfile = (isAppBar) => async (dispatch) => {
 }
 
 export const getProfileByName = (username) => async (dispatch) => {
-  try {
-    dispatch({type: CLEAR_PROFILE})
+  dispatch({type: CLEAR_PROFILE})
 
+  try {
     const res = await api.get(`/profile/user/${username}`)
 
     dispatch({

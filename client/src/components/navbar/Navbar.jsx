@@ -8,10 +8,10 @@ import mailIcon from '../../img/mailnav.svg'
 import searchIcon from '../../img/searchnav.svg'
 import noAvatar from '../../img/noAvatar.png'
 
-const Navbar = ({profile, user, numberNotifications}) => {
+const Navbar = ({profile, user, numberNotifications, isAuthenticated}) => {
   const location = useLocation();
 
-  return (
+  return isAuthenticated && (
     <div className={styles.root}>
       <Link 
         to={'/'}
@@ -58,7 +58,8 @@ const Navbar = ({profile, user, numberNotifications}) => {
 const mapStateToProps = state => ({
   user: state.auth.user,
   profile: state.profile,
-  numberNotifications: state.profile.numberNotifications
+  numberNotifications: state.profile.numberNotifications,
+  isAuthenticated: state.auth.isAuthenticated,
 })
 
 

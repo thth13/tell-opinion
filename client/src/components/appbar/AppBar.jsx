@@ -35,10 +35,10 @@ let AppBar = ({user, profile,
   }
 
   useEffect(() => {
-    // if (user && !profile.name) {
+    if (isAuthenticated) {
       getCurrentProfile(true)
-    // }
-  }, [])
+    }
+  }, [isAuthenticated])
 
   return (
     <div>
@@ -83,7 +83,7 @@ let AppBar = ({user, profile,
   )
 }
 
-let mapStateToProps = state => ({
+const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   user: state.auth.user,
   profile: state.profile
