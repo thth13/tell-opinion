@@ -5,8 +5,8 @@ import {connect} from "react-redux"
 import AppBar from "../appbar/AppBar"
 import styles from "./styles.module.css"
 import {Helmet} from "react-helmet";
-import instagramIcon from '../../img/social/instagram.svg'
-import twitterIcon from '../../img/social/twitter.svg'
+// import instagramIcon from '../../img/social/instagram.svg'
+// import twitterIcon from '../../img/social/twitter.svg'
 import background from '../../img/avatarBackground.svg'
 import { toast, ToastContainer } from 'react-toastify';
 import Navbar from "../navbar/Navbar"
@@ -26,7 +26,6 @@ const Profile = ({auth}) => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "colored",
     });
   }
 
@@ -56,7 +55,7 @@ const Profile = ({auth}) => {
           {/*</div>*/}
         </div>
       </main>
-      <ToastContainer />
+      <ToastContainer limit={1} />
       <Navbar />
     </div>
   )
