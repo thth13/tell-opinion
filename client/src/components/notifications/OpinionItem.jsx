@@ -1,9 +1,5 @@
-import React, {useState, useEffect} from 'react'
-import {Link, useParams} from 'react-router-dom'
+import React, {useState} from 'react'
 import {addAnswer} from '../../actions/profile'
-import DeleteOpinionPopup from '../delete-opinion/DeleteOpinionPopup'
-import EditIcon from '@skbkontur/react-icons/Edit'
-import TrashIcon from '@skbkontur/react-icons/Trash'
 import {useTranslation} from 'react-i18next'
 import c from 'classnames'
 import {connect} from 'react-redux'
@@ -17,8 +13,6 @@ const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
   const {t} = useTranslation()
   const [handleAddAnswer, setHandleAddAnswer] = useState(false)
   const [answerText, setAnswerText] = useState('')
-  // const [isMyProfile, setIsMyProfile] = useState(false)
-  const [handleDeleteOpinionPopup, setHandleDeleteOpinionPopup] = useState(false)
 
   const setAddAnswer = () => setHandleAddAnswer(!handleAddAnswer)
 
@@ -29,20 +23,18 @@ const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
   const onSubmit = async (e) => {
     e.preventDefault()
 
-    if (answerText) {
-      await addAnswer(item._id, answerText)
+    await addAnswer(item._id, answerText)
 
-      toast.success(`🦄 ${t('success')}`, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
+    toast.success(`🦄 ${t('success')}`, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
 
     setHandleAddAnswer(false)
   }
@@ -74,7 +66,7 @@ const OpinionItem = ({addAnswer, profile, item, auth: {user}}) => {
           />
           <div className={styles.buttonsBlock}>
             <button onClick={setAddAnswer} className={c(styles.cancelButton, styles.sendButton)}>{t('cancel')}</button>
-            <button type='submit' className={styles.sendButton}>{t('send')}</button>
+            <button type='submit' className={styles.sendButton}>{t('publish')}</button>
           </div>
         </form>
       )}
