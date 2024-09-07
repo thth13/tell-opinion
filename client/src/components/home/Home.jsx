@@ -27,6 +27,8 @@ const Profile = ({auth}) => {
       draggable: true,
       progress: undefined,
     });
+
+    toast.clearWaitingQueue();
   }
 
   return (
