@@ -26,6 +26,7 @@ const initialState = {
   userList: [],
   error: null,
   myProfile: null,
+  appBarLoading: true
 }
 
 function profileReducer(state = initialState, action) {
@@ -65,7 +66,8 @@ function profileReducer(state = initialState, action) {
       return {
           ...state,
           name: payload.profile.name,
-          avatar: payload.profile.avatar
+          avatar: payload.profile.avatar,
+          appBarLoading: false
       }
     case PROFILE_ERROR:
       return {

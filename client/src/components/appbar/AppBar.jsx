@@ -3,18 +3,21 @@ import c from "classnames"
 import { useNavigate } from 'react-router-dom'
 import styles from "./styles.module.css"
 import logo from "../../img/logo.svg"
-import settingsIcon from "../../img/settings-icon.svg"
 import { connect } from "react-redux"
 import { getCurrentProfile } from "../../actions/profile"
 import {useTranslation} from 'react-i18next'
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { logoutsUser } from "../../actions/auth"
-import noAvatar from "../../img/noAvatar.png"
+import Skeleton from "react-loading-skeleton"
 
-let AppBar = ({user, profile,
-  getCurrentProfile, logoutsUser, 
-  isAuthenticated}) => {
+const AppBar = ({
+  profile,
+  getCurrentProfile,
+  logoutsUser,
+  isAuthenticated,
+  loading
+}) => {
   let [isMenuOpen, setIsMenuOpen] = useState(false);
   const {t, i18n} = useTranslation()
   const navigate = useNavigate()
@@ -49,9 +52,14 @@ let AppBar = ({user, profile,
         {isAuthenticated && <div className={styles.navContainer}>
         {/* <Link to={`/find`}><button className={styles.searchButton}></button></Link> */}
           <button className={c(styles.menuButton, {[styles.menuButtonActive]: isMenuOpen})} onClick={toggleMenu}>
-            <div className={styles.name}>
-              {profile && profile.name}
-            </div>
+            <span className={styles.name}>
+              {loading ? 
+                <div className={styles.nameSkeleton}>
+                  <Skeleton/>
+                </div> :
+                profile?.name
+              }
+            </span>
             <button className={styles.arrowButton}></button>
           </button>
           <nav className={styles.menu}>
@@ -86,7 +94,8 @@ let AppBar = ({user, profile,
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   user: state.auth.user,
-  profile: state.profile
+  profile: state.profile,
+  loading: state.profile.appBarLoading,
 })
  
 export default connect(mapStateToProps, {getCurrentProfile, logoutsUser})(AppBar)

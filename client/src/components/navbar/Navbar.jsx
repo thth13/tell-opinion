@@ -8,7 +8,7 @@ import mailIcon from '../../img/mailnav.svg'
 import searchIcon from '../../img/searchnav.svg'
 import noAvatar from '../../img/noAvatar.png'
 
-const Navbar = ({profile, user, numberNotifications, isAuthenticated}) => {
+const Navbar = ({profile, user, numberNotifications, isAuthenticated, loading}) => {
   const location = useLocation();
 
   return isAuthenticated && (
@@ -45,10 +45,12 @@ const Navbar = ({profile, user, numberNotifications, isAuthenticated}) => {
         className={c(styles.menuItem, {[styles.selectedItem]: location.pathname === `/${user?.login}`})}
       >
         <button className={styles.button}>
-          <img
-            src={profile?.avatar ? `https://tell-opinion-images.fra1.digitaloceanspaces.com/${profile.avatar}` : noAvatar}
-            className={styles.avatar}
-          />
+          {loading ? <div className={styles.avatarSkeleton}/> :
+            <img
+              src={profile.avatar ? `https://tell-opinion-images.fra1.digitaloceanspaces.com/${profile.avatar}` : noAvatar}
+              className={styles.avatar}
+            />
+          }
         </button>
       </Link>
     </div>
@@ -60,6 +62,7 @@ const mapStateToProps = state => ({
   profile: state.profile,
   numberNotifications: state.profile.numberNotifications,
   isAuthenticated: state.auth.isAuthenticated,
+  loading: state.profile.appBarLoading,
 })
 
 

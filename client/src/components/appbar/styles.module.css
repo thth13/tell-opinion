@@ -47,7 +47,7 @@
   margin-right: 10px;
   font-weight: 700;
   font-size: 18px;
-  color: #2E3238;  
+  color: #2E3238; 
 }
 
 .arrowButton {
@@ -142,8 +142,8 @@
     background-size: 20px;
   }
 
-  .name {
-    /* display: none; */
+  .nameSkeleton {
+    width: 75px;
   }
 
   .arrowButton{
