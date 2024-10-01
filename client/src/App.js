@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from 'react'
 // import { Routes, Route, useLocation } from 'react-router-dom'
 import { createBrowserRouter, RouterProvider, useLocation } from 'react-router-dom'
-// import ReactGA from 'react-ga'
+import ReactGA from 'react-ga'
 import setAuthToken from './utils/setAuthToken'
 import { connect } from "react-redux"
 import { loadUser, logoutsUser } from './actions/auth'
@@ -21,9 +21,9 @@ import Notifications from './components/notifications/Notifications'
 import './App.css'
 import 'react-loading-skeleton/dist/skeleton.css'
 
-// const TRACKING_ID = 'G-Y3MT7ZXTS8'
+const TRACKING_ID = 'G-Y3MT7ZXTS8'
 
-// ReactGA.initialize(TRACKING_ID)
+ReactGA.initialize(TRACKING_ID)
 
 const App = ({loadUser, logoutsUser, auth: {isAuthenticated, loading}}) => {
   // let location = useLocation()
