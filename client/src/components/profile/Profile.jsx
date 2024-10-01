@@ -43,10 +43,6 @@ const Profile = ({
     setIsMyProfile(user && user.login === params.username)
   }, [user, setIsMyProfile, params.username])
 
-  const isOneDayAfter =
-    userOpinionInfo ?
-      moment().isAfter(moment(userOpinionInfo.date).add(1, 'day')) : true
-
   useEffect(() => {
     if (user && user.login === params.username) {
       getCurrentProfile()
@@ -86,7 +82,6 @@ const Profile = ({
                 opinions={opinions}
                 newOpinion={newOpinion}
                 isMyProfile={isMyProfile}
-                isOneDayAfter={isOneDayAfter}
                 setIsShowThanksPopup={setIsShowThanksPopup}
                 opinionsLength={opinionsLength}
                 loadMore={loadMore}

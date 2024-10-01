@@ -10,7 +10,7 @@ import {useState} from "react"
 
 const Opinions = ({
   profile, opinions, isMyProfile, 
-  isOneDayAfter, newOpinion, setIsShowThanksPopup,
+  newOpinion, setIsShowThanksPopup,
   opinionsLength, loadMore
 }) => {
   const {t} = useTranslation()
@@ -32,7 +32,7 @@ const Opinions = ({
   return profile && (
     <section className={c(styles.opinions, styles.section)}>
       <h2 className={styles.opinionsTitle}>{t('opinionsTitle')}</h2>
-      {!isMyProfile && isOneDayAfter && 
+      {!isMyProfile && 
         <OpinionForm
           newOpinion={newOpinion} 
           profile={profile}
@@ -46,9 +46,6 @@ const Opinions = ({
           setIsShowAdviceInMyProfile={closeAdviceInMyprofile} 
         />
       } */}
-      {!isMyProfile && !isOneDayAfter && <p className={styles.advice}>
-        {t('youHaveAlreadyOpinion')}
-      </p>}
       <div className={styles.opinionItemsContainer}>
         {opinions && opinions.length < 1 && 
           <p className={styles.noOpinions}>

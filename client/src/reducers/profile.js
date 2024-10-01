@@ -79,7 +79,6 @@ function profileReducer(state = initialState, action) {
     case NEW_OPINION: {
       return {
         ...state,
-        opinions: [payload, ...state.opinions],
         loading: false
       }
     }
